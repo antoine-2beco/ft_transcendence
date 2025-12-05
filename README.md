@@ -1,11 +1,11 @@
 # Architecture de l'App Web :
 
 ## Frontend :
-# Langages :
+### Langages :
 - HTML (contenu)  
 - CSS (rendu)  
 - JS (dynamisation)  
-# Environnement client = Navigateur :
+### Environnement client = Navigateur :
 Le front y est execute    
 1. Moteur de rendu HTML/CSS  
 	- Il cree la representation visuelle grace a HTML et CSS  
@@ -16,20 +16,20 @@ Le front y est execute
 	- Permet de performer les requetes HTTP  
 
 ## Backend :
-# Environnement :
+### Environnement :
 OS de la machine - environnement classique
-# Langages :
+### Langages :
 - Python  
 - PHP  
 - Ruby  
 - JS (L'interpreteur de JS dans un environnement classique est node.JS)
 
-# Bases de donnees :
+### Bases de donnees :
 - Programme qui stocke et organise toutes les donnees  
 - Des requetes peuvent etre faites sur la BBD depuis le backend avec SQL  
 - D'autres technologies modernes existent aujourd'hui comme le MySql ou MariaDB  
 
-# Framework :
+## Framework :
 - Suite aux nombreuses taches redondantes des developpeurs en web, utilisation de frameworks
 - Ensemble d'outils qui permettent de performer rapidement des taches generiques et une organisation qui avec avec le langage
 - Pour Transcendence :
