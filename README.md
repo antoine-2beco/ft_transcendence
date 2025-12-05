@@ -1,35 +1,35 @@
-# Architecture de l'App Web :
+# Architecture de l'App Web
 
-## Frontend :
-### Langages :
+## Frontend
+### Langages
 - HTML (contenu)  
 - CSS (rendu)  
 - JS (dynamisation)  
-### Environnement client = Navigateur :
+### Environnement client = Navigateur
 Le front y est execute    
-1. Moteur de rendu HTML/CSS  
+- Moteur de rendu HTML/CSS  
 	- Il cree la representation visuelle grace a HTML et CSS  
 	- Il cronstruit le DOM qui represente la structure de la page  
-2. Moteur de rendu JS  
+- Moteur de rendu JS  
 	- Le DOM est utilise pour l'utilisation de JS dans la page  
-3. Gestionnaire de protocole reseau :  
+- Gestionnaire de protocole reseau :  
 	- Permet de performer les requetes HTTP  
 
-## Backend :
-### Environnement :
+## Backend
+### Environnement
 OS de la machine - environnement classique
-### Langages :
+### Langages
 - Python  
 - PHP  
 - Ruby  
 - JS (L'interpreteur de JS dans un environnement classique est node.JS)
 
-### Bases de donnees :
+### Bases de donnees
 - Programme qui stocke et organise toutes les donnees  
 - Des requetes peuvent etre faites sur la BBD depuis le backend avec SQL  
 - D'autres technologies modernes existent aujourd'hui comme le MySql ou MariaDB  
 
-## Framework :
+## Framework
 - Suite aux nombreuses taches redondantes des developpeurs en web, utilisation de frameworks
 - Ensemble d'outils qui permettent de performer rapidement des taches generiques et une organisation qui avec avec le langage
 - Pour Transcendence :
@@ -50,7 +50,7 @@ OS de la machine - environnement classique
 # Tips
 - Toujours garder un main en etat de fonctionnement - faire des branches et merge un max
 
-# Sources :
+# Sources
 - [Tout savoir sur Transcendence](https://www.youtube.com/watch?v=HnzYqxMfGAk&pp=ygUWZnRfdHJhbnNjZW5kZW5jZSA0MiBmcg%3D%3D)
 - [How to master 42](https://haglobah.github.io/Mastering-42/holy_graph/ft_transcendence.html)
 - [Getting Started Deep Wiki](https://deepwiki.com/transcendence-2025-09/ft_transcendence/1-overview)
