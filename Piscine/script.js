@@ -16,6 +16,14 @@ function identificationSystem() {
 	}
 }
 
+function elementsHandling() {
+	let baliseZoneLeJeu = document.getElementById("zoneLeJeu"); // recupere le HTMLElement avec l'id du div
+	console.log(baliseZoneLeJeu); // print le HTMLElement en console
+	console.log(baliseZoneLeJeu.clientHeight);
 
+	let baliseZoneLeJeuSpan = document.querySelector("#zoneLeJeu span");
+	console.log(baliseZoneLeJeuSpan);
+}
 
-identificationSystem();
+// identificationSystem();
+elementsHandling();
