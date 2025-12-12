@@ -23,6 +23,13 @@ function elementsHandling() {
 
 	let baliseZoneLeJeuSpan = document.querySelector("#zoneLeJeu span");
 	console.log(baliseZoneLeJeuSpan);
+
+	let listInputRadio = document.querySelectorAll(".zoneChoix input");
+	for (let i = 0; i < listInputRadio.length; i++) {
+		console.log(listInputRadio[i]);
+		if (listInputRadio[i].checked == true)
+			console.log(listInputRadio[i].id + " is checked !") 
+	}
 }
 
 // identificationSystem();

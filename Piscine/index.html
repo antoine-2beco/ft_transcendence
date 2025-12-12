@@ -20,7 +20,7 @@
 
 <body>
     <header>
-        <h1>AzerType</h1>
+        <h1>Titre</h1>
     </header>
 
     <main>
@@ -28,15 +28,33 @@
             <h2>Le jeu</h2>
             <p>Un petit texte</p>
         </div>
-        <div id="zoneLeJeu"> Ici est la zone Le Jeu</div>
+        <div id="zoneLeJeu"> Ici est la zone <span>Le Jeu</span></div>
         <div>
             <h2>Une autre div</h2>
             <p>Un autre texte</p>
         </div>
+
+        <div class="zoneChoix">
+
+            <input type="radio" name="optionSource" id="mots" value="1" checked>
+
+            <label for="mots">Mots</label>
+
+            <input type="radio" name="optionSource" id="phrases" value="2">
+
+            <label for="phrases">Phrases</label>
+
+        </div>
+
+        <div class="zoneProposition">
+
+            Entrez le mot : <span>Cachalot</span>
+
+        </div>
     </main>
 
     <footer>
-        @Copyright : OpenClassrooms.
+        Footer
     </footer>
 </body>
 
