@@ -1,0 +1,2 @@
+
+startGame(0);
