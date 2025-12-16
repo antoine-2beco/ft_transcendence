@@ -185,6 +185,13 @@ footer {
     font-size: 20px;
 }
 
+.zoneEndGame {
+    color: #ffeee6;
+    font-size: 30px;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
 /** 
  * Responsive
  */

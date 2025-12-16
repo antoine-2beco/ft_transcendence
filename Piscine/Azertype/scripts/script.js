@@ -1,6 +1,7 @@
 
 function getRadioInput() {
 	let listRadioInput = document.querySelectorAll(".optionSource input");
+
 	if (listRadioInput[0].checked == true) {
 		return "mots";
 	}
@@ -11,6 +12,8 @@ function getRadioInput() {
 
 function setProposition( mode, score ) {
 	let proposition = document.querySelector(".zoneProposition");
+	if (score == 3) 
+		return endGame();
 	if (mode == "mots")
 		proposition.innerText = motsPropositions[score];
 	else if (mode == "phrases")
@@ -26,20 +29,35 @@ function setScore( score ) {
 
 function getValidationButton( proposition, score ) {
 	let validationButton = document.getElementById("btnValiderMot");
-	validationButton.addEventListener("click", () => getTextInput( proposition, score ), { once: true });
+	validationButton.addEventListener("click", getTextInput, { once: true });
 }
 
-function getTextInput( proposition, score ) {
+function getTextInput() {
 	let textInput = document.getElementById("inputEcriture");
+	let proposition = document.querySelector(".zoneProposition").innerText;
+	let score = document.querySelector(".zoneScore span").innerText;
 	if (textInput.value == proposition) {
 		textInput.value = "";
-		startGame( score + 1 );
+		return startGame( Number(score) + 1 );
 	}
 	else {
 		textInput.value = "";
-		startGame( score );
+		return startGame( Number(score) );
 	}
 
+}
+
+function endGame() {
+	let score = document.querySelector(".zoneScore");
+
+	let endGameTitle = document.createElement("p");
+	let endGameDiv = document.createElement("div");
+
+	endGameTitle.textContent = endGameMessage;
+	endGameDiv.setAttribute("class", "zoneEndGame");
+
+	endGameDiv.appendChild(endGameTitle);
+	score.appendChild(endGameDiv);
 }
 
 function startGame( score ) {
