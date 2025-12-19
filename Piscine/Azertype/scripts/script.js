@@ -60,6 +60,24 @@ function endGame() {
 	score.appendChild(endGameDiv);
 }
 
+function sharePopup() {
+	let popupBackground = document.querySelector(".popupBackground");
+	popupBackground.classList.add("active");
+}
+
+function hideSharePopup( event ) {
+	let popupBackground = document.querySelector(".popupBackground");
+	if (event.target === popupBackground)
+		popupBackground.classList.remove("active");
+}
+
+function sendShareForm() {
+	let nameInputForm = document.getElementById("nom");
+	let emailInputForm = document.getElementById("email");
+	let mailto = (`mailto:${emailInputForm.value}?subject=Partage du score sur Azertype&body=Bonjour, voici le score de ${nameInputForm.value} sur Azertype !`);
+	location.href = mailto;
+}
+
 function startGame( score ) {
 	let mode = getRadioInput();
 	let proposition = setProposition( mode, score );
