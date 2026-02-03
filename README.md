@@ -10,6 +10,8 @@
 
 - Developers
 
+A definir
+
 ## Bonnes pratiques
 
 ### Regular Communication (Meetings)
@@ -19,7 +21,7 @@
 
 ### Task Organization
 
-- Github Projects
+- Github Projects (Kandan)
 
 ### Work Breakdown
 
@@ -48,11 +50,11 @@
 ### Communication Channel
 
 - Whatsapp
+- Discord pour calls
 
 ## On fait quoi ?
 
 - Jeu OXO
-- Eventuellement un autre petit jeu
 - User Profile Management
 
 ## Modules
@@ -111,7 +113,7 @@ same game in real-time.
 	- Implement reconnection logic.
 
 
-### Module custome
+### Module custom
 
 - [ ] Minor: Light/Dark Mode
 
