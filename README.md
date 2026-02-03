@@ -113,7 +113,7 @@ same game in real-time.
 
 ### Module custome
 
-[ ] Minor: Light/Dark Mode
+- [ ] Minor: Light/Dark Mode
 
 
 ## Base de donnees
