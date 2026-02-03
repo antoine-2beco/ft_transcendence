@@ -1,0 +1,33 @@
+services:
+    node:
+        build: ./node
+        container_name: node
+        environment:
+            NODE_ENV: production
+        ports:
+            - "8787:8787"
+        networks:
+            - transcendence_net
+        restart: unless-stopped
+
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        depends_on:
+            - node
+        ports:
+            - "8080:8080"
+            - "4430:4430"
+        environment:
+            HOSTNAME: ${HOSTNAME}
+            LAN_IP: ${LAN_IP}
+        volumes:
+            - ./html:/usr/share/nginx/html:ro
+        networks:
+            - transcendence_net
+        restart: unless-stopped
+
+
+networks:
+    transcendence_net:
+        driver: bridge
