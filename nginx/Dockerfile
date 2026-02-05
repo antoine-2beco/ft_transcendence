@@ -4,7 +4,7 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 COPY ./html/package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 COPY ./html ./
 RUN npm run build
 
