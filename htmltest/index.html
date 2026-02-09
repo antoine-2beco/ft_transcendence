@@ -7,17 +7,27 @@
     </head>
     <body>
         <h1>Transcendance test</h1>
-        <span>register</span>
-        <br />
-        <input id="usernameregister" placeholder="username" />
-        <input id="passwordregister" type="password" placeholder="password" />
-        <button id="register">Register</button>
-        <br />
-        <span>login</span>
-        <br />
-        <input id="usernamelogin" placeholder="username" />
-        <input id="passwordlogin" type="password" placeholder="password" />
-        <button id="login">Login</button>
+
+        <section>
+          <h2>Register</h2>
+          <input id="usernameregister" placeholder="username" />
+          <input id="passwordregister" type="password" placeholder="password" />
+          <button id="register">Register</button>
+        </section>
+        
+        <section>
+          <h2>Login</h2>
+          <input id="usernamelogin" placeholder="username" />
+          <input id="passwordlogin" type="password" placeholder="password" />
+          <button id="login">Login</button>
+        </section>
+        
+        <section>
+          <button id="queue">Join matchmaking</button>
+        </section>
+        
+        <div id="board" style="display:grid;grid-template-columns:repeat(3,60px);gap:6px;margin-top:12px;"></div>
+        <pre id="log"></pre>
     </body>
 
 </html>

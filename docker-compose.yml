@@ -25,6 +25,7 @@ services:
             DB_NAME: ${POSTGRES_DB}
             DB_USER: ${POSTGRES_USER}
             DB_PASSWORD: ${POSTGRES_PASSWORD}
+            JWT_SECRET: ${JWT_SECRET}
             DB_HOST: postgres
             DB_PORT: "5432"
         ports:

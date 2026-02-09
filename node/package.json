@@ -11,6 +11,9 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/websocket": "^11.2.0",
     "@prisma/client": "^7.3.0",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",

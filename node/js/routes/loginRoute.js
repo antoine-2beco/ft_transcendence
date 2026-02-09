@@ -24,6 +24,15 @@ export async function loginRoute(fastify)
             reply.code(401);
             return { error: "invalid credentials" };
         }
-        return { ok: true };
+        
+        const token = fastify.jwt.sign({ sub: user.id, username });
+
+        reply.setCookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "lax",
+            path: "/",
+        });
+        return { ok: true, username };
     });
 }

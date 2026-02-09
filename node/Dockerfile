@@ -27,6 +27,9 @@ COPY --from=deps /app/js/models/User.js ./models/User.js
 
 COPY --from=deps /app/js/routes/registerRoute.js ./routes/registerRoute.js
 COPY --from=deps /app/js/routes/loginRoute.js ./routes/loginRoute.js
+COPY --from=deps /app/js/routes/matchmakingRoute.js ./routes/matchmakingRoute.js
+COPY --from=deps /app/js/routes/meRoute.js ./routes/meRoute.js
+COPY --from=deps /app/js/routes/logoutRoute.js ./routes/logoutRoute.js
 
 RUN mkdir -p /app/certs && chown -R node:node /app
 
