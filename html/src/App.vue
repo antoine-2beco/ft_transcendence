@@ -1,11 +1,12 @@
-<script setup></script>
+<script setup>
+import { RouterView } from 'vue-router'
+import ThemeSwitch from './components/ThemeSwitch.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
-</template>
+  <ThemeSwitch />
 
-<style scoped></style>
+  <main class="container">
+    <RouterView />
+  </main>
+</template>

@@ -1,0 +1,17 @@
+:root {
+  --pico-primary: #42b883;
+  --pico-primary-background: #42b883;
+  --pico-primary-hover: #3aa876;
+  --pico-primary-underline: rgba(66, 184, 131, 0.5);
+  --pico-font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.text-center { text-align: center; }
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.w-full { width: 100%; }
+.mt-2 { margin-top: 2rem; }
