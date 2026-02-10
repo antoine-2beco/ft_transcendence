@@ -25,7 +25,7 @@ export async function loginRoute(fastify)
             return { error: "invalid credentials" };
         }
         
-        const token = fastify.jwt.sign({ sub: user.id, username });
+        const token = fastify.jwt.sign({ sub: user.id, username }, {expiresIn: '24h'} );
 
         reply.setCookie("token", token, {
             httpOnly: true,
