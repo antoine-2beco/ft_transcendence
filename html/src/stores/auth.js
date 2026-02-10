@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
+import axios from 'axios' ;
 import { loginAPI, getProfileAPI } from '@/services/authService';
 import router from '@/router';
 
@@ -11,13 +12,20 @@ export const useAuthStore = defineStore('auth', () => {
 
   const login = async (username, password) => {
     try {
-      const response = await loginAPI(username, password);
-
-      token.value = response.token;
-      user.value = response.user;
-      localStorage.setItem('token', response.token);
-      router.push('/');
+      const response = await axios.post('/api/login', 
+		{username, password},
+		{
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		token.value = response.token;
+		user.value = response.user;
+		localStorage.setItem('token', response.token);
+		router.push('/');
+		console.log("hello");
     } catch (error) {
+		console.log(error);
       throw error;
     }
   };
