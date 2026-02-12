@@ -29,6 +29,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/matchmaking',
+      name: 'matchmaking',
+      component: () => import('../views/MatchmakingView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('../views/UserProfileView.vue'),
