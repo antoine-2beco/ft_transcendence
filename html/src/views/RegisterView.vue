@@ -9,9 +9,9 @@ const error = ref('');
 
 const handleSubmit = async () => {
   try {
-    await auth.login(username.value, password.value);
+    await auth.register(username.value, password.value);
   } catch (e) {
-    error.value = "Pseudo ou mot de passe incorrect";
+    error.value = "Register failed";
   }
 };
 </script>
@@ -19,7 +19,7 @@ const handleSubmit = async () => {
 <template>
   <div class="container login-container">
     <article>
-      <header>Please Sign In</header>
+      <header>Please Register</header>
 
       <form @submit.prevent="handleSubmit">
         <label>
@@ -34,7 +34,7 @@ const handleSubmit = async () => {
 
         <small v-if="error" class="error">{{ error }}</small>
 
-        <button type="submit" :aria-busy="false">Se connecter</button> </form>
+        <button type="submit" :aria-busy="false">Register</button> </form>
     </article>
   </div>
 </template>

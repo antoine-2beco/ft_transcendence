@@ -16,7 +16,8 @@ const auth = useAuthStore();
         </template>
 
       <template v-else>
-        <RouterLink to="/login" role="button">Se connecter</RouterLink>
+        <RouterLink to="/login" role="button">Login</RouterLink>
+        <RouterLink to="/register" role="button">Register</RouterLink>
       </template>
     </nav>
   </div>
