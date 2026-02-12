@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import axios from 'axios' ;
-import { loginAPI, getProfileAPI } from '@/services/authService';
+import { loginAPI, getProfileAPI, registerAPI} from '@/services/authService';
 import router from '@/router';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -11,21 +11,33 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!token.value);
 
   const login = async (username, password) => {
-    try {
-      const response = await axios.post('/api/login', 
-		{username, password},
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		token.value = response.token;
-		user.value = response.user;
-		localStorage.setItem('token', response.token);
-		router.push('/');
-		console.log("hello");
+		try {
+      // const response = await axios.post('/api/login',
+      // {username, password},
+      // {
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // });
+      const response = await loginAPI(username, password);
+      token.value = response.token;
+      user.value = response.user;
+      localStorage.setItem('token', response.token);
+      router.push('/');
     } catch (error) {
 		console.log(error);
+      throw error;
+    }
+  };
+
+  const register = async (username, password) => {
+    try {
+      const response = await registerAPI(username, password);
+      token.value = response.token;
+      user.value = response.user;
+      localStorage.setItem('token', response.token);
+      router.push('/');
+    } catch (error) {
       throw error;
     }
   };
@@ -46,5 +58,5 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  return { token, user, isAuthenticated, login, logout, checkAuth };
+  return { token, user, isAuthenticated, login, register, logout, checkAuth };
 });

@@ -16,33 +16,20 @@ onMounted(async () => {
 <template>
   <div class="container">
     <h2 class="text-center">Classement</h2>
-
     <div v-if="loading" aria-busy="true">Chargement...</div>
 
     <table v-else class="striped">
       <thead>
-        <tr>
-          <th>#</th>
-          <th>Joueur</th>
-          <th>Elo</th>
-          <th>Win Rate</th>
-        </tr>
+        <tr><th>#</th><th>Joueur</th><th>Elo</th><th>Win Rate</th></tr>
       </thead>
       <tbody>
-        <tr
-          v-for="(player, index) in leaderboard"
-          :key="player.id"
-          :class="{ 'highlight': auth.user && auth.user.id === player.id }"
-        >
-          <td>{{ index + 1 }}</td>
-          <td class="player-cell">
-            <img :src="player.avatar" class="avatar-small">
-            <strong>{{ player.username }}</strong>
+        <tr v-for="(p, i) in leaderboard" :key="p.id" :class="{ 'highlight': auth.user?.id === p.id }">
+          <td>{{ i + 1 }}</td>
+          <td class="flex-center" style="justify-content: flex-start;"> <img :src="p.avatar" class="avatar-small">
+            <strong>{{ p.username }}</strong>
           </td>
-          <td>{{ player.stats.elo }}</td>
-          <td>
-            {{ Math.round((player.stats.wins / (player.stats.wins + player.stats.losses)) * 100) }}%
-          </td>
+          <td>{{ p.stats.elo }}</td>
+          <td>{{ Math.round((p.stats.wins / (p.stats.wins + p.stats.losses)) * 100) }}%</td>
         </tr>
       </tbody>
     </table>
@@ -56,17 +43,10 @@ onMounted(async () => {
 <style scoped>
 .avatar-small {
   width: 30px;
-  height: 30px;
   border-radius: 50%;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-.player-cell {
-  display: flex;
-  align-items: center;
 }
 .highlight {
   background-color: var(--pico-primary-background) !important;
-  color: var(--pico-primary-inverse);
+  color: white;
 }
 </style>
