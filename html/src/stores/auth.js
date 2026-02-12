@@ -1,50 +1,57 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
-import axios from 'axios' ;
-import { loginAPI, getProfileAPI } from '@/services/authService';
+import * as authApi from '../api/auth'
 import router from '@/router';
 
-export const useAuthStore = defineStore('auth', () => {
-  const token = ref(localStorage.getItem('token') || null);
-  const user = ref(null);
+export const useAuthStore = defineStore('auth', {
 
-  const isAuthenticated = computed(() => !!token.value);
+  state: () => ({
+    username: null,
+  }),
 
-  const login = async (username, password) => {
-    try {
-      const response = await axios.post('/api/login', 
-		{username, password},
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		token.value = response.token;
-		user.value = response.user;
-		localStorage.setItem('token', response.token);
-		router.push('/');
-		console.log("hello");
-    } catch (error) {
-		console.log(error);
-      throw error;
-    }
-  };
+  getters: {
+    isAuthenticated: (state) => !!state?.username
+  },
 
-  const logout = () => {
-    token.value = null;
-    user.value = null;
-    localStorage.removeItem('token');
-  };
-
-  const checkAuth = async () => {
-    if (token.value && !user.value) {
+  actions: {
+    async login (username, password) {
       try {
-        user.value = await getProfileAPI(token.value);
+        const response = await authApi.login(username, password);
+		    this.username = response.data.username;
+		    router.push('/');
       } catch (e) {
-        logout();
+        console.error(e);
+        throw e;
       }
-    }
-  };
+    },
 
-  return { token, user, isAuthenticated, login, logout, checkAuth };
+    async register (username, password) {
+      try {
+        const response = await authApi.register(username, password);
+		    router.push('/login');
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+
+    async checkAuth () {
+      if (!this.username) {
+        try {
+          this.username = await authApi.getProfile();
+        } catch (e) {
+          this.logout();
+        }
+      }
+    },
+
+    async logout () {
+      try {
+        const response = await authApi.logout();
+      } catch (e) {
+        throw (e);
+      }
+      this.username = null;
+      router.push('/');
+    }
+  }
 });
