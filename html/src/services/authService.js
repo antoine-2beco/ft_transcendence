@@ -29,29 +29,36 @@ export const getProfileAPI = async (token) => {
   });
 };
 
-export const registerAPI = async (username, password) => {
+export const registerAPI = async (username, email, password) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const exists = MOCK_USERS.find(u => u.username.toLowerCase() === username.toLowerCase());
+      const userExists = MOCK_USERS.find(u =>
+        u.username.toLowerCase() === username.toLowerCase()
+      );
+      const emailExists = MOCK_USERS.find(u =>
+        u.email && u.email.toLowerCase() === email.toLowerCase()
+      );
 
-      if (exists) {
-        reject("Ce pseudo est déjà pris.");
-      } else {
-        const newUser = {
-          id: Date.now(),
-          username: username,
-          avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`,
-          status: 'online',
-          stats: { wins: 0, losses: 0, elo: 1000 }
-        };
+      if (userExists)
+        return reject("Ce pseudo est déjà pris.");
+      if (emailExists)
+        return reject("Cet email est déjà utilisé.");
 
-        MOCK_USERS.push(newUser);
+      const newUser = {
+        id: Date.now(),
+        username: username,
+        email: email,
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`,
+        status: 'online',
+        stats: { wins: 0, losses: 0, elo: 1000 }
+      };
 
-        resolve({
-          token: "fake-jwt-token-new-user",
-          user: newUser
-        });
-      }
+      MOCK_USERS.push(newUser);
+
+      resolve({
+        token: "fake-jwt-token-new-user",
+        user: newUser
+      });
     }, 500);
   });
 };

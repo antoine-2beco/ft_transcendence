@@ -2,25 +2,33 @@ export const MOCK_USERS = [
   {
     id: 1,
     username: "Sachito",
+    email: "sachito@example.com",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+    status: "online",
     stats: { wins: 42, losses: 5, elo: 1500 }
   },
   {
     id: 2,
     username: "Neo",
+    email: "neo@example.com",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Neo",
+    status: "offline",
     stats: { wins: 20, losses: 10, elo: 1200 }
   },
   {
     id: 3,
     username: "Trinity",
+    email: "trinity@example.com",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Trinity",
+    status: "in-game",
     stats: { wins: 15, losses: 15, elo: 1050 }
   },
   {
     id: 4,
     username: "Smith",
+    email: "smith@example.com",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Smith",
+    status: "online",
     stats: { wins: 5, losses: 20, elo: 800 }
   }
 ];

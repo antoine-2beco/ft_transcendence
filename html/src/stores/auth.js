@@ -30,13 +30,14 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  const register = async (username, password) => {
+  const register = async (username, email, password) => {
     try {
-      const response = await registerAPI(username, password);
+      const response = await registerAPI(username, email, password);
+
       token.value = response.token;
       user.value = response.user;
       localStorage.setItem('token', response.token);
-      router.push('/');
+      router.push('/profile');
     } catch (error) {
       throw error;
     }
