@@ -28,3 +28,37 @@ export const getProfileAPI = async (token) => {
     }, 300);
   });
 };
+
+export const registerAPI = async (username, email, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const userExists = MOCK_USERS.find(u =>
+        u.username.toLowerCase() === username.toLowerCase()
+      );
+      const emailExists = MOCK_USERS.find(u =>
+        u.email && u.email.toLowerCase() === email.toLowerCase()
+      );
+
+      if (userExists)
+        return reject("Ce pseudo est déjà pris.");
+      if (emailExists)
+        return reject("Cet email est déjà utilisé.");
+
+      const newUser = {
+        id: Date.now(),
+        username: username,
+        email: email,
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`,
+        status: 'online',
+        stats: { wins: 0, losses: 0, elo: 1000 }
+      };
+
+      MOCK_USERS.push(newUser);
+
+      resolve({
+        token: "fake-jwt-token-new-user",
+        user: newUser
+      });
+    }, 500);
+  });
+};

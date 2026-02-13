@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    async register (username, password) {
+    async register (username, email, password) {
       try {
         const response = await authApi.register(username, password);
 		    router.push('/login');

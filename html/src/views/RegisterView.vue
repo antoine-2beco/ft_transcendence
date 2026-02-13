@@ -4,49 +4,54 @@ import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
 const username = ref('');
+const email = ref('');
 const password = ref('');
 const error = ref('');
 
 const handleSubmit = async () => {
+  error.value = '';
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.value)) {
+    error.value = "Format d'email invalide (ex: nom@domaine.com)";
+    return;
+  }
+
   try {
-    await auth.register(username.value, password.value);
+    await auth.register(username.value, email.value, password.value);
   } catch (e) {
-    error.value = "Register failed";
+    error.value = e;
   }
 };
 </script>
 
 <template>
-  <div class="container login-container">
+  <div class="container" style="max-width: 400px; margin-top: 10vh;">
     <article>
-      <header>Please Register</header>
-
-      <form @submit.prevent="handleSubmit">
+      <header>Créer un compte</header>
+      <form @submit.prevent="handleSubmit" novalidate>
         <label>
-          Username
-          <input type="text" v-model="username" placeholder="Username" required />
+          Pseudo
+          <input type="text" v-model="username" required />
         </label>
 
         <label>
-          Password
-          <input type="password" v-model="password" placeholder="Password" required />
+          Email
+          <input type="email" v-model="email" required />
         </label>
 
-        <small v-if="error" class="error">{{ error }}</small>
+        <label>
+          Mot de passe
+          <input type="password" v-model="password" required />
+        </label>
 
-        <button type="submit" :aria-busy="false">Register</button> </form>
+        <small v-if="error" class="text-del">{{ error }}</small>
+
+        <button type="submit">S'inscrire</button>
+      </form>
+      <footer class="text-center">
+        <small>Déjà un compte ? <RouterLink to="/login">Se connecter</RouterLink></small>
+      </footer>
     </article>
   </div>
 </template>
-
-<style scoped>
-.login-container {
-  max-width: 400px;
-  margin-top: 10vh;
-}
-.error {
-  color: var(--pico-del-color);
-  display: block;
-  margin-bottom: 1rem;
-}
-</style>

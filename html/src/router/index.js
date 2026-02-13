@@ -45,6 +45,22 @@ const router = createRouter({
       name: 'leaderboard',
       component: () => import('../views/LeaderboardView.vue')
     },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('../views/HistoryView.vue')
+    },
+    {
+      path: '/friends',
+      name: 'friends',
+      component: () => import('../views/FriendsView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView
+    },
   ]
 });
 
