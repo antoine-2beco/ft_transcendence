@@ -9,14 +9,18 @@ const auth = useAuthStore();
 
     <nav class="menu">
       <template v-if="auth.isAuthenticated">
-          <RouterLink to="/game" role="button">Jouer</RouterLink>
-          <RouterLink to="/leaderboard" role="button" class="contrast">Classement</RouterLink>
-          <RouterLink to="/profile" role="button" class="secondary">Mon Profil</RouterLink>
-          <button @click="auth.logout" class="outline contrast">Se déconnecter</button>
-        </template>
+        <RouterLink to="/game" role="button" class="w-full">Jouer contre l'IA</RouterLink>
+        <RouterLink to="/matchmaking" role="button">Jouer contre l'humain</RouterLink>
+        <RouterLink to="/profile" role="button" class="secondary w-full">Mon Profil</RouterLink>
+        <RouterLink to="/friends" role="button" class="secondary w-full">Mes Amis</RouterLink>
+        <RouterLink to="/leaderboard" role="button" class="contrast">Classement</RouterLink>
+        <RouterLink to="/history" role="button" class="contrast">Historique</RouterLink>
+        <button @click="auth.logout" class="contrast outline w-full">Déconnexion</button>
+      </template>
 
       <template v-else>
-        <RouterLink to="/login" role="button">Se connecter</RouterLink>
+        <RouterLink to="/login" role="button" class="w-full">Se connecter</RouterLink>
+        <RouterLink to="/register" role="button" class="secondary outline w-full">S'inscrire</RouterLink>
       </template>
     </nav>
   </div>

@@ -8,45 +8,27 @@ const password = ref('');
 const error = ref('');
 
 const handleSubmit = async () => {
-  try {
-    await auth.login(username.value, password.value);
-  } catch (e) {
-    error.value = "Pseudo ou mot de passe incorrect";
-  }
+  try { await auth.login(username.value, password.value); }
+  catch (e) { error.value = "Identifiants incorrects"; }
 };
 </script>
 
 <template>
-  <div class="container login-container">
+  <div class="container" style="max-width: 400px; margin-top: 10vh;">
     <article>
-      <header>Please Sign In</header>
-
+      <header>Connexion</header>
       <form @submit.prevent="handleSubmit">
         <label>
           Username
-          <input type="text" v-model="username" placeholder="Pseudo" required />
+          <input type="text" v-model="username" placeholder="Username" required />
+          Pseudo <input type="text" v-model="username" required />
         </label>
-
         <label>
-          Password
-          <input type="password" v-model="password" placeholder="Mot de passe" required />
+          Mot de passe <input type="password" v-model="password" required />
         </label>
-
-        <small v-if="error" class="error">{{ error }}</small>
-
-        <button type="submit" :aria-busy="false">Se connecter</button> </form>
+        <small v-if="error" style="color: var(--pico-del-color)">{{ error }}</small>
+        <button type="submit">Se connecter</button>
+      </form>
     </article>
   </div>
 </template>
-
-<style scoped>
-.login-container {
-  max-width: 400px;
-  margin-top: 10vh;
-}
-.error {
-  color: var(--pico-del-color);
-  display: block;
-  margin-bottom: 1rem;
-}
-</style>
