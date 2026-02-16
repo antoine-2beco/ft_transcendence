@@ -61,6 +61,7 @@ function connectWs() {
   ws.onopen = () => {
 	log("WS open");
 	queueBtn.disabled = false;
+	playAiBtn.disabled = false;
   };
 
   ws.onclose = (e) => {
@@ -218,6 +219,7 @@ window.addEventListener("load", async () => {
   if (me) {
 	log("Already logged in as", me.username);
 	connectWs();
+	playAiBtn.disabled = false;
   } else {
 	log("Not logged in");
 	queueBtn.disabled = true;
