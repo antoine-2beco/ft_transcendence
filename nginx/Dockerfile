@@ -1,12 +1,12 @@
 # Build Vue App
 
-FROM node:20-slim AS builder
+# FROM node:20-slim AS builder
 
-WORKDIR /app
-COPY ./html/package*.json ./
-RUN npm ci
-COPY ./html ./
-RUN npm run build
+# WORKDIR /app
+# COPY ./html/package*.json ./
+# RUN npm ci
+# COPY ./html ./
+# RUN npm run build
 
 # Run Nginx
 
