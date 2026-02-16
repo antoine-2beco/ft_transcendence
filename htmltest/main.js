@@ -6,12 +6,18 @@ const boardEl = $("board");
 const registerBtn = $("register");
 const loginBtn = $("login");
 const queueBtn = $("queue");
+const statusEl = $("status");
 
 let ws = null;
 let me = null;
 let gameId = null;
 let mySymbol = null;
 let board = Array(9).fill(null);
+
+function setStatus(text) {
+    if (statusEl) statusEl.textContent = text;
+    log(text);
+}
 
 function log(...args) {
   const line = args.map(String).join(" ");
@@ -30,11 +36,18 @@ async function api(path, body) {
   return { res, data };
 }
 
-async function getMe() {
-  const res = await fetch("/api/me", { credentials: "include" });
-  if (!res.ok) return null;
-  const data = await res.json();
-  return data.user || null;
+async function getMe() 
+{
+    const res = await fetch("/api/me", { credentials: "include" });
+  
+    if (res.status === 401) return null;
+    if (!res.ok) 
+    {
+        log("getMe failed:", res.status);
+        return null;
+    }  
+    const data = await res.json().catch(() => null);
+    return data?.user || null;
 }
 
 function connectWs() {
@@ -52,6 +65,7 @@ function connectWs() {
   ws.onclose = (e) => {
 	log("WS closed", e.code, e.reason || "");
 	queueBtn.disabled = true;
+    if (me) setTimeout(connectWs, 1000);
   };
 
   ws.onerror = () => log("WS error");
@@ -71,6 +85,26 @@ function connectWs() {
 	  log("Match found. gameId=", gameId, "symbol=", mySymbol);
 	  renderBoard();
 	}
+
+    if (msg.type === "reconnected") {
+        gameId = msg.gameId;
+        mySymbol = msg.symbol;
+        board = msg.board;
+        setStatus(`Reconnected. You are ${mySymbol}`);
+        renderBoard();
+    }
+    
+    if (msg.type === "opponent:disconnected") {
+        setStatus(`Opponent disconnected. Auto-win in ${msg.seconds}s if they don't return.`);
+    }
+    
+    if (msg.type === "opponent:reconnected") {
+        setStatus("Opponent reconnected.");
+    }
+    
+    if (msg.type === "game:forfeit") {
+        setStatus("Opponent did not return. You win by forfeit.");
+    }
 
 	if (msg.type === "state") {
 	  board = msg.board;
@@ -110,9 +144,10 @@ function renderBoard() {
 
 registerBtn.addEventListener("click", async () => {
   const username = $("usernameregister").value.trim();
+  const email = $("emailregister").value.trim();
   const password = $("passwordregister").value;
 
-  const { res, data } = await api("/api/register", { username, password });
+  const { res, data } = await api("/api/register", { username, email, password });
   log("register", res.status, JSON.stringify(data));
 });
 
