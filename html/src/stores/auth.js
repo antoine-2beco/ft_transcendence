@@ -12,7 +12,7 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    isAuthenticated: (state) => !!state?.username
+    isAuthenticated: (state) => !!state?.user.username
   },
 
   actions: {
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth', {
       } catch (e) {
         console.log(e);
       }
-      this.user.username = null;
+      this.$reset();
       router.push('/');
     }
   }

@@ -53,6 +53,7 @@ export const useGameStore = defineStore('game', {
         }
         else
           router.push('/');
+        this.$reset();
       } catch (e) {
         console.log(e);
       }
