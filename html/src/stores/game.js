@@ -2,16 +2,23 @@ import { defineStore } from 'pinia';
 import * as matchmakingApi from '../api/matchmaking'
 import router from '@/router';
 
+
 export const useGameStore = defineStore('game', {
 
 	state: () => ({
     mode: null,
     board: Array(9).fill(null),
     winner: null,
-    isPlayerTurn: true,
+    isPlayerTurn: null,
+    symbol: null,
 
-    searching: false,
-    opponent: false
+    matchmaking: {
+      searching: false,
+      opponent: false,
+      ws: null,
+      me: null,
+      gameId: null,
+    },
   }),
 
   actions: {
@@ -27,7 +34,6 @@ export const useGameStore = defineStore('game', {
 
     async joinQueue() {
       try {
-        this.searching = true;
         await matchmakingApi.joinQueue();
       } catch (e) {
         console.log(e);
@@ -57,6 +63,17 @@ export const useGameStore = defineStore('game', {
       } catch (e) {
         console.log(e);
       }
+    },
+
+    async playMove(i) {
+      try {
+        if (this.isPlayerTurn)
+          await matchmakingApi.playMove(i);
+        } catch (e) {
+          console.log(e);
+          throw (e);
+        }
+      }
     }
   }
-})
+)

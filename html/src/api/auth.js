@@ -24,7 +24,7 @@ export const register = async (username, email, password) => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response;
+		return response.data.user.username;
     } catch (error) {
       throw error;
     }

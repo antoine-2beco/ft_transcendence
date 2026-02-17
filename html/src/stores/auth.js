@@ -12,14 +12,14 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    isAuthenticated: (state) => !!state?.user.username
+    // isAuthenticated: (state) => !!state?.user.username
+    isAuthenticated: (state) => true
   },
 
   actions: {
     async login (username, password) {
       try {
-        const response = await authApi.login(username, password);
-		    this.user.username = response.data.username;
+        this.user.username = await authApi.login(username, password);
 		    router.push('/');
       } catch (e) {
         console.error(e);

@@ -1,9 +1,7 @@
-let ws = null;
-let me = null;
-let gameId = null;
-let mySymbol = null;
-let board = Array(9).fill(null);
-// to check
+import { useGameStore } from '../stores/game';
+
+const game = useGameStore();
+const ws = game.matchmaking.ws;
 
 export const start = async () => {
 	if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))
@@ -27,22 +25,24 @@ export const start = async () => {
 
     if (msg.type === "queue:waiting") {
       console.log("Waiting for opponent...");
+      game.searching = true;
     }
 
     if (msg.type === "match:found") {
-      gameId = msg.gameId;
-      mySymbol = msg.symbol;
-      board = msg.board;
-      console.log("Match found. gameId=", gameId, "symbol=", mySymbol);
-    //   renderBoard();
+      game.matchmaking.gameId = msg.gameId;
+      game.symbol = msg.symbol;
+      game.board = msg.board;
+      game.opponent = true;
     }
 
     if (msg.type === "state") {
-      board = msg.board;
-    //   renderBoard();
-      if (msg.winner) {
-      console.log(msg.winner === "draw" ? "Draw!" : `${msg.winner} wins!`);
-      }
+      game.board = msg.board;
+      if (!msg.winner)
+        game.isPlayerTurn = false;
+      else if (msg.winner == "draw")
+        game.isPlayerTurn = true;
+      else
+        game.winner = msg.winner;
     }
   };
 }
@@ -65,14 +65,19 @@ export const leaveMatchmaking = async () => {
   console.log("Sent close");
 }
 
-// queueBtn.addEventListener("click", () => {
-//   if (!ws || ws.readyState !== WebSocket.OPEN) {
-// 	log("WS not open");
-// 	return;
-//   }
-//   ws.send(JSON.stringify({ type: "queue:join" }));
-//   log("Sent queue:join");
-// });
+export const playMove = async (i) => {
+  if (!ws || ws.readyState !== WebSocket.OPEN)
+    return;
+  if (game.matchmaking.gameId == null)
+    return;
+
+  ws.send(JSON.stringify({
+    type: "move",
+    gameId: game.matchmaking.gameId,
+    cell: i,
+    symbol: game.symbol,
+  }));
+}
 
 // playAiBtn.addEventListener("click", () => {
 //   if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))

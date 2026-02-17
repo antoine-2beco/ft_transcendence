@@ -8,32 +8,6 @@ onMounted(resetGame);
 
 const game = useGameStore();
 const error = ref('');
-
-// const handleMatchmaking = async () => {
-//   try {
-//     await game.startMatchmaking();
-//   } catch (e) {
-//     console.log(e);
-//     error.value = "Impossible de trouver un opposant";
-//   }
-// };
-
-// const handleIA = async () => {
-//   try {
-//     await game.startIA();
-//   } catch (e) {
-//   console.log(e);
-//   }
-// };
-
-// const leaveGame = async () => {
-//   try {
-//     await game.leaveGame();
-//   } catch (e) {
-//     throw (e);
-//   }
-// };
-
 </script>
 
 <template>
@@ -54,7 +28,7 @@ const error = ref('');
 
     <div v-if="game.opponent" class="board-container">
       <div class="board">
-        <div v-for="(cell, i) in state.board" :key="i" class="cell" @click="playMove(i)">
+        <div v-for="(cell, i) in game.board" :key="i" class="cell" @click="playMove(i)">
           <span v-if="cell === 'X'" style="color: var(--pico-primary)">X</span>
           <span v-if="cell === 'O'" style="color: var(--pico-del-color)">O</span>
         </div>
