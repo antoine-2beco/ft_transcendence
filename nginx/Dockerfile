@@ -1,12 +1,12 @@
 # Build Vue App
 
-# FROM node:20-slim AS builder
+FROM node:20-slim AS builder
 
-# WORKDIR /app
-# COPY ./html/package*.json ./
-# RUN npm ci
-# COPY ./html ./
-# RUN npm run build
+WORKDIR /app
+COPY ./html/package*.json ./
+RUN npm ci
+COPY ./html ./
+RUN npm run build
 
 # Run Nginx
 
@@ -14,8 +14,8 @@ FROM nginx:alpine
 
 RUN apk add --no-cache openssl
 
-# COPY --from=builder /app/dist /usr/share/nginx/html
-COPY ./htmltest /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
+# COPY ./htmltest /usr/share/nginx/html
 
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/entrypoint.sh /entrypoint.sh
