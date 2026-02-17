@@ -6,6 +6,7 @@ const boardEl = $("board");
 const registerBtn = $("register");
 const loginBtn = $("login");
 const queueBtn = $("queue");
+const playAiBtn = $("playai");
 const statusEl = $("status");
 
 let ws = null;
@@ -60,6 +61,7 @@ function connectWs() {
   ws.onopen = () => {
 	log("WS open");
 	queueBtn.disabled = false;
+	playAiBtn.disabled = false;
   };
 
   ws.onclose = (e) => {
@@ -176,11 +178,48 @@ queueBtn.addEventListener("click", () => {
   log("Sent queue:join");
 });
 
+playAiBtn.addEventListener("click", () => {
+  if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))
+    ws.close();
+
+  ws = new WebSocket(`wss://${location.host}/ws-ai`);
+
+  ws.onopen = () => {
+    log("AI WS open");
+    ws.send(JSON.stringify({ type: "queue:join" }));
+  };
+
+  ws.onclose = (e) => log("AI WS closed", e.code, e.reason || "");
+  ws.onerror = () => log("AI WS error");
+
+  ws.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    log("WS:", msg.type);
+
+    if (msg.type === "match:found") {
+      gameId = msg.gameId;
+      mySymbol = msg.symbol;
+      board = msg.board;
+      log("AI game started. gameId=", gameId, "symbol=", mySymbol);
+      renderBoard();
+    }
+
+    if (msg.type === "state") {
+      board = msg.board;
+      renderBoard();
+      if (msg.winner) {
+        alert(msg.winner === "draw" ? "Draw!" : `${msg.winner} wins!`);
+      }
+    }
+  };
+});
+
 window.addEventListener("load", async () => {
   me = await getMe();
   if (me) {
 	log("Already logged in as", me.username);
 	connectWs();
+	playAiBtn.disabled = false;
   } else {
 	log("Not logged in");
 	queueBtn.disabled = true;

@@ -12,6 +12,7 @@ import { loginRoute } from "./routes/loginRoute.js";
 import { matchmakingRoute } from "./routes/matchmakingRoute.js";
 import { meRoute } from "./routes/meRoute.js";
 import { logoutRoute } from "./routes/logoutRoute.js";
+import { aiRoute } from "./routes/aiRoute.js";
 import "./db.js";
 
 const fastify = Fastify({
@@ -38,6 +39,7 @@ await fastify.register(loginRoute);
 await fastify.register(matchmakingRoute);
 await fastify.register(meRoute);
 await fastify.register(logoutRoute);
+await fastify.register(aiRoute);
 
 async function start() 
 {
