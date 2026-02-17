@@ -38,7 +38,7 @@ export const getProfile = async () => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response.data.user.username;
+		return response;
     } catch (error) {
 		  this.logout();
       throw error;

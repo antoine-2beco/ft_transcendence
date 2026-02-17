@@ -1,43 +1,89 @@
 <script setup>
 import { onMounted } from 'vue';
+import { ref } from 'vue';
+import { useGameStore } from '@/stores/game';
 import { state, playMove, resetGame } from '@/services/gameService';
+
 onMounted(resetGame);
+
+const game = useGameStore();
+const error = ref('');
+
+// const handleMatchmaking = async () => {
+//   try {
+//     await game.startMatchmaking();
+//   } catch (e) {
+//     console.log(e);
+//     error.value = "Impossible de trouver un opposant";
+//   }
+// };
+
+// const handleIA = async () => {
+//   try {
+//     await game.startIA();
+//   } catch (e) {
+//   console.log(e);
+//   }
+// };
+
+// const leaveGame = async () => {
+//   try {
+//     await game.leaveGame();
+//   } catch (e) {
+//     throw (e);
+//   }
+// };
+
 </script>
 
 <template>
-  <div class="text-center mt-2">
+  <div class="text-center">
     <header>
       <h1>Tic Tac Toe</h1>
-      <article>
-        <h3 v-if="!state.winner">{{ state.isPlayerTurn ? "À toi (X)" : "IA..." }}</h3>
-        <h3 v-else>
-          {{ state.winner === 'draw' ? "Match Nul" : `Vainqueur : ${state.winner}` }}
-        </h3>
-      </article>
     </header>
 
-    <div class="flex-center">
+    <article v-if="game.mode == 'matchmaking' && (game.searching || game.opponent)">
+      <h3 v-if="game.searching">Recherche d'un adversaire...</h3>
+      <h3 v-if="game.opponent && !game.winner">
+        {{ game.isPlayerTurn ? "À toi de jouer (X)" : "L'humain réfléchit..." }}
+      </h3>
+      <h3 v-if="game.opponent && game.winner" class="headings">
+        {{ game.winner === 'draw' ? "Match Nul" : `Vainqueur : ${game.winner}` }}
+      </h3>
+    </article>
+
+    <div v-if="game.opponent" class="board-container">
       <div class="board">
         <div v-for="(cell, i) in state.board" :key="i" class="cell" @click="playMove(i)">
-          <span v-if="cell === 'X'" class="text-primary">X</span>
-          <span v-if="cell === 'O'" class="text-del">O</span>
+          <span v-if="cell === 'X'" style="color: var(--pico-primary)">X</span>
+          <span v-if="cell === 'O'" style="color: var(--pico-del-color)">O</span>
         </div>
       </div>
     </div>
 
-    <div class="menu-actions">
-      <button v-if="state.winner" @click="resetGame" class="w-full">Rejouer</button>
-      <RouterLink to="/" role="button" class="secondary outline w-full">Quitter</RouterLink>
+    <div class="grid mt-2">
+      <button v-if="game.winner" @click="resetGame">Rejouer</button>
+
+      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking">Jouer contre un advesaire</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startIA">Jouer contre l'IA</button>
+
+      <button v-if="game.mode == 'matchmaking' && !game.searching" @click="game.joinQueue">Rejoindre la file d'attente</button>
+
+      <button to="/" role="button" class="secondary outline" @click="game.leaveGame">Quitter</button>
     </div>
   </div>
 </template>
 
 <style scoped>
+.board-container {
+  display: flex;
+  justify-content:center;
+  margin: 2rem 0;
+}
 .board {
   display: grid;
   grid-template-columns: repeat(3, 80px);
   gap: 10px;
-  margin: 2rem 0;
 }
 .cell {
   width: 80px; height: 80px;
@@ -46,10 +92,13 @@ onMounted(resetGame);
   display: flex; align-items: center; justify-content: center;
   font-size: 2rem; font-weight: bold; cursor: pointer; border-radius: 8px;
 }
-.menu-actions {
-  max-width: 300px;
-  margin: 0 auto; display: flex;
+.grid {
+  display: flex;
   flex-direction: column;
-  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+  gap: 1rem;
+  margin: 2rem auto;
 }
+
 </style>

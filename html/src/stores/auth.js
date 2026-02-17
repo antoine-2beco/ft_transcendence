@@ -5,7 +5,10 @@ import router from '@/router';
 export const useAuthStore = defineStore('auth', {
 
   state: () => ({
-    username: null,
+    user: {
+      id: null,
+      username: null
+    },
   }),
 
   getters: {
@@ -16,7 +19,7 @@ export const useAuthStore = defineStore('auth', {
     async login (username, password) {
       try {
         const response = await authApi.login(username, password);
-		    this.username = response.data.username;
+		    this.user.username = response.data.username;
 		    router.push('/');
       } catch (e) {
         console.error(e);
@@ -35,22 +38,23 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async checkAuth () {
-      if (!this.username) {
+      if (!this.user.username) {
         try {
-          this.username = await authApi.getProfile();
+          const response = await authApi.getProfile();
+          this.user.username = response.data.user.username;
         } catch (e) {
-          this.logout();
+          console.log(e);
         }
       }
     },
 
     async logout () {
       try {
-        const response = await authApi.logout();
+        await authApi.logout();
       } catch (e) {
-        throw (e);
+        console.log(e);
       }
-      this.username = null;
+      this.user.username = null;
       router.push('/');
     }
   }

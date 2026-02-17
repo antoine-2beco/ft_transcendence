@@ -29,9 +29,9 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/matchmaking',
-      name: 'matchmaking',
-      component: () => import('../views/MatchmakingView.vue'),
+      path: '/ia',
+      name: 'ia',
+      component: () => import('../views/ia.vue'),
       meta: { requiresAuth: true }
     },
     {
@@ -62,7 +62,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  if (!authStore.username) {
+  if (!authStore.user.username) {
     await authStore.checkAuth();
   }
 
