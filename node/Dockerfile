@@ -22,6 +22,8 @@ COPY --from=deps /app/package*.json ./
 COPY --from=deps /app/js/index.js ./index.js
 COPY --from=deps /app/js/db.js ./db.js
 COPY --from=deps /app/js/initdb.js ./initdb.js
+COPY --from=deps /app/js/authPreHandler.js ./authPreHandler.js
+
 
 COPY --from=deps /app/js/models/User.js ./models/User.js
 
