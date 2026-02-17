@@ -56,18 +56,13 @@ const router = createRouter({
       component: () => import('../views/FriendsView.vue'),
       meta: { requiresAuth: true }
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: RegisterView
-    },
   ]
 });
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  if (!authStore.user && authStore.token) {
+  if (!authStore.username) {
     await authStore.checkAuth();
   }
 

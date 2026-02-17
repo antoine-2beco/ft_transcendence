@@ -45,6 +45,7 @@ const handleMatchmaking = async () => {
     <div class="grid mt-2">
       <button v-if="matchmaking.winner" @click="resetGame">Rejouer</button>
       <button v-if="!matchmaking.founding" @click="handleMatchmaking">Rechercher un adversaire</button>
+      <RouterLink v-if="!matchmaking.founding" to="/game" role="button" class="w-full">Jouer contre l'IA</RouterLink>
       <RouterLink to="/" role="button" class="secondary outline" @click="resetGame">Quitter</RouterLink>
     </div>
   </div>
