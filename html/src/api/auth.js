@@ -15,10 +15,10 @@ export const login = async (username, password) => {
     }
   }
 
-export const register = async (username, password) => {
+export const register = async (username, email, password) => {
     try {
       const response = await axios.post('/api/register', 
-		{username, password},
+		{username, email, password},
 		{
 			headers: {
 				"Content-Type": "application/json"
