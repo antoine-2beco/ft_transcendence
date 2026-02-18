@@ -9,6 +9,9 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    VueI18nPlugin({
+      include: resolve(fileURLToPath(new URL('./src/i18n/locales/**/*.json', import.meta.url))),
+    }),
   ],
   resolve: {
     alias: {

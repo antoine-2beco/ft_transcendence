@@ -1,0 +1,16 @@
+{
+	"head" : {
+		"page_title" : "Tic Tac Toe",
+		"site_title" : "Tic Tac Toe"
+	},
+	"home" : {
+		"play" : "Play",
+		"my_profile" : "My Profile",
+		"my_friends" : "My Friends",
+		"leaderboard" : "Leaderboard",
+		"history" : "History",
+		"logout" : "Logout",
+		"login" : "Login",
+		"register" : "Register"
+	}
+}
