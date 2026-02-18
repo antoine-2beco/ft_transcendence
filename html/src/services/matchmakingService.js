@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 export const state = reactive({
   board: Array(9).fill(null),
   winner: null,
-  isPlayerTurn: true
+  turn: true
 });
 
 export const playMove = (index) => {
@@ -53,5 +53,5 @@ const syncClient = () => {
   state.board = [...serverBoard];
   state.winner = winner;
   const moves = serverBoard.filter(c => c !== null).length;
-  state.isPlayerTurn = (moves % 2 === 0) && !winner;
+  state.turn = (moves % 2 === 0) && !winner;
 };

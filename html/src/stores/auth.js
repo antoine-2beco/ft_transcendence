@@ -23,7 +23,6 @@ export const useAuthStore = defineStore('auth', {
 		    router.push('/');
       } catch (e) {
         console.error(e);
-        throw e;
       }
     },
 
@@ -33,7 +32,6 @@ export const useAuthStore = defineStore('auth', {
 		    router.push('/login');
       } catch (e) {
         console.error(e);
-        throw e;
       }
     },
 

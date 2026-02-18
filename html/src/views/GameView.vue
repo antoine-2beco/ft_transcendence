@@ -19,7 +19,7 @@ const error = ref('');
     <article v-if="game.mode == 'matchmaking' && (game.matchmaking.searching || game.matchmaking.opponent)">
       <h3 v-if="game.matchmaking.searching">Recherche d'un adversaire...</h3>
       <h3 v-if="game.matchmaking.opponent && !game.winner">
-        {{ game.isPlayerTurn ? "À toi de jouer (X)" : "L'humain réfléchit..." }}
+        {{ game.turn === game.symbol ? `À toi de jouer (${game.symbol})` : "L'adversaire réfléchit..." }}
       </h3>
       <h3 v-if="game.matchmaking.opponent && game.winner" class="headings">
         {{ game.winner === 'draw' ? "Match Nul" : `Vainqueur : ${game.winner}` }}
@@ -36,7 +36,7 @@ const error = ref('');
     </div>
 
     <div class="grid mt-2">
-      <button v-if="game.winner" @click="resetGame">Rejouer</button>
+      <button v-if="game.winner" @click="game.replay()">Rejouer</button>
 
       <button v-if="!game.mode && !game.matchmaking.searching" @click="game.startMatchmaking">Jouer contre un advesaire</button>
       <button v-if="!game.mode && !game.matchmaking.searching" @click="game.startIA">Jouer contre l'IA</button>
@@ -44,7 +44,7 @@ const error = ref('');
       <button v-if="game.mode == 'matchmaking' && !game.matchmaking.searching && !game.matchmaking.opponent" @click="game.joinQueue">Rejoindre la file d'attente</button>
 
       <button to="/" role="button" class="secondary outline" @click="game.leaveGame">
-        {{ game.matchmaking.opponent ? "Abandonner" : "Quitter" }}
+        {{ game.matchmaking.opponent && !game.winner ? "Abandonner" : "Quitter" }}
       </button>
     </div>
   </div>

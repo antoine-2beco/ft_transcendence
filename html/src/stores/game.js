@@ -9,7 +9,7 @@ export const useGameStore = defineStore('game', {
     mode: null,
     board: Array(9).fill(null),
     winner: null,
-    isPlayerTurn: null,
+    turn: null,
     symbol: null,
 
     matchmaking: {
@@ -52,22 +52,18 @@ export const useGameStore = defineStore('game', {
           }
 
           if (msg.type === "match:found") {
-            console.log("Match Found !" + msg.gameId);
             this.matchmaking.gameId = msg.gameId;
             this.symbol = msg.symbol;
             this.board = msg.board;
+            this.turn = msg.turn;
             this.matchmaking.searching = false;
             this.matchmaking.opponent = true;
           }
 
           if (msg.type === "state") {
             this.board = msg.board;
-            if (!msg.winner)
-              this.isPlayerTurn = false;
-            else if (msg.winner == "draw")
-              this.isPlayerTurn = true;
-            else
-              this.winner = msg.winner;
+            this.turn = msg.turn;
+            this.winner = msg.winner;
           }
         };
       } catch (e) {
@@ -97,12 +93,10 @@ export const useGameStore = defineStore('game', {
 
     async leaveGame() {
       try {
-        if (this.mode == 'matchmaking') {
+        console.log(this.matchmaking.ws);
+        if (this.matchmaking.ws)
           await matchmakingApi.leaveMatchmaking(this.matchmaking.ws);
-          router.push('/');
-        }
-        else
-          router.push('/');
+        router.push('/');
         this.$reset();
       } catch (e) {
         console.log(e);
@@ -111,14 +105,23 @@ export const useGameStore = defineStore('game', {
 
     async playMove(i) {
       try {
-        if (this.isPlayerTurn)
+        if (this.turn)
           await matchmakingApi.playMove(this.matchmaking.ws, 
             i, this.matchmaking.gameId, this.symbol);
         } catch (e) {
           console.log(e);
           throw (e);
         }
+      },
+
+    async replay() {
+      this.$reset();
+      try {
+        this.startMatchmaking();
+      } catch (e) {
+        console.log(e);
       }
+    }
     }
   }
 )
