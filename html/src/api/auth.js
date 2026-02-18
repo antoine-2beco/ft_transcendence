@@ -9,7 +9,7 @@ export const login = async (username, password) => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response;
+		return response.data.username;
     } catch (error) {
       throw error;
     }
@@ -24,7 +24,7 @@ export const register = async (username, email, password) => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response.data.user.username;
+		return response.data.username;
     } catch (error) {
       throw error;
     }

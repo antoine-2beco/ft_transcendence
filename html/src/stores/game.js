@@ -34,7 +34,8 @@ export const useGameStore = defineStore('game', {
 
     async joinQueue() {
       try {
-        await matchmakingApi.joinQueue();
+        console.log(this.matchmaking.ws);
+        await matchmakingApi.joinQueue(this.matchmaking.ws);
       } catch (e) {
         console.log(e);
         throw (e);
@@ -54,7 +55,7 @@ export const useGameStore = defineStore('game', {
     async leaveGame() {
       try {
         if (this.mode == 'matchmaking') {
-          await matchmakingApi.leaveMatchmaking();
+          await matchmakingApi.leaveMatchmaking(this.matchmaking.ws);
           router.push('/');
         }
         else
@@ -68,7 +69,8 @@ export const useGameStore = defineStore('game', {
     async playMove(i) {
       try {
         if (this.isPlayerTurn)
-          await matchmakingApi.playMove(i);
+          await matchmakingApi.playMove(this.matchmaking.ws, 
+            i, this.matchmaking.gameId, this.symbol);
         } catch (e) {
           console.log(e);
           throw (e);

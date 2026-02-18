@@ -1,13 +1,14 @@
 import { useGameStore } from '../stores/game';
 
-const game = useGameStore();
-const ws = game.matchmaking.ws;
-
 export const start = async () => {
+  const game = useGameStore();
+  let ws = game.matchmaking.ws;
+
 	if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))
 		return;
 	
 	ws = new WebSocket(`wss://${location.host}/ws`);
+  console.log(ws);
 	
   ws.onopen = () => {
 	  console.log("WS open");
@@ -47,7 +48,8 @@ export const start = async () => {
   };
 }
 
-export const joinQueue = async () => {
+export const joinQueue = async (ws) => {
+  console.log(ws);
   if (!ws || ws.readyState !== WebSocket.OPEN) {
 	  console.log("WS not open");
     return;
@@ -56,7 +58,7 @@ export const joinQueue = async () => {
   console.log("Sent join queue");
 }
 
-export const leaveMatchmaking = async () => {
+export const leaveMatchmaking = async (ws) => {
   if (!ws || ws.readyState !== WebSocket.OPEN) {
 	  console.log("WS not open");
 	  return;
@@ -65,17 +67,17 @@ export const leaveMatchmaking = async () => {
   console.log("Sent close");
 }
 
-export const playMove = async (i) => {
+export const playMove = async (ws, cell, gameId, symbol) => {
   if (!ws || ws.readyState !== WebSocket.OPEN)
     return;
-  if (game.matchmaking.gameId == null)
+  if (gameId == null)
     return;
 
   ws.send(JSON.stringify({
     type: "move",
-    gameId: game.matchmaking.gameId,
-    cell: i,
-    symbol: game.symbol,
+    gameId,
+    cell,
+    symbol,
   }));
 }
 
