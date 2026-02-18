@@ -1,55 +1,5 @@
-import { useGameStore } from '../stores/game';
-
-export const start = async () => {
-  const game = useGameStore();
-  let ws = game.matchmaking.ws;
-
-	if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))
-		return;
-	
-	ws = new WebSocket(`wss://${location.host}/ws`);
-  console.log(ws);
-	
-  ws.onopen = () => {
-	  console.log("WS open");
-  };
-
-  ws.onclose = (e) => {
-	  console.log("WS closed", e.code, e.reason || "");
-  };
-
-  ws.onerror = () => console.log("WS error");
-
-  ws.onmessage = (e) => {
-    const msg = JSON.parse(e.data);
-    console.log("WS:", msg.type);
-
-    if (msg.type === "queue:waiting") {
-      console.log("Waiting for opponent...");
-      game.searching = true;
-    }
-
-    if (msg.type === "match:found") {
-      game.matchmaking.gameId = msg.gameId;
-      game.symbol = msg.symbol;
-      game.board = msg.board;
-      game.opponent = true;
-    }
-
-    if (msg.type === "state") {
-      game.board = msg.board;
-      if (!msg.winner)
-        game.isPlayerTurn = false;
-      else if (msg.winner == "draw")
-        game.isPlayerTurn = true;
-      else
-        game.winner = msg.winner;
-    }
-  };
-}
 
 export const joinQueue = async (ws) => {
-  console.log(ws);
   if (!ws || ws.readyState !== WebSocket.OPEN) {
 	  console.log("WS not open");
     return;

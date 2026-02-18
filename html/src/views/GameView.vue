@@ -16,7 +16,7 @@ const error = ref('');
       <h1>Tic Tac Toe</h1>
     </header>
 
-    <article v-if="game.mode == 'matchmaking' && (game.matchmaking.searching || game.matchmaking.gameIdopponent)">
+    <article v-if="game.mode == 'matchmaking' && (game.matchmaking.searching || game.matchmaking.opponent)">
       <h3 v-if="game.matchmaking.searching">Recherche d'un adversaire...</h3>
       <h3 v-if="game.matchmaking.opponent && !game.winner">
         {{ game.isPlayerTurn ? "À toi de jouer (X)" : "L'humain réfléchit..." }}
@@ -41,9 +41,11 @@ const error = ref('');
       <button v-if="!game.mode && !game.matchmaking.searching" @click="game.startMatchmaking">Jouer contre un advesaire</button>
       <button v-if="!game.mode && !game.matchmaking.searching" @click="game.startIA">Jouer contre l'IA</button>
 
-      <button v-if="game.mode == 'matchmaking' && !game.matchmaking.searching" @click="game.joinQueue">Rejoindre la file d'attente</button>
+      <button v-if="game.mode == 'matchmaking' && !game.matchmaking.searching && !game.matchmaking.opponent" @click="game.joinQueue">Rejoindre la file d'attente</button>
 
-      <button to="/" role="button" class="secondary outline" @click="game.leaveGame">Quitter</button>
+      <button to="/" role="button" class="secondary outline" @click="game.leaveGame">
+        {{ game.matchmaking.opponent ? "Abandonner" : "Quitter" }}
+      </button>
     </div>
   </div>
 </template>

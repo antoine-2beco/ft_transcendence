@@ -25,7 +25,51 @@ export const useGameStore = defineStore('game', {
     async startMatchmaking() {
       try {
         this.mode = 'matchmaking';
-        await matchmakingApi.start();
+
+        if (this.matchmaking.ws && (this.matchmaking.ws.readyState === WebSocket.OPEN || this.matchmaking.ws.readyState === WebSocket.CONNECTING))
+          return;
+        
+        this.matchmaking.ws = new WebSocket(`wss://${location.host}/ws`);
+        console.log(this.matchmaking.ws);
+        
+        this.matchmaking.ws.onopen = () => {
+          console.log("ws open");
+        };
+
+        this.matchmaking.ws.onclose = (e) => {
+          console.log("ws closed", e.code, e.reason || "");
+        };
+
+        this.matchmaking.ws.onerror = () => console.log("ws error");
+
+        this.matchmaking.ws.onmessage = (e) => {
+          const msg = JSON.parse(e.data);
+          console.log("ws:", msg.type);
+
+          if (msg.type === "queue:waiting") {
+            this.matchmaking.searching = true;
+            console.log("Waiting for opponent...");
+          }
+
+          if (msg.type === "match:found") {
+            console.log("Match Found !" + msg.gameId);
+            this.matchmaking.gameId = msg.gameId;
+            this.symbol = msg.symbol;
+            this.board = msg.board;
+            this.matchmaking.searching = false;
+            this.matchmaking.opponent = true;
+          }
+
+          if (msg.type === "state") {
+            this.board = msg.board;
+            if (!msg.winner)
+              this.isPlayerTurn = false;
+            else if (msg.winner == "draw")
+              this.isPlayerTurn = true;
+            else
+              this.winner = msg.winner;
+          }
+        };
       } catch (e) {
         console.log(e);
         throw (e);
@@ -34,7 +78,6 @@ export const useGameStore = defineStore('game', {
 
     async joinQueue() {
       try {
-        console.log(this.matchmaking.ws);
         await matchmakingApi.joinQueue(this.matchmaking.ws);
       } catch (e) {
         console.log(e);
