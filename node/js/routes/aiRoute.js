@@ -64,7 +64,7 @@ export async function aiRoute(fastify) {
 
         ws.userId = user.sub;
         ws.username = user.username;
-        ws.send(JSON.stringify({ type: "hello", username: ws.username }));
+        ws.send(JSON.stringify({ type: "ai", username: ws.username }));
 
         ws.on("message", (raw) => {
             const msg = JSON.parse(raw.toString());

@@ -29,12 +29,6 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/ia',
-      name: 'ia',
-      component: () => import('../views/ia.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
       path: '/profile',
       name: 'profile',
       component: () => import('../views/UserProfileView.vue'),
@@ -62,9 +56,9 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  // if (!authStore.user.username) {
-  //   await authStore.checkAuth();
-  // }
+  if (!authStore.user.username) {
+    await authStore.checkAuth();
+  }
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login');

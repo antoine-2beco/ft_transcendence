@@ -16,17 +16,17 @@ const error = ref('');
       <h1>Tic Tac Toe</h1>
     </header>
 
-    <article v-if="game.mode == 'matchmaking' && (game.matchmaking.searching || game.matchmaking.opponent)">
-      <h3 v-if="game.matchmaking.searching">Recherche d'un adversaire...</h3>
-      <h3 v-if="game.matchmaking.opponent && !game.winner">
+    <article v-if="game.searching || game.opponent">
+      <h3 v-if="game.searching">Recherche d'un adversaire...</h3>
+      <h3 v-if="game.opponent && !game.winner">
         {{ game.turn === game.symbol ? `À toi de jouer (${game.symbol})` : "L'adversaire réfléchit..." }}
       </h3>
-      <h3 v-if="game.matchmaking.opponent && game.winner" class="headings">
+      <h3 v-if="game.opponent && game.winner" class="headings">
         {{ game.winner === 'draw' ? "Match Nul" : `Vainqueur : ${game.winner}` }}
       </h3>
     </article>
 
-    <div v-if="game.matchmaking.opponent" class="board-container">
+    <div v-if="game.opponent" class="board-container">
       <div class="board">
         <div v-for="(cell, i) in game.board" :key="i" class="cell" @click="game.playMove(i)">
           <span v-if="cell === 'X'" style="color: var(--pico-primary)">X</span>
@@ -36,15 +36,15 @@ const error = ref('');
     </div>
 
     <div class="grid mt-2">
-      <button v-if="game.winner" @click="game.replay()">Rejouer</button>
+      <button v-if="game.winner" @click="game.replay(game.mode)">Rejouer</button>
 
-      <button v-if="!game.mode && !game.matchmaking.searching" @click="game.startMatchmaking">Jouer contre un advesaire</button>
-      <button v-if="!game.mode && !game.matchmaking.searching" @click="game.startIA">Jouer contre l'IA</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('matchmaking')">Jouer contre un advesaire</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('ai')">Jouer contre l'IA</button>
 
-      <button v-if="game.mode == 'matchmaking' && !game.matchmaking.searching && !game.matchmaking.opponent" @click="game.joinQueue">Rejoindre la file d'attente</button>
+      <button v-if="game.mode == 'matchmaking' && !game.searching && !game.opponent" @click="game.joinQueue">Rejoindre la file d'attente</button>
 
       <button to="/" role="button" class="secondary outline" @click="game.leaveGame">
-        {{ game.matchmaking.opponent && !game.winner ? "Abandonner" : "Quitter" }}
+        {{ game.opponent && !game.winner ? "Abandonner" : "Quitter" }}
       </button>
     </div>
   </div>

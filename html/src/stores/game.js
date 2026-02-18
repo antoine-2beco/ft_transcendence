@@ -7,57 +7,62 @@ export const useGameStore = defineStore('game', {
 
 	state: () => ({
     mode: null,
+    searching: false,
+    opponent: false,
+
     board: Array(9).fill(null),
+
+    ws: null,
+    gameId: null,
+
     winner: null,
     turn: null,
-    symbol: null,
-
-    matchmaking: {
-      searching: false,
-      opponent: false,
-      ws: null,
-      me: null,
-      gameId: null,
-    },
-  }),
+    symbol: null
+    }),
 
   actions: {
-    async startMatchmaking() {
+    async startMatchmaking(mode) {
       try {
-        this.mode = 'matchmaking';
+        this.mode = mode;
 
-        if (this.matchmaking.ws && (this.matchmaking.ws.readyState === WebSocket.OPEN || this.matchmaking.ws.readyState === WebSocket.CONNECTING))
+        if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING))
           return;
         
-        this.matchmaking.ws = new WebSocket(`wss://${location.host}/ws`);
-        console.log(this.matchmaking.ws);
+        if (mode === 'ai')
+          this.ws = new WebSocket(`wss://${location.host}/ws-ai`);
+        else if (mode === 'matchmaking')
+          this.ws = new WebSocket(`wss://${location.host}/ws`);
+        else
+          return;
         
-        this.matchmaking.ws.onopen = () => {
+        this.ws.onopen = () => {
           console.log("ws open");
+          if (mode === 'ai')
+            this.joinQueue();
         };
 
-        this.matchmaking.ws.onclose = (e) => {
+        this.ws.onclose = (e) => {
           console.log("ws closed", e.code, e.reason || "");
         };
 
-        this.matchmaking.ws.onerror = () => console.log("ws error");
+        this.ws.onerror = () => console.log("ws error");
 
-        this.matchmaking.ws.onmessage = (e) => {
+        this.ws.onmessage = (e) => {
           const msg = JSON.parse(e.data);
           console.log("ws:", msg.type);
 
           if (msg.type === "queue:waiting") {
-            this.matchmaking.searching = true;
+            this.searching = true;
             console.log("Waiting for opponent...");
           }
 
           if (msg.type === "match:found") {
-            this.matchmaking.gameId = msg.gameId;
+            this.gameId = msg.gameId;
             this.symbol = msg.symbol;
             this.board = msg.board;
             this.turn = msg.turn;
-            this.matchmaking.searching = false;
-            this.matchmaking.opponent = true;
+            this.searching = false;
+            this.opponent = true;
           }
 
           if (msg.type === "state") {
@@ -74,7 +79,7 @@ export const useGameStore = defineStore('game', {
 
     async joinQueue() {
       try {
-        await matchmakingApi.joinQueue(this.matchmaking.ws);
+        await matchmakingApi.joinQueue(this.ws);
       } catch (e) {
         console.log(e);
         throw (e);
@@ -93,9 +98,9 @@ export const useGameStore = defineStore('game', {
 
     async leaveGame() {
       try {
-        console.log(this.matchmaking.ws);
-        if (this.matchmaking.ws)
-          await matchmakingApi.leaveMatchmaking(this.matchmaking.ws);
+        console.log(this.ws);
+        if (this.ws)
+          await matchmakingApi.leaveMatchmaking(this.ws);
         router.push('/');
         this.$reset();
       } catch (e) {
@@ -106,18 +111,17 @@ export const useGameStore = defineStore('game', {
     async playMove(i) {
       try {
         if (this.turn)
-          await matchmakingApi.playMove(this.matchmaking.ws, 
-            i, this.matchmaking.gameId, this.symbol);
+          await matchmakingApi.playMove(this.ws, i, this.gameId, this.symbol);
         } catch (e) {
           console.log(e);
           throw (e);
         }
       },
 
-    async replay() {
+    async replay(mode) {
       this.$reset();
       try {
-        this.startMatchmaking();
+        this.startMatchmaking(mode);
       } catch (e) {
         console.log(e);
       }
