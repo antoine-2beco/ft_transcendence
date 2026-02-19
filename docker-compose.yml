@@ -28,10 +28,13 @@ services:
             JWT_SECRET: ${JWT_SECRET}
             DB_HOST: postgres
             DB_PORT: "5432"
+            UPLOAD_DIR: /app/uploads
         ports:
             - "8787:8787"
         networks:
             - transcendence_net
+        volumes:
+            - uploads:/app/uploads
         restart: unless-stopped
 
     nginx:
@@ -49,6 +52,8 @@ services:
             LAN_IP: ${LAN_IP}
         networks:
             - transcendence_net
+        volumes:
+            - uploads:/uploads:ro
         restart: unless-stopped
 
     adminer:
@@ -67,3 +72,4 @@ networks:
 
 volumes:
     pgdata:
+    uploads:
