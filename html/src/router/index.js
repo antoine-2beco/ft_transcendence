@@ -56,7 +56,8 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  if (!authStore.user.username) {
+  // if (!authStore.user.username) {
+  if (!authStore.user) { // MOCKDATA
     await authStore.checkAuth();
   }
 

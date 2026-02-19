@@ -1,14 +1,16 @@
-import { MOCK_USERS, MOCK_FRIENDS } from '@/data/mockData';
+import { MOCK_USERS } from '@/data/mockData';
 
 export const getMyFriends = async (currentUserId) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const relationships = MOCK_FRIENDS.filter(f => f.userId === currentUserId || f.friendId === currentUserId);
-
-      const friendIds = relationships.map(r => r.userId === currentUserId ? r.friendId : r.userId);
-
-      const friendsList = MOCK_USERS.filter(user => friendIds.includes(user.id));
-
+      const currentUser = MOCK_USERS.find(u => u.id === currentUserId);
+      if (!currentUser || !currentUser.friends) {
+        resolve([]);
+        return;
+      }
+      const friendsList = MOCK_USERS.filter(user =>
+        currentUser.friends.includes(user.id)
+      );
       resolve(friendsList);
     }, 500);
   });

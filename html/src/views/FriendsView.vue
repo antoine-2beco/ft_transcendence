@@ -14,6 +14,14 @@ onMounted(async () => {
   }
 });
 
+const removeFriend = (friendId) => {
+  const indexStore = auth.user.friends.indexOf(friendId);
+  if (indexStore > -1) {
+    auth.user.friends.splice(indexStore, 1);
+  }
+  friends.value = friends.value.filter(f => f.id !== friendId);
+};
+
 const getStatusClass = (s) => ({
   'online': 'text-primary',
   'in-game': 'text-warning',
@@ -27,23 +35,29 @@ const getStatusClass = (s) => ({
     <div v-if="loading" aria-busy="true">Chargement...</div>
 
     <div v-else-if="friends.length === 0" class="text-center">
-      <p>Tu n'as pas encore d'amis</p>
+      <p>Tu n'as pas encore d'amis.</p>
+      <RouterLink to="/leaderboard" class="contrast">Ajouter des amis depuis le classement</RouterLink>
     </div>
 
     <div v-else class="friends-grid">
       <article v-for="friend in friends" :key="friend.id">
         <header class="text-center">
-          <img :src="friend.avatar" class="avatar">
+          <img :src="friend.profile_picture_url" class="avatar">
           <div :class="getStatusClass(friend.status)">
             <small>● {{ friend.status }}</small>
           </div>
         </header>
         <div class="text-center">
           <strong>{{ friend.username }}</strong>
-          <p>Elo: {{ friend.stats.elo }}</p>
+          <p>Elo: {{ friend.elo }}</p>
         </div>
         <footer>
-          <button class="outline secondary w-full">Retirer</button>
+          <button
+            class="outline secondary w-full"
+            @click="removeFriend(friend.id)"
+          >
+            Retirer
+          </button>
         </footer>
       </article>
     </div>
@@ -61,8 +75,9 @@ const getStatusClass = (s) => ({
   gap: 1rem;
 }
 .avatar {
-  width: 80px;
+  width: 80px; height: 80px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .text-warning { color: #f59f00; }
 </style>
