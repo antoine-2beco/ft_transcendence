@@ -1,13 +1,7 @@
 <script setup>
-import { onMounted } from 'vue';
-import { ref } from 'vue';
 import { useGameStore } from '@/stores/game';
-import { state, playMove, resetGame } from '@/services/gameService';
-
-onMounted(resetGame);
 
 const game = useGameStore();
-const error = ref('');
 </script>
 
 <template>

@@ -29,7 +29,7 @@ export const getProfileAPI = async (token) => {
   });
 };
 
-export const registerAPI = async (username, email, password) => {
+export const registerAPI = async (username, email) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const userExists = MOCK_USERS.find(u =>

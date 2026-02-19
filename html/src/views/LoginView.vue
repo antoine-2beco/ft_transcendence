@@ -9,7 +9,7 @@ const error = ref('');
 
 const handleSubmit = async () => {
   try { await auth.login(username.value, password.value); }
-  catch (e) { error.value = "Identifiants incorrects"; }
+  catch (e) { void (e); error.value = "Identifiants incorrects"; }
 };
 </script>
 

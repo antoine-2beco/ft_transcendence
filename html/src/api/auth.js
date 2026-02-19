@@ -1,33 +1,25 @@
 import axios from 'axios' ;
 
 export const login = async (username, password) => {
-    try {
-      const response = await axios.post('/api/login', 
-		{username, password},
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response.data.username;
-    } catch (error) {
-      throw error;
-    }
+	const response = await axios.post('/api/login', 
+	{username, password},
+	{
+		headers: {
+			"Content-Type": "application/json"
+		}
+	});
+	return response.data.username;
   }
 
 export const register = async (username, email, password) => {
-    try {
-      const response = await axios.post('/api/register', 
-		{username, email, password},
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response.data.username;
-    } catch (error) {
-      throw error;
-    }
+	const response = await axios.post('/api/register', 
+	{username, email, password},
+	{
+		headers: {
+			"Content-Type": "application/json"
+		}
+	});
+	return response.data.username;
   }
 
 export const getProfile = async () => {
@@ -46,9 +38,5 @@ export const getProfile = async () => {
 }
 
 export const logout = async () => {
-  try {
-    const response = await axios.post('/api/logout');
-  } catch (error) {
-    throw error;
-  }
+  await axios.post('/api/logout');
 }
