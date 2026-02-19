@@ -12,5 +12,23 @@
 		"logout" : "Logout",
 		"login" : "Login",
 		"register" : "Register"
+	},
+	"login" : {
+		"title" : "Login",
+		"username" : "Username",
+		"pseudo" : "Pseudo",
+		"password" : "Password",
+		"bad_entries" : "Bad entries",
+		"submit_button" : "Login"
+	},
+	"register" : {
+		"title" : "Regitser",
+		"username" : "Username",
+		"mail" : "Mail",
+		"password" : "Password",
+		"bad_entries" : "Bad entries",
+		"submit_button" : "Register",
+		"already_account" : "Do you already have an account ?",
+		"login" : "Login"
 	}
 }

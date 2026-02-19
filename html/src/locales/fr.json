@@ -1,0 +1,33 @@
+{
+	"head" : {
+		"page_title" : "Tic Tac Toe",
+		"site_title" : "Tic Tac Toe"
+	},
+	"home" : {
+		"play" : "Jouer",
+		"my_profile" : "Mon Profile",
+		"my_friends" : "Mes Amis",
+		"leaderboard" : "Classement",
+		"history" : "Historique",
+		"logout" : "Se déconnecter",
+		"login" : "Se connecter",
+		"register" : "S'inscrire"
+	},
+	"login" : {
+		"title" : "Se connecter",
+		"username" : "Nom d'utilisateur",
+		"pseudo" : "Pseudo",
+		"password" : "Mot de passe",
+		"bad_entries" : "Mauvais identifiants",
+		"submit_button" : "Se connecter"
+	},
+	"register" : {
+		"title" : "S'inscrire",
+		"username" : "Nom d'utilisateur",
+		"mail" : "Mail",
+		"password" : "Mot de passe",
+		"submit_button" : "S'inscrire",
+		"already_account" : "Vous avez déjà un compte ?",
+		"login" : "Se connecter"
+	}
+}

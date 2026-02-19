@@ -28,29 +28,29 @@ const handleSubmit = async () => {
 <template>
   <div class="container" style="max-width: 400px; margin-top: 10vh;">
     <article>
-      <header>Créer un compte</header>
+      <header>{{ $t("register.title") }}</header>
       <form @submit.prevent="handleSubmit" novalidate>
         <label>
-          Pseudo
+          {{ $t("register.username") }}
           <input type="text" v-model="username" required />
         </label>
 
         <label>
-          Email
+          {{ $t("register.mail") }}
           <input type="email" v-model="email" required />
         </label>
 
         <label>
-          Mot de passe
+          {{ $t("register.password") }}
           <input type="password" v-model="password" required />
         </label>
 
         <small v-if="error" class="text-del">{{ error }}</small>
 
-        <button type="submit">S'inscrire</button>
+        <button type="submit">{{ $t("register.submit_button") }}</button>
       </form>
       <footer class="text-center">
-        <small>Déjà un compte ? <RouterLink to="/login">Se connecter</RouterLink></small>
+        <small>{{ $t("register.already_account") }} <RouterLink to="/login">{{ $t("register.login") }}</RouterLink></small>
       </footer>
     </article>
   </div>
