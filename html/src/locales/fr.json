@@ -24,8 +24,9 @@
 	"register" : {
 		"title" : "S'inscrire",
 		"username" : "Nom d'utilisateur",
-		"mail" : "Mail",
+		"email" : "Mail",
 		"password" : "Mot de passe",
+		"bad_email" : "Mauvais format d'email",
 		"submit_button" : "S'inscrire",
 		"already_account" : "Vous avez déjà un compte ?",
 		"login" : "Se connecter"

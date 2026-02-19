@@ -12,8 +12,7 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    // isAuthenticated: (state) => !!state?.user.username
-    isAuthenticated: (state) => true
+    isAuthenticated: (state) => !!state?.user.username
   },
 
   actions: {
@@ -29,20 +28,18 @@ export const useAuthStore = defineStore('auth', {
     async register (username, email, password) {
       try {
         await authApi.register(username, email, password);
-		    router.push('/login');
+		    router.push('/login'); 
       } catch (e) {
         console.error(e);
       }
     },
 
     async checkAuth () {
-      if (!this.user.username) {
-        try {
-          const response = await authApi.getProfile();
-          this.user.username = response.data.user.username;
-        } catch (e) {
-          console.log(e);
-        }
+      try {
+        const response = await authApi.checkAuth();
+        this.user.username = response.data.user.username;
+      } catch (e) {
+        this.user.username = false;
       }
     },
 

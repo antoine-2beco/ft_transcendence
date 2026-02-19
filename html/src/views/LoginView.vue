@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n();
 const auth = useAuthStore();
 const username = ref('');
 const password = ref('');
@@ -9,7 +11,8 @@ const error = ref('');
 
 const handleSubmit = async () => {
   try { await auth.login(username.value, password.value); }
-  catch (e) { void (e); error = true;}
+  catch (e) { void (e);}
+  error.value = t("login.bad_entries");
 };
 </script>
 
@@ -28,7 +31,7 @@ const handleSubmit = async () => {
           {{ $t("login.password") }}
           <input type="password" v-model="password" required />
         </label>
-        <small v-if="error" style="color: var(--pico-del-color)">{{ $t("login.bad_entries") }}</small>
+        <small v-if="error" style="color: var(--pico-del-color)">{{ error }}</small>
         <button type="submit">{{ $t("login.submit_button") }}</button>
       </form>
     </article>

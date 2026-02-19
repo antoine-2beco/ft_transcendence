@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n();
 const auth = useAuthStore();
 const username = ref('');
 const email = ref('');
@@ -13,7 +15,7 @@ const handleSubmit = async () => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email.value)) {
-    error.value = "Format d'email invalide (ex: nom@domaine.com)";
+    error.value = t("register.bad_email");
     return;
   }
 
@@ -36,7 +38,7 @@ const handleSubmit = async () => {
         </label>
 
         <label>
-          {{ $t("register.mail") }}
+          {{ $t("register.email") }}
           <input type="email" v-model="email" required />
         </label>
 
