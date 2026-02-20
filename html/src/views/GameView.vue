@@ -16,7 +16,7 @@ const game = useGameStore();
         {{ game.turn === game.symbol ? $t("game.your_turn", {symobol : game.symbol}) : $t("game.opponent_turn") }}
       </h3>
       <h3 v-if="game.opponent && game.winner" class="headings">
-        {{ game.winner === 'draw' ? $t("game.draw") : $t("game.winner", {winner : game.winner}) }}
+        {{ game.winner === 'draw' ? $t("game.draw") : $t("game.winner", {symbol : game.winner}) }}
       </h3>
     </article>
 
@@ -26,7 +26,7 @@ const game = useGameStore();
           <span v-if="cell === 'X'" style="color: var(--pico-primary)">X</span>
           <span v-if="cell === 'O'" style="color: var(--pico-del-color)">O</span>
         </div>
-      </div>
+      </div>/
     </div>
 
     <div class="grid mt-2">
@@ -38,7 +38,7 @@ const game = useGameStore();
       <button v-if="game.mode == 'matchmaking' && !game.searching && !game.opponent" @click="game.joinQueue">{{ $t("game.join_queue") }}</button>
 
       <button to="/" role="button" class="secondary outline" @click="game.leaveGame">
-        {{ game.opponent && !game.winner ? $t("game.give_up") : $t() }}
+        {{ game.opponent && !game.winner ? $t("game.give_up") : $t("game.leave") }}
       </button>
     </div>
   </div>

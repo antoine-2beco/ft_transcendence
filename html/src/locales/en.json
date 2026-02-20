@@ -36,7 +36,7 @@
 		"looking_opponent" : "Looking for an opponnent...",
 		"your_turn" : "You turn to play ({symbol})",
 		"opponent_turn" : "Opponent plays...",
-		"winner" : "Winner is {symobol} !",
+		"winner" : "Winner is {symbol} !",
 		"draw" : "Draw !",
 		"replay" : "Replay",
 		"play_matchmaking" : "Play against an opponnent",

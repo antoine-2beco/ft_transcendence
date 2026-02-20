@@ -67,12 +67,12 @@ A definir
 
 ### Accessibility and Internationalization
 
-- [x] Minor: Support for multiple languages (at least 3 languages)
+- [] Minor: Support for multiple languages (at least 3 languages)
 	- Implement i18n (internationalization) system.
 	- At least 3 complete language translations.
 	- Language switcher in the UI.
 	- All user-facing text must be translatable.
-- [x] Minor: Support for additional browsers.
+- [] Minor: Support for additional browsers.
 	- Full compatibility with at least 2 additional browsers (Firefox, Safari, Edge, etc.).
 	- Test and fix all features in each browser.
 	- Document any browser-specific limitations.
@@ -80,12 +80,12 @@ A definir
 
 ### User Management
 
-- [x] Major: Standard user management and authentication.
+- [] Major: Standard user management and authentication.
 	- Users can update their profile information.
 	- Users can upload an avatar (with a default avatar if none provided).
 	- Users can add other users as friends and see their online status.
 	- Users have a profile page displaying their information.
-- [x] Minor: Game statistics and match history (requires a game module).
+- [] Minor: Game statistics and match history (requires a game module).
 	- Track user game statistics (wins, losses, ranking, level, etc.).
 	- Display match history (1v1 games, dates, results, opponents).
 	- Show achievements and progression.
@@ -115,7 +115,7 @@ same game in real-time.
 
 ### Module custom
 
-- [ ] Minor: Light/Dark Mode
+- [x] Minor: Light/Dark Mode
 
 
 ## Base de donnees

@@ -49,15 +49,14 @@ const router = createRouter({
       name: 'friends',
       component: () => import('../views/FriendsView.vue'),
       meta: { requiresAuth: true }
-    },
+    }
   ]
 });
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  // if (!authStore.user.username) {
-  if (!authStore.user) { // MOCKDATA
+  if (!authStore.user.username) {
     await authStore.checkAuth();
   }
 
