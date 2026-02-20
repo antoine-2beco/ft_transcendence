@@ -24,16 +24,15 @@ const handleSubmit = async () => {
         <label>
           {{ $t("login.username") }}
           <input type="text" v-model="username" required />
-          {{ $t("login.pseudo") }}
-          <input type="text" v-model="username" required />
-        </label>
-        <label>
           {{ $t("login.password") }}
           <input type="password" v-model="password" required />
         </label>
         <small v-if="error" style="color: var(--pico-del-color)">{{ error }}</small>
         <button type="submit">{{ $t("login.submit_button") }}</button>
       </form>
+      <footer class="text-center">
+        <small>Pas encore de compte ? <RouterLink to="/register">S'inscrire</RouterLink></small>
+      </footer>
     </article>
   </div>
 </template>

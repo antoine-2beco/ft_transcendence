@@ -9,28 +9,32 @@ const loading = ref(true);
 
 onMounted(async () => {
   if (auth.user) {
-    history.value = await getUserGames(auth.user.username);
+    const allGames = await getUserGames(auth.user.id);
+    history.value = allGames.slice(0, 5);
     loading.value = false;
   }
 });
 
-const getResult = (g) => g.winner === 'Draw' ? 'DRAW' : (g.winner === auth.user.username ? 'WIN' : 'LOSS');
+const getResult = (g) => g.winner === 'Draw' ? 'DRAW' : (g.winner === auth.user.id ? 'WIN' : 'LOSS');
 </script>
 
 <template>
   <div class="container">
+    <h2 class="text-center">Mon Profil</h2>
+
     <article v-if="auth.user">
       <header class="flex-center">
-        <img :src="auth.user.avatar" class="avatar">
+        <img :src="auth.user.profile_picture_url" class="avatar">
         <div>
           <h2>{{ auth.user.username }}</h2>
-          <small>Elo: {{ auth.user.stats.elo }}</small>
+          <small>Elo: {{ auth.user.elo }}</small>
         </div>
       </header>
 
       <div class="flex-center mb-2">
-        <div class="text-center"><h3>{{ auth.user.stats.wins }}</h3><small>Victoires</small></div>
-        <div class="text-center"><h3>{{ auth.user.stats.losses }}</h3><small>Défaites</small></div>
+        <div class="text-center"><h3>{{ auth.user.wins }}</h3><small>Victoires</small></div>
+        <div class="text-center"><h3>{{ auth.user.losses }}</h3><small>Défaites</small></div>
+        <div class="text-center"><h3>{{ auth.user.ties }}</h3><small>Nuls</small></div>
       </div>
 
       <footer v-if="!loading">
@@ -60,6 +64,8 @@ const getResult = (g) => g.winner === 'Draw' ? 'DRAW' : (g.winner === auth.user.
 <style scoped>
 .avatar {
   width: 80px;
+  height: 80px;
+  object-fit: cover;
   border-radius: 50%;
   border: 2px solid var(--pico-primary);
 }
