@@ -8,6 +8,12 @@ const loginBtn = $("login");
 const queueBtn = $("queue");
 const playAiBtn = $("playai");
 const statusEl = $("status");
+const addFriendBtn = $("addFriend");
+const friendIdInput = $("friendId");
+const uploadPicBtn = $("uploadPic");
+const profilePicInput = $("profilePic");
+const profilePreview = $("profilePreview");
+const myPfpEl = $("myPfp");
 
 let ws = null;
 let me = null;
@@ -49,6 +55,21 @@ async function getMe()
     }  
     const data = await res.json().catch(() => null);
     return data?.user || null;
+}
+
+async function loadMyProfilePicture() {
+    const res = await fetch("/api/profile", { credentials: "include" });
+    if (!res.ok) return;
+  
+    const data = await res.json().catch(() => null);
+    const url = data?.user?.profile_picture_url;
+  
+    if (url && myPfpEl) {
+      myPfpEl.src = url;
+      myPfpEl.style.display = "inline-block";
+    } else if (myPfpEl) {
+      myPfpEl.style.display = "none";
+    }
 }
 
 function connectWs() {
@@ -163,6 +184,7 @@ loginBtn.addEventListener("click", async () => {
   me = await getMe();
   if (me) {
 	log("Logged in as", me.username);
+    await loadMyProfilePicture();
 	connectWs();
   } else {
 	log("Login failed (no /me)");
@@ -218,10 +240,63 @@ window.addEventListener("load", async () => {
   me = await getMe();
   if (me) {
 	log("Already logged in as", me.username);
+    await loadMyProfilePicture();
 	connectWs();
 	playAiBtn.disabled = false;
   } else {
 	log("Not logged in");
 	queueBtn.disabled = true;
   }
+});
+
+addFriendBtn.addEventListener("click", async () => {
+    const friendId = friendIdInput.value.trim();
+  
+    if (!friendId) {
+      log("Please enter a user ID");
+      return;
+    }
+  
+    const res = await fetch(`/api/addFriend/${friendId}`, {
+      method: "POST",
+      credentials: "include",
+    });
+  
+    const data = await res.json().catch(() => ({}));
+  
+    log("addFriend", res.status, JSON.stringify(data));
+});
+
+uploadPicBtn.addEventListener("click", async () => {
+    const file = profilePicInput.files[0];
+  
+    if (!file) {
+      log("No file selected");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("file", file);
+  
+    const res = await fetch("/api/profilePicUpload", {
+      method: "POST",
+      credentials: "include",
+      body: formData,
+    });
+  
+    const data = await res.json().catch(() => ({}));
+  
+    log("upload", res.status, JSON.stringify(data));
+  
+    if (res.ok && data.profile_picture_url) {
+      // display uploaded image
+      profilePreview.src = data.profile_picture_url;
+    }
+});
+
+profilePicInput.addEventListener("change", () => {
+    const file = profilePicInput.files[0];
+    if (!file) return;
+  
+    profilePreview.src = URL.createObjectURL(file);
 });

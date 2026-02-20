@@ -195,7 +195,25 @@ export async function matchmakingRoute(fastify)
                         player2_id: game.playerIds.O,
                         winner_id: winnerId,
                     });
-            
+                    if (winner === "draw") 
+                    {
+                        await db("users")
+                            .whereIn("id", [game.playerIds.X, game.playerIds.O])
+                            .increment("ties", 1);
+                    } 
+                    else 
+                    {
+                        const winnerUserId = winner === "X" ? game.playerIds.X : game.playerIds.O;
+                        const loserUserId  = winner === "X" ? game.playerIds.O : game.playerIds.X;
+                      
+                        await db("users").where({ id: winnerUserId })
+                            .increment("wins", 1)
+                            .increment("elo", 10);
+                      
+                        await db("users").where({ id: loserUserId })
+                            .increment("losses", 1)
+                            .decrement("elo", 10);
+                    }
                     userToGame.delete(game.playerIds.X);
                     userToGame.delete(game.playerIds.O);
                     games.delete(gameId);
@@ -261,11 +279,21 @@ export async function matchmakingRoute(fastify)
                     const winnerSymbol = other;
                     const winnerId = game.playerIds[winnerSymbol];
         
+                    const loserSymbol = winnerSymbol === "X" ? "O" : "X";
+                    const loserId = game.playerIds[loserSymbol];
+
                     await db("games").insert({
                         player1_id: game.playerIds.X,
                         player2_id: game.playerIds.O,
                         winner_id: winnerId,
                     });
+                    await db("users").where({ id: winnerId })
+                        .increment("wins", 1)
+                        .increment("elo", 10);
+
+                    await db("users").where({ id: loserId })
+                        .increment("losses", 1)
+                        .decrement("elo", 10);
         
                     const stillThere = game.sockets[other];
                     if (stillThere) 

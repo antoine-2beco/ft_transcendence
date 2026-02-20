@@ -10,7 +10,7 @@ export async function loginRoute(fastify)
             reply.code(400);
             return { error: "username and password required" };
         }
-      
+
         const user = await User.query().findOne({ username });
         if (!user) 
         {
