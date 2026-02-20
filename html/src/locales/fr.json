@@ -30,5 +30,19 @@
 		"submit_button" : "S'inscrire",
 		"already_account" : "Vous avez déjà un compte ?",
 		"login" : "Se connecter"
+	},
+	"game" : {
+		"title" : "Tic Tac Toe",
+		"looking_opponent" : "Recherche d'un adversaire...",
+		"your_turn" : "Á votre tour: ({symbol})",
+		"opponent_turn" : "L'adversaire joue...",
+		"winner" : "Le gagnant est {symobol} !",
+		"draw" : "Match nul !",
+		"replay" : "Rejouer",
+		"play_matchmaking" : "Jouer contre un adversaire",
+		"play_ai" : "Jouer contre une IA",
+		"join_queue" : "Rejoindre la file d'attente",
+		"give_up" : "Abandonner",
+		"leave" : "Quitter"
 	}
 }

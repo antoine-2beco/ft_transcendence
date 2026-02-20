@@ -7,16 +7,16 @@ const game = useGameStore();
 <template>
   <div class="text-center">
     <header>
-      <h1>Tic Tac Toe</h1>
+      <h1>{{$t("game.title")}}</h1>
     </header>
 
     <article v-if="game.searching || game.opponent">
-      <h3 v-if="game.searching">Recherche d'un adversaire...</h3>
+      <h3 v-if="game.searching">{{ $t("game.looking_opponent") }}</h3>
       <h3 v-if="game.opponent && !game.winner">
-        {{ game.turn === game.symbol ? `À toi de jouer (${game.symbol})` : "L'adversaire réfléchit..." }}
+        {{ game.turn === game.symbol ? $t("game.your_turn", {symobol : game.symbol}) : $t("game.opponent_turn") }}
       </h3>
       <h3 v-if="game.opponent && game.winner" class="headings">
-        {{ game.winner === 'draw' ? "Match Nul" : `Vainqueur : ${game.winner}` }}
+        {{ game.winner === 'draw' ? $t("game.draw") : $t("game.winner", {winner : game.winner}) }}
       </h3>
     </article>
 
@@ -30,15 +30,15 @@ const game = useGameStore();
     </div>
 
     <div class="grid mt-2">
-      <button v-if="game.winner" @click="game.replay(game.mode)">Rejouer</button>
+      <button v-if="game.winner" @click="game.replay(game.mode)">{{ $t("game.replay") }}</button>
 
-      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('matchmaking')">Jouer contre un advesaire</button>
-      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('ai')">Jouer contre l'IA</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('matchmaking')">{{ $t("game.play_matchmaking") }}</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('ai')">{{ $t("game.play_ai") }}</button>
 
-      <button v-if="game.mode == 'matchmaking' && !game.searching && !game.opponent" @click="game.joinQueue">Rejoindre la file d'attente</button>
+      <button v-if="game.mode == 'matchmaking' && !game.searching && !game.opponent" @click="game.joinQueue">{{ $t("game.join_queue") }}</button>
 
       <button to="/" role="button" class="secondary outline" @click="game.leaveGame">
-        {{ game.opponent && !game.winner ? "Abandonner" : "Quitter" }}
+        {{ game.opponent && !game.winner ? $t("game.give_up") : $t() }}
       </button>
     </div>
   </div>
