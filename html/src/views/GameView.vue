@@ -26,7 +26,7 @@ const game = useGameStore();
           <span v-if="cell === 'X'" style="color: var(--pico-primary)">X</span>
           <span v-if="cell === 'O'" style="color: var(--pico-del-color)">O</span>
         </div>
-      </div>/
+      </div>
     </div>
 
     <div class="grid mt-2">
