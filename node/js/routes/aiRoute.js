@@ -37,9 +37,6 @@ function aiMove(board) {
 		if (board[b] === "X" && board[c] === "X" && !board[a]) return a;
 	}
 
-	if (board[4] === null)
-		return 4;
-	
 	const empties = board.map((v, i) => v === null ? i : null).filter(i => i !== null);
 	return empties[Math.floor(Math.random() * empties.length)];
 }
