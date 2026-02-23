@@ -44,5 +44,10 @@
 		"join_queue" : "Rejoindre la file d'attente",
 		"give_up" : "Abandonner",
 		"leave" : "Quitter"
+	},
+	"footer": {
+		"privacy_policy": "Politique de confidentialité",
+		"terms_of_service": "Conditions d'utilisation",
+		"copyright": "© 2026 Tic Tac Toe. Tous droits réservés."
 	}
 }

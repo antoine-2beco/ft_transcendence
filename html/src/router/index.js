@@ -49,6 +49,16 @@ const router = createRouter({
       name: 'friends',
       component: () => import('../views/FriendsView.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: () => import('../views/PrivacyPolicy.vue')
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: () => import('../views/TermsofService.vue')
     }
   ]
 });
