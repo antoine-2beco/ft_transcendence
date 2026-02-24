@@ -13,7 +13,7 @@ const game = useGameStore();
     <article v-if="game.searching || game.opponent">
       <h3 v-if="game.searching">{{ $t("game.looking_opponent") }}</h3>
       <h3 v-if="game.opponent && !game.winner">
-        {{ game.turn === game.symbol ? $t("game.your_turn", {symobol : game.symbol}) : $t("game.opponent_turn") }}
+        {{ game.turn === game.symbol ? $t("game.your_turn", {symbol : game.symbol}) : $t("game.opponent_turn") }}
       </h3>
       <h3 v-if="game.opponent && game.winner" class="headings">
         {{ game.winner === 'draw' ? $t("game.draw") : $t("game.winner", {symbol : game.winner}) }}

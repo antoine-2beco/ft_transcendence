@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import * as matchmakingApi from '../api/matchmaking'
+import { useErrorStore } from '@/stores/error'
 import router from '@/router';
 
 
@@ -72,8 +73,7 @@ export const useGameStore = defineStore('game', {
           }
         };
       } catch (e) {
-        console.log(e);
-        throw (e);
+        useErrorStore().notifyError(e);
       }
     },
 
@@ -81,8 +81,7 @@ export const useGameStore = defineStore('game', {
       try {
         await matchmakingApi.joinQueue(this.ws);
       } catch (e) {
-        console.log(e);
-        throw (e);
+        useErrorStore().notifyError(e);
       }
     },
 
@@ -91,8 +90,7 @@ export const useGameStore = defineStore('game', {
         this.mode = 'ia';
         this.opponent = true;
       } catch (e) {
-        console.log(e);
-        throw (e);
+        useErrorStore().notifyError(e);
       }
     },
 
@@ -104,7 +102,7 @@ export const useGameStore = defineStore('game', {
         router.push('/');
         this.$reset();
       } catch (e) {
-        console.log(e);
+        useErrorStore().notifyError(e);
       }
     },
 
@@ -113,8 +111,7 @@ export const useGameStore = defineStore('game', {
         if (this.turn)
           await matchmakingApi.playMove(this.ws, i, this.gameId, this.symbol);
         } catch (e) {
-          console.log(e);
-          throw (e);
+        useErrorStore().notifyError(e);
         }
       },
 
@@ -123,7 +120,7 @@ export const useGameStore = defineStore('game', {
       try {
         this.startMatchmaking(mode);
       } catch (e) {
-        console.log(e);
+        useErrorStore().notifyError(e);
       }
     }
     }

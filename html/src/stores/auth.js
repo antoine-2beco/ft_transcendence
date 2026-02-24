@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import * as authApi from '../api/auth'
 import router from '@/router';
+import { useErrorStore } from '@/stores/error'
 
 export const useAuthStore = defineStore('auth', {
 
@@ -21,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
         this.user.username = await authApi.login(username, password);
         router.push('/');
       } catch (e) {
-        console.error(e);
+        useErrorStore().notifyError(e);
       }
     },
 
@@ -30,7 +31,7 @@ export const useAuthStore = defineStore('auth', {
         await authApi.register(username, email, password);
 		    router.push('/login'); 
       } catch (e) {
-        console.error(e);
+        useErrorStore().notifyError(e);
       }
     },
 
@@ -47,7 +48,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         await authApi.logout();
       } catch (e) {
-        console.log(e);
+        useErrorStore().notifyError(e);
       }
       this.$reset();
       router.push('/');

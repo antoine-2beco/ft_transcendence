@@ -11,7 +11,7 @@ export const login = async (username, password) => {
 		});
 		return response.data.username;
     } catch (error) {
-      void (error);
+      throw (error);
     }
   }
 
@@ -26,7 +26,7 @@ export const register = async (username, email, password) => {
 		});
 		return response.data.username;
     } catch (error) {
-      void (error);
+		throw (error);
     }
   }
 
@@ -48,6 +48,6 @@ export const logout = async () => {
   try {
     await axios.post('/api/logout');
   } catch (error) {
-    void (error);
+    throw (error);
   }
 }

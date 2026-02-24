@@ -18,7 +18,6 @@
 		"username" : "Username",
 		"pseudo" : "Pseudo",
 		"password" : "Password",
-		"bad_entries" : "Bad entries",
 		"submit_button" : "Login"
 	},
 	"register" : {
@@ -44,5 +43,17 @@
 		"join_queue" : "Join queue",
 		"give_up" : "Give up",
 		"leave" : "Leave"
+	},
+	"error": {
+		"bad_request": "Bad request - check your data",
+		"already_exists": "This already exists",
+		"bad_entries": "Invalid credentials",
+		"forbidden": "Access forbidden",
+		"not_found": "Resource not found", 
+		"validation": "Validation failed",
+		"network": "Connection lost",
+		"timeout": "Request timeout",
+		"server": "Server error",
+		"unknow_error": "An unexpected error occurred"
 	}
 }

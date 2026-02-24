@@ -30,39 +30,3 @@ export const playMove = async (ws, cell, gameId, symbol) => {
     symbol,
   }));
 }
-
-// playAiBtn.addEventListener("click", () => {
-//   if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))
-//     ws.close();
-
-//   ws = new WebSocket(`wss://${location.host}/ws-ai`);
-
-//   ws.onopen = () => {
-//     log("AI WS open");
-//     ws.send(JSON.stringify({ type: "queue:join" }));
-//   };
-
-//   ws.onclose = (e) => log("AI WS closed", e.code, e.reason || "");
-//   ws.onerror = () => log("AI WS error");
-
-//   ws.onmessage = (e) => {
-//     const msg = JSON.parse(e.data);
-//     log("WS:", msg.type);
-
-//     if (msg.type === "match:found") {
-//       gameId = msg.gameId;
-//       mySymbol = msg.symbol;
-//       board = msg.board;
-//       log("AI game started. gameId=", gameId, "symbol=", mySymbol);
-//       renderBoard();
-//     }
-
-//     if (msg.type === "state") {
-//       board = msg.board;
-//       renderBoard();
-//       if (msg.winner) {
-//         alert(msg.winner === "draw" ? "Draw!" : `${msg.winner} wins!`);
-//       }
-//     }
-//   };
-// });
