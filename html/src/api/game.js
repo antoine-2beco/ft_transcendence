@@ -1,14 +1,14 @@
 
 export const joinQueue = async (ws) => {
   if (!ws || ws.readyState !== WebSocket.OPEN) {
-	  console.log("WS not open");
+	  throw( {status: 500} );
     return;
   }
   ws.send(JSON.stringify({ type: "queue:join" }));
   console.log("Sent join queue");
 }
 
-export const leaveMatchmaking = async (ws) => {
+export const leaveGame = async (ws) => {
   if (!ws || ws.readyState !== WebSocket.OPEN) {
 	  console.log("WS not open");
 	  return;

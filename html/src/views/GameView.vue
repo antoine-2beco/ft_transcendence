@@ -32,8 +32,8 @@ const game = useGameStore();
     <div class="grid mt-2">
       <button v-if="game.winner" @click="game.replay(game.mode)">{{ $t("game.replay") }}</button>
 
-      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('matchmaking')">{{ $t("game.play_matchmaking") }}</button>
-      <button v-if="!game.mode && !game.searching" @click="game.startMatchmaking('ai')">{{ $t("game.play_ai") }}</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startGame('matchmaking')">{{ $t("game.play_matchmaking") }}</button>
+      <button v-if="!game.mode && !game.searching" @click="game.startGame('ai')">{{ $t("game.play_ai") }}</button>
 
       <button v-if="game.mode == 'matchmaking' && !game.searching && !game.opponent" @click="game.joinQueue">{{ $t("game.join_queue") }}</button>
 

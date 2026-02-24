@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import * as matchmakingApi from '../api/matchmaking'
+import * as gameApi from '../api/game'
 import { useErrorStore } from '@/stores/error'
 import router from '@/router';
 
@@ -22,7 +22,7 @@ export const useGameStore = defineStore('game', {
     }),
 
   actions: {
-    async startMatchmaking(mode) {
+    async startGame(mode) {
       try {
         this.mode = mode;
 
@@ -46,11 +46,13 @@ export const useGameStore = defineStore('game', {
           console.log("ws closed", e.code, e.reason || "");
         };
 
-        this.ws.onerror = () => console.log("ws error");
+        this.ws.onerror = () => {
+          useErrorStore().notifyError( {status: 500} );
+        }
 
         this.ws.onmessage = (e) => {
           const msg = JSON.parse(e.data);
-          console.log("ws:", msg.type);
+          console.log("ws sent:", msg.type);
 
           if (msg.type === "queue:waiting") {
             this.searching = true;
@@ -71,6 +73,11 @@ export const useGameStore = defineStore('game', {
             this.turn = msg.turn;
             this.winner = msg.winner;
           }
+
+          if (msg.type === "error") {
+            useErrorStore().notifyError( {status: 500} );
+          }
+
         };
       } catch (e) {
         useErrorStore().notifyError(e);
@@ -79,16 +86,7 @@ export const useGameStore = defineStore('game', {
 
     async joinQueue() {
       try {
-        await matchmakingApi.joinQueue(this.ws);
-      } catch (e) {
-        useErrorStore().notifyError(e);
-      }
-    },
-
-    async startIA() {
-      try {
-        this.mode = 'ia';
-        this.opponent = true;
+        await gameApi.joinQueue(this.ws);
       } catch (e) {
         useErrorStore().notifyError(e);
       }
@@ -98,7 +96,7 @@ export const useGameStore = defineStore('game', {
       try {
         console.log(this.ws);
         if (this.ws)
-          await matchmakingApi.leaveMatchmaking(this.ws);
+          await gameApi.leaveGame(this.ws);
         router.push('/');
         this.$reset();
       } catch (e) {
@@ -109,7 +107,7 @@ export const useGameStore = defineStore('game', {
     async playMove(i) {
       try {
         if (this.turn)
-          await matchmakingApi.playMove(this.ws, i, this.gameId, this.symbol);
+          await gameApi.playMove(this.ws, i, this.gameId, this.symbol);
         } catch (e) {
         useErrorStore().notifyError(e);
         }
