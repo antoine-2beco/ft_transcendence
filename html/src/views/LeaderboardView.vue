@@ -2,14 +2,18 @@
 import { ref, onMounted, computed } from 'vue';
 import { getLeaderboard } from '@/services/userService';
 import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
 
 const leaderboard = ref([]);
 const loading = ref(true);
 const searchQuery = ref('');
 const auth = useAuthStore();
+const userStore = useUserStore();
 
 onMounted(async () => {
-  leaderboard.value = await getLeaderboard();
+  await userStore.getProfile(auth.user.id);
+  leaderboard.value = await userStore.getLeaderboard();
+  console.log(leaderboard.value);
   loading.value = false;
 });
 
@@ -24,13 +28,14 @@ const getWinRate = (p) => {
   return total > 0 ? Math.round((p.wins / total) * 100) : 0;
 };
 
-const isFriend = (playerId) => auth.user?.friends?.includes(playerId);
+const isFriend = (playerId) => userStore.user?.friends?.includes(playerId);
 
 const toggleFriend = (player) => {
-  if (!auth.user) return;
-  const index = auth.user.friends.indexOf(player.id);
-  if (index > -1) auth.user.friends.splice(index, 1);
-  else auth.user.friends.push(player.id);
+  if (!userStore.user) return;
+  const index = userStore.user.friends.indexOf(player.id);
+  if (index > -1) userStore.user.friends.splice(index, 1);
+  else userStore.addFriend(player.id);
+  onMounted();
 };
 </script>
 
@@ -59,7 +64,7 @@ const toggleFriend = (player) => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(p, i) in filteredLeaderboard" :key="p.id" :class="{ 'highlight': auth.user?.id === p.id }">
+          <tr v-for="(p, i) in filteredLeaderboard" :key="p.id" :class="{ 'highlight': userStore.user?.id === p.id }">
             <td>{{ i + 1 }}</td>
 
             <td style="display: flex; align-items: center; gap: 10px;">
@@ -72,7 +77,7 @@ const toggleFriend = (player) => {
 
             <td>
               <button
-                v-if="auth.user && auth.user.id !== p.id"
+                v-if="userStore.user && userStore.user.id !== p.id"
                 @click="toggleFriend(p)"
                 class="outline"
                 style="padding: 2px 10px; font-size: 0.8rem;"

@@ -12,7 +12,7 @@ onMounted(async () => {
   await userStore.getProfile(auth.user.id);
   if (userStore.user) {
     const allGames = await userStore.getGames(userStore.user.id);
-    history.value = [...allGames].slice(0, 5);
+    history.value = allGames.slice(0, 5);
     loading.value = false;
   }
 });
