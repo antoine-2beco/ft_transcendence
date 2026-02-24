@@ -10,6 +10,13 @@ onMounted(async () => {
   games.value = await userStore.getGames();
   loading.value = false;
 });
+
+const formatDate = (dateString) => {
+  if (!dateString)
+    return '';
+  return new Date(dateString).toLocaleDateString('fr-FR');
+};
+
 </script>
 
 <template>
@@ -29,7 +36,7 @@ onMounted(async () => {
         </thead>
         <tbody>
           <tr v-for="game in games" :key="game.id">
-            <td>{{ game.created_at }}</td>
+            <td>{{ formatDate(game.created_at) }}</td>
             <td>
               <strong :class="{ 'text-primary': game.winner_username === game.player1_username }">
                 {{ game.player1_username }}

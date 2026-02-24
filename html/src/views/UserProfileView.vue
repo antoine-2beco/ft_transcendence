@@ -34,7 +34,15 @@ const saveProfile = () => {
   isEditing.value = false;
 };
 
-const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username === userStore.user.id ? 'WIN' : 'LOSS');
+const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username ===
+userStore.user.username ? 'WIN' : 'LOSS');
+
+const formatDate = (dateString) => {
+  if (!dateString)
+    return '';
+  return new Date(dateString).toLocaleDateString('fr-FR');
+};
+
 </script>
 
 <template>
@@ -104,7 +112,7 @@ const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_usern
                   {{ getResult(g) }}
                 </span>
               </td>
-              <td>{{ g.created_at }}</td>
+              <td>{{ formatDate(g.created_at) }}</td>
             </tr>
           </tbody>
         </table>
