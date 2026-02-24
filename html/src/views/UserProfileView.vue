@@ -1,40 +1,42 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { getUserGames } from '@/services/historyService';
+import { useUserStore } from '@/stores/user';
 
 const auth = useAuthStore();
+const userStore = useUserStore();
 const history = ref([]);
 const loading = ref(true);
 
 onMounted(async () => {
-  if (auth.user) {
-    const allGames = await getUserGames(auth.user.id);
-    history.value = allGames.slice(0, 5);
+  await userStore.getProfile(auth.user.id);
+  if (userStore.user) {
+    const allGames = await userStore.getGames(userStore.user.id);
+    history.value = [...allGames].slice(0, 5);
     loading.value = false;
   }
 });
 
-const getResult = (g) => g.winner === 'Draw' ? 'DRAW' : (g.winner === auth.user.id ? 'WIN' : 'LOSS');
+const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username === userStore.user.id ? 'WIN' : 'LOSS');
 </script>
 
 <template>
   <div class="container">
     <h2 class="text-center">Mon Profil</h2>
 
-    <article v-if="auth.user">
+    <article v-if="userStore.user">
       <header class="flex-center">
-        <img :src="auth.user.profile_picture_url" class="avatar">
+        <img :src="userStore.user.profile_picture_url" class="avatar">
         <div>
-          <h2>{{ auth.user.username }}</h2>
-          <small>Elo: {{ auth.user.elo }}</small>
+          <h2>{{ userStore.user.username }}</h2>
+          <small>Elo: {{ userStore.user.elo }}</small>
         </div>
       </header>
 
       <div class="flex-center mb-2">
-        <div class="text-center"><h3>{{ auth.user.wins }}</h3><small>Victoires</small></div>
-        <div class="text-center"><h3>{{ auth.user.losses }}</h3><small>Défaites</small></div>
-        <div class="text-center"><h3>{{ auth.user.ties }}</h3><small>Nuls</small></div>
+        <div class="text-center"><h3>{{ userStore.user.wins }}</h3><small>Victoires</small></div>
+        <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>Défaites</small></div>
+        <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>Nuls</small></div>
       </div>
 
       <footer v-if="!loading">
@@ -43,13 +45,13 @@ const getResult = (g) => g.winner === 'Draw' ? 'DRAW' : (g.winner === auth.user.
           <thead><tr><th>Contre</th><th>Résultat</th><th>Date</th></tr></thead>
           <tbody>
             <tr v-for="g in history" :key="g.id">
-              <td>{{ g.player1 === auth.user.username ? g.player2 : g.player1 }}</td>
+              <td>{{ g.player1_username === userStore.user.username ? g.player2_username : g.player1_username }}</td>
               <td>
                 <span :class="['badge', getResult(g).toLowerCase()]">
                   {{ getResult(g) }}
                 </span>
               </td>
-              <td>{{ g.date }}</td>
+              <td>{{ g.created_at }}</td>
             </tr>
           </tbody>
         </table>
