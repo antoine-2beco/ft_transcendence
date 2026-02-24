@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { getLeaderboard } from '@/services/userService';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
 

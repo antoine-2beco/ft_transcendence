@@ -1,12 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { getAllGames } from '@/services/historyService';
+import { useUserStore } from '@/stores/user';
 
 const games = ref([]);
 const loading = ref(true);
+const userStore = useUserStore();
 
 onMounted(async () => {
-  games.value = await getAllGames();
+  games.value = await userStore.getGames();
   loading.value = false;
 });
 </script>
@@ -28,19 +30,19 @@ onMounted(async () => {
         </thead>
         <tbody>
           <tr v-for="game in games" :key="game.id">
-            <td>{{ game.date }}</td>
+            <td>{{ game.created_at }}</td>
             <td>
-              <strong :class="{ 'text-primary': game.winner === game.player1 }">
-                {{ game.player1 }}
+              <strong :class="{ 'text-primary': game.winner_username === game.player1_username }">
+                {{ game.player1_username }}
               </strong>
               <span class="text-muted"> vs </span>
-              <strong :class="{ 'text-primary': game.winner === game.player2 }">
-                {{ game.player2 }}
+              <strong :class="{ 'text-primary': game.winner_username === game.player2_username }">
+                {{ game.player2_username }}
               </strong>
             </td>
             <td>
-              <span v-if="game.winner === 'Draw'" class="text-muted">Nul</span>
-              <span v-else>Vainqueur : {{ game.winner }}</span>
+              <span v-if="game.winner_username === 'Draw'" class="text-muted">Nul</span>
+              <span v-else>Vainqueur : {{ game.winner_username }}</span>
             </td>
           </tr>
         </tbody>
