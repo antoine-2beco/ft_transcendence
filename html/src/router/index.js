@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
@@ -54,13 +54,13 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
 
-  if (!authStore.user.username) {
-    await authStore.checkAuth();
+  if (!userStore.user.username) {
+    await userStore.checkAuth();
   }
 
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
     next('/login');
   } else {
     next();

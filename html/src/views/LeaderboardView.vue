@@ -1,16 +1,14 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
 
 const leaderboard = ref([]);
 const loading = ref(true);
 const searchQuery = ref('');
-const auth = useAuthStore();
 const userStore = useUserStore();
 
 onMounted(async () => {
-  await userStore.getProfile(auth.user.id);
+  await userStore.getProfile(userStore.user.id);
   leaderboard.value = await userStore.getLeaderboard();
   console.log(leaderboard.value);
   loading.value = false;

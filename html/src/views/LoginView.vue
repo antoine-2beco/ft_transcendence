@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
 
-const auth = useAuthStore();
+const userStore = useUserStore();
 const username = ref('');
 const password = ref('');
 </script>
@@ -11,7 +11,7 @@ const password = ref('');
   <div class="container" style="max-width: 400px; margin-top: 10vh;">
     <article>
       <header>{{ $t("login.title")}}</header>
-      <form @submit.prevent="auth.login(username, password)">
+      <form @submit.prevent="userStore.login(username, password)">
         <label>
           {{ $t("login.username") }}
           <input type="text" v-model="username" required />

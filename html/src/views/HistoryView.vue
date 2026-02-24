@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getAllGames } from '@/services/historyService';
 import { useUserStore } from '@/stores/user';
 
 const games = ref([]);

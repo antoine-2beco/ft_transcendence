@@ -1,6 +1,7 @@
 <script setup>
-import { useAuthStore } from '@/stores/auth';
-const auth = useAuthStore();
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -8,13 +9,13 @@ const auth = useAuthStore();
     <h1>{{ $t("head.site_title") }}</h1>
 
     <nav class="menu">
-      <template v-if="auth.isAuthenticated">
+      <template v-if="userStore.isAuthenticated">
         <RouterLink to="/game" role="button">{{ $t("home.play")}}</RouterLink>
         <RouterLink to="/profile" role="button" class="secondary w-full">{{ $t("home.my_profile")}}</RouterLink>
         <RouterLink to="/friends" role="button" class="secondary w-full">{{ $t("home.my_friends")}}</RouterLink>
         <RouterLink to="/leaderboard" role="button" class="contrast">{{ $t("home.leaderboard")}}</RouterLink>
         <RouterLink to="/history" role="button" class="contrast">{{ $t("home.history")}}</RouterLink>
-        <button @click="auth.logout" class="contrast outline w-full">{{ $t("home.logout")}}</button>
+        <button @click="userStore.logout" class="contrast outline w-full">{{ $t("home.logout")}}</button>
       </template>
 
       <template v-else>

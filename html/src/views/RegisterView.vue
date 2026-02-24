@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n();
-const auth = useAuthStore();
+const userStore = useUserStore();
 const username = ref('');
 const email = ref('');
 const password = ref('');
@@ -20,7 +20,7 @@ const handleSubmit = async () => {
   }
 
   try {
-    await auth.register(username.value, email.value, password.value);
+    await userStore.register(username.value, email.value, password.value);
   } catch (e) {
     error.value = e;
   }

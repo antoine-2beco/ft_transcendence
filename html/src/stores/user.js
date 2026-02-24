@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia';
 import * as userApi from '../api/user'
-import router from '@/router';
 import { useErrorStore } from '@/stores/error'
-import { getLeaderboard } from '@/services/userService';
 
 export const useUserStore = defineStore('user', {
 
@@ -20,7 +18,47 @@ export const useUserStore = defineStore('user', {
 		}
 	}),
 
+	getters: {
+    isAuthenticated: (state) => !!state?.user.username
+	},
+
 	actions: {
+		async login (username, password) {
+			try {
+				this.user.username = await userApi.login(username, password);
+				router.push('/');
+			} catch (e) {
+				useErrorStore().notifyError(e);
+			}
+		},
+
+		async register (username, email, password) {
+			try {
+				await userApi.register(username, email, password);
+					router.push('/login'); 
+			} catch (e) {
+				useErrorStore().notifyError(e);
+			}
+		},
+
+		async checkAuth () {
+			try {
+				const response = await userApi.checkAuth();
+				this.user.username = response.data.user.username;
+			} catch (e) {
+				this.user.username = false;
+			}
+		},
+
+		async logout () {
+			try {
+				await userApi.logout();
+			} catch (e) {
+				useErrorStore().notifyError(e);
+			}
+			this.$reset();
+			router.push('/');
+		},
 
 		async getProfile (id) {
 			try {

@@ -1,23 +1,23 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useAuthStore } from '@/stores/auth';
-import { getMyFriends } from '@/services/friendService';
+import { useUserStore } from '@/stores/user';
 
-const auth = useAuthStore();
+const userStore = useUserStore();
 const friends = ref([]);
 const loading = ref(true);
 
 onMounted(async () => {
-  if (auth.user) {
-    friends.value = await getMyFriends(auth.user.id);
+  if (userStore.user) {
+    const user = await userStore.getProfile(userStore.user.id);
+    friends.value = user.friends;
     loading.value = false;
   }
 });
 
 const removeFriend = (friendId) => {
-  const indexStore = auth.user.friends.indexOf(friendId);
+  const indexStore = userStore.user.friends.indexOf(friendId);
   if (indexStore > -1) {
-    auth.user.friends.splice(indexStore, 1);
+    userStore.user.friends.splice(indexStore, 1);
   }
   friends.value = friends.value.filter(f => f.id !== friendId);
 };

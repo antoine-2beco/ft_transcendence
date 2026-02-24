@@ -1,15 +1,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
 
-const auth = useAuthStore();
 const userStore = useUserStore();
 const history = ref([]);
 const loading = ref(true);
 
 onMounted(async () => {
-  await userStore.getProfile(auth.user.id);
+  await userStore.getProfile(userStore.user.id);
   if (userStore.user) {
     const allGames = await userStore.getGames(userStore.user.id);
     history.value = allGames.slice(0, 5);
