@@ -26,15 +26,24 @@
         <h2>Add friend</h2>
         <input id="friendId" placeholder="User ID" />
         <button id="addFriend">Add Friend</button>
+        
+        <h2>Remove friend</h2>
+        <input id="removeFriendId" placeholder="User ID" />
+        <button id="removeFriend">Remove Friend</button>
+
         <h2>Upload profile picture</h2>
         <input type="file" id="profilePic" accept="image/*" />
         <button id="uploadPic">Upload</button>
 
         <br /><br />
         <img id="profilePreview" style="max-width:200px;" />
+        <h2>Edit username</h2>
+        <input id="newUsername" placeholder="new username" />
+        <button id="updateUsername">Update</button>
 
         <section>
           <button id="queue">Join matchmaking</button>
+          <button id="leaveQueue">Leave queue</button>
         </section>
 
 
@@ -44,6 +53,7 @@
         
         <div id="status"></div>
         <div id="board" style="display:grid;grid-template-columns:repeat(3,60px);gap:6px;margin-top:12px;"></div>
+        <button id="forfeit">Forfeit</button>
         <pre id="log"></pre>
     </body>
 
