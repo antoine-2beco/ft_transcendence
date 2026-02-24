@@ -6,6 +6,9 @@ const userStore = useUserStore();
 const history = ref([]);
 const loading = ref(true);
 
+const isEditing = ref(false);
+const editForm = ref({ username: '', avatar: '' });
+
 onMounted(async () => {
   await userStore.getProfile(userStore.user.id);
   if (userStore.user) {
@@ -15,6 +18,22 @@ onMounted(async () => {
   }
 });
 
+const startEdit = () => {
+  editForm.value.username = userStore.user.username;
+  editForm.value.avatar = userStore.user.profile_picture_url;
+  isEditing.value = true;
+};
+
+const saveProfile = () => {
+  if (!editForm.value.username.trim() || !editForm.value.avatar.trim())
+    return;
+
+  userStore.user.username = editForm.value.username;
+  userStore.user.profile_picture_url = editForm.value.avatar;
+
+  isEditing.value = false;
+};
+
 const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username === userStore.user.id ? 'WIN' : 'LOSS');
 </script>
 
@@ -23,15 +42,51 @@ const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_usern
     <h2 class="text-center">Mon Profil</h2>
 
     <article v-if="userStore.user">
-      <header class="flex-center">
-        <img :src="userStore.user.profile_picture_url" class="avatar">
-        <div>
-          <h2>{{ userStore.user.username }}</h2>
-          <small>Elo: {{ userStore.user.elo }}</small>
+
+      <header v-if="!isEditing" style="display: flex; align-items: center;">
+
+        <div style="flex: 1;"></div>
+
+        <div class="flex-center" style="display: flex; align-items: center; gap: 1rem;">
+          <img :src="userStore.user.profile_picture_url" class="avatar">
+          <div>
+            <h2 style="margin-bottom: 0;">{{ userStore.user.username }}</h2>
+            <small>Elo: {{ userStore.user.elo }}</small>
+          </div>
         </div>
+
+        <div style="flex: 1; text-align: right;">
+          <button
+            class="outline secondary"
+            style="width: auto; padding: 0.2rem 0.6rem; font-size: 0.8rem; margin: 0;"
+            @click="startEdit"
+          >
+            Éditer
+          </button>
+        </div>
+
       </header>
 
-      <div class="flex-center mb-2">
+      <header v-else>
+        <form @submit.prevent="saveProfile" style="margin-bottom: 0;">
+          <div class="grid">
+            <label>
+              Pseudo
+              <input type="text" v-model="editForm.username" required />
+            </label>
+            <label>
+              URL Avatar
+              <input type="url" v-model="editForm.avatar" required />
+            </label>
+          </div>
+          <div class="grid" style="margin-top: 1rem;">
+            <button type="button" class="secondary outline" @click="isEditing = false">Annuler</button>
+            <button type="submit">Enregistrer</button>
+          </div>
+        </form>
+      </header>
+
+      <div class="flex-center mb-2" style="margin-top: var(--pico-spacing); justify-content: space-around; display: flex;">
         <div class="text-center"><h3>{{ userStore.user.wins }}</h3><small>Victoires</small></div>
         <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>Défaites</small></div>
         <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>Nuls</small></div>
