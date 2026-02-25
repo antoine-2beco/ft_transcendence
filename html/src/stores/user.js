@@ -1,7 +1,8 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 import * as userApi from '../api/user'
 import { useToastStore } from '@/stores/toast'
-import router from '@/router';
+import { useLocalStorage } from '@vueuse/core'
+import router from '@/router'
 
 
 export const useUserStore = defineStore('user', {

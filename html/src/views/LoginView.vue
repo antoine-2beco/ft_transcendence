@@ -21,7 +21,7 @@ const password = ref('');
         <button type="submit">{{ $t("login.submit_button") }}</button>
       </form>
       <footer class="text-center">
-        <small>Pas encore de compte ? <RouterLink to="/register">S'inscrire</RouterLink></small>
+        <small>{{ $t("login.no_account") }} <RouterLink to="/register">{{ $t("login.register") }}</RouterLink></small>
       </footer>
     </article>
   </div>

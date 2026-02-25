@@ -22,21 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <button @click="toggleTheme" class="theme-switch outline contrast">
-    {{ isDark ? '☀️' : '🌙' }}
+  <button @click="toggleTheme" class="outline contrast">
+    {{ isDark ? '🌙' : '☀️' }}
   </button>
 </template>
-
-<style scoped>
-.theme-switch {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  border: none;
-  background: transparent;
-  z-index: 1000;
-  cursor: pointer;
-}
-</style>

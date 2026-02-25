@@ -18,7 +18,9 @@
 		"username" : "Nom d'utilisateur",
 		"pseudo" : "Pseudo",
 		"password" : "Mot de passe",
-		"submit_button" : "Se connecter"
+		"submit_button" : "Se connecter",
+		"no_account" : "Pas encore de compte ?",
+		"register" : "S'inscrire"
 	},
 	"register" : {
 		"title" : "S'inscrire",
