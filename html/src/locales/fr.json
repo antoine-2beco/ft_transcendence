@@ -48,7 +48,7 @@
 	},
 	"friends" : {
 		"title" : "Mes Amis",
-		"loading" : "Chargement",
+		"loading" : "Chargement...",
 		"no_friends" : "Tu n'as pas encore d'amis.",
 		"add_friends_leaderboard" : "Ajouter des amis depuis le classement",
 		"online" : "En ligne",
@@ -59,17 +59,28 @@
 		"remove" : "Retirer",
 		"back" : "Retour"
 	},
-	"error": {
-		"bad_request": "Mauvaise requête - vérifiez vos données",
-		"already_exists": "Cet élément existe déjà",
-		"bad_entries": "Identifiants incorrects",
-		"forbidden": "Accès interdit",
-		"not_found": "Ressource non trouvée",
-		"validation": "Échec de validation",
-		"network": "Connexion perdue",
-		"timeout": "Délai de requête dépassé",
-		"server": "Erreur serveur",
-		"unknow_error": "Une erreur inattendue est survenue"
+	"history" : {
+		"title" : "Historique Global",
+		"loading" : "Chargement...",
+		"date" : "Date",
+		"match" : "Match",
+		"result" : "Résultat",
+		"versus" : "vs",
+		"draw" : "Nul",
+		"winner" : "Vainqueur",
+		"back" : "Retour"
+	},
+	"error" : {
+		"bad_request" : "Mauvaise requête - vérifiez vos données",
+		"already_exists" : "Cet élément existe déjà",
+		"bad_entries" : "Identifiants incorrects",
+		"forbidden" : "Accès interdit",
+		"not_found" : "Ressource non trouvée",
+		"validation" : "Échec de validation",
+		"network" : "Connexion perdue",
+		"timeout" : "Délai de requête dépassé",
+		"server" : "Erreur serveur",
+		"unknow_error" : "Une erreur inattendue est survenue"
 	},
 	"success": {
 		"register" : "Enregistré",

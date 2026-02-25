@@ -48,7 +48,7 @@
 	},
 	"friends" : {
 		"title" : "My Friends",
-		"loading" : "Loading",
+		"loading" : "Loading...",
 		"no_friends" : "You don't have friends.",
 		"add_friends_leaderboard" : "Add friends from the leaderboard",
 		"online" : "Online",
@@ -59,17 +59,28 @@
 		"remove" : "Remove",
 		"back" : "Back"
 	},
-	"error": {
-		"bad_request": "Bad request - check your data",
-		"already_exists": "This already exists",
-		"bad_entries": "Invalid credentials",
-		"forbidden": "Access forbidden",
-		"not_found": "Resource not found", 
-		"validation": "Validation failed",
-		"network": "Connection lost",
-		"timeout": "Request timeout",
-		"server": "Server error",
-		"unknow_error": "An unexpected error occurred"
+	"history" : {
+		"title" : "Global History",
+		"loading" : "Loading...",
+		"date" : "Date",
+		"match" : "Match",
+		"result" : "Result",
+		"versus" : "vs",
+		"draw" : "Draw",
+		"winner" : "Winner",
+		"back" : "Back"
+	},
+	"error" : {
+		"bad_request" : "Bad request - check your data",
+		"already_exists" : "This already exists",
+		"bad_entries" : "Invalid credentials",
+		"forbidden" : "Access forbidden",
+		"not_found" : "Resource not found", 
+		"validation" : "Validation failed",
+		"network" : "Connection lost",
+		"timeout" : "Request timeout",
+		"server" : "Server error",
+		"unknow_error" : "An unexpected error occurred"
 	},
 	"success": {
 		"register" : "Registered",

@@ -21,17 +21,17 @@ const formatDate = (dateString) => {
 
 <template>
   <div class="container">
-    <h2 class="text-center">Historique Global</h2>
+    <h2 class="text-center">{{ $t("history.title") }}</h2>
 
-    <div v-if="loading" aria-busy="true">Chargement...</div>
+    <div v-if="loading" aria-busy="true">{{ $t("history.loading") }}</div>
 
     <div v-else class="scroll-box">
       <table class="striped">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Match</th>
-            <th>Résultat</th>
+            <th>{{ $t("history.date") }}</th>
+            <th>{{ $t("history.match") }}</th>
+            <th>{{ $t("history.result") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -41,14 +41,14 @@ const formatDate = (dateString) => {
               <strong :class="{ 'text-primary': game.winner_username === game.player1_username }">
                 {{ game.player1_username }}
               </strong>
-              <span class="text-muted"> vs </span>
+              <span class="text-muted"> {{ $t("history.versus") }} </span>
               <strong :class="{ 'text-primary': game.winner_username === game.player2_username }">
                 {{ game.player2_username }}
               </strong>
             </td>
             <td>
-              <span v-if="game.winner_username === 'Draw'" class="text-muted">Nul</span>
-              <span v-else>Vainqueur : {{ game.winner_username }}</span>
+              <span v-if="game.winner_username === 'Draw'" class="text-muted">{{ $t("history.draw") }}</span>
+              <span v-else>{{ $t("history.winner") }} : {{ game.winner_username }}</span>
             </td>
           </tr>
         </tbody>
@@ -56,7 +56,7 @@ const formatDate = (dateString) => {
     </div>
 
     <div class="text-center mt-2">
-      <RouterLink to="/" role="button" class="secondary outline">Retour</RouterLink>
+      <RouterLink to="/" role="button" class="secondary outline">{{ $t("history.back") }}</RouterLink>
     </div>
   </div>
 </template>
