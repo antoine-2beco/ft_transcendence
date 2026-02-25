@@ -9,7 +9,9 @@ const loading = ref(true);
 onMounted(async () => {
   if (userStore.user) {
     const user = await userStore.getProfile(userStore.user.id);
-    friends.value = user.friends;
+    for (let friend_id in user.friends) {
+      friends.value.push(await userStore.getProfile(friend_id));
+    }
     loading.value = false;
   }
 });

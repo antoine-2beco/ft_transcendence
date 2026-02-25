@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import * as userApi from '../api/user'
 import { useErrorStore } from '@/stores/error'
+import router from '@/router';
 
 export const useUserStore = defineStore('user', {
 
@@ -45,6 +46,7 @@ export const useUserStore = defineStore('user', {
 			try {
 				const response = await userApi.checkAuth();
 				this.user.username = response.data.user.username;
+				this.user.id = response.data.user.id;
 			} catch (e) {
 				this.user.username = false;
 			}
