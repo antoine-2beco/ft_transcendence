@@ -10,7 +10,6 @@ const userStore = useUserStore();
 onMounted(async () => {
   await userStore.getProfile(userStore.user.id);
   leaderboard.value = await userStore.getLeaderboard();
-  console.log(leaderboard.value);
   loading.value = false;
 });
 
@@ -27,12 +26,12 @@ const getWinRate = (p) => {
 
 const isFriend = (playerId) => userStore.user?.friends?.includes(playerId);
 
-const toggleFriend = (player) => {
+const toggleFriend = async (player) => {
   if (!userStore.user) return;
   const index = userStore.user.friends.indexOf(player.id);
-  if (index > -1) userStore.user.friends.splice(index, 1);
-  else userStore.addFriend(player.id);
-  onMounted();
+  if (index > -1) await userStore.removeFriend(player.id);
+  else await userStore.addFriend(player.id);
+  window.location.reload(); // TO CHANGE (REFRESH DATA)
 };
 </script>
 

@@ -97,6 +97,14 @@ export const useUserStore = defineStore('user', {
 			} catch (e) {
 				useErrorStore().notifyError(e);
 			}
+		},
+
+		async removeFriend (id) {
+			try {
+				await userApi.removeFriend(id);
+			} catch (e) {
+				useErrorStore().notifyError(e);
+			}
 		}
 
 	}

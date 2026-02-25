@@ -108,3 +108,16 @@ export const addFriend = async (id) => {
 		throw (e);
 	}
 }
+
+export const removeFriend = async (id) => {
+	try {
+		await axios.delete(`/api/removeFriend/${id}`,
+			{
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+	} catch (e) {
+		throw (e);
+	}
+}
