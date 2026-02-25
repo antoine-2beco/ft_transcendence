@@ -105,6 +105,22 @@ export const useUserStore = defineStore('user', {
 			} catch (e) {
 				useErrorStore().notifyError(e);
 			}
+		},
+
+		async editUsername (newUsername) {
+			try {
+				await userApi.editUsername(newUsername);
+			} catch (e) {
+				useErrorStore().notifyError(e);
+			}
+		},
+
+		async uploadProfilePicture (profilePicture) {
+			try {
+				await userApi.uploadProfilePicture(profilePicture);
+			} catch (e) {
+				useErrorStore().notifyError(e);
+			}
 		}
 
 	}

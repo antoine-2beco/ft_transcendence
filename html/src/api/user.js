@@ -121,3 +121,31 @@ export const removeFriend = async (id) => {
 		throw (e);
 	}
 }
+
+export const editUsername = async (newUsername) => {
+	try {
+		await axios.post(`/api/editUsername`,
+			{ newUsername },
+			{
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+	} catch (e) {
+		throw (e);
+	}
+}
+
+export const uploadProfilePicture = async (uploadProfilePicture) => {
+	try {
+		await axios.post(`/api/profilePicUpload`,
+			{ uploadProfilePicture },
+			{
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+	} catch (e) {
+		throw (e);
+	}
+}
