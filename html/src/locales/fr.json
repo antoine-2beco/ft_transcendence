@@ -55,5 +55,14 @@
 		"timeout": "Délai de requête dépassé",
 		"server": "Erreur serveur",
 		"unknow_error": "Une erreur inattendue est survenue"
+	},
+	"success": {
+		"register" : "Enregistré",
+		"login" : "Conecté",
+		"logout" : "Déconnecté",
+		"add_friend" : "Ami ajouté",
+		"remove_friend" : "Ami retiré",
+		"edit_username" : "Nom d'utilisateur modifié",
+		"upload_profile_picture" : "Photo de profil mise à jour"
 	}
 }

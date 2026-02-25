@@ -1,6 +1,6 @@
 import { toast } from 'vue3-toastify'
 
-export function ToastError() {
+export function Toast() {
 
   function showError(message) {
     toast.error(message);
@@ -14,5 +14,5 @@ export function ToastError() {
     toast.success(message);
   }
 
-  return { showError, showSuccess }
+  return { showError, showWarning, showSuccess }
 }

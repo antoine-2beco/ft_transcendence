@@ -55,5 +55,14 @@
 		"timeout": "Request timeout",
 		"server": "Server error",
 		"unknow_error": "An unexpected error occurred"
+	},
+	"success": {
+		"register" : "Registered",
+		"login" : "Logged in",
+		"logout" : "Deconnected",
+		"add_friend" : "Friend added",
+		"remove_friend" : "Friend removed",
+		"edit_username" : "Username changed",
+		"upload_profile_picture" : "Profile picture uploaded"
 	}
 }

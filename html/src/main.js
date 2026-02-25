@@ -15,8 +15,7 @@ app.use(i18n);
 app.use(Vue3Toastify, { 
 	autoclose: 3000,
   	position: "bottom-left",
-	theme: "colored"
+	theme: "colored",
+	delay: 200
  });
 app.mount('#app');
-
-// app.config.errorHandler = (err, vm, info) => {};

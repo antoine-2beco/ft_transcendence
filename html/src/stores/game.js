@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import * as gameApi from '../api/game'
-import { useErrorStore } from '@/stores/error'
+import { useToastStore } from '@/stores/toast'
 import router from '@/router';
 
 
@@ -47,7 +47,7 @@ export const useGameStore = defineStore('game', {
         };
 
         this.ws.onerror = () => {
-          useErrorStore().notifyError( {status: 500} );
+          useToastStore().notifyApiError( {status: 500} );
         }
 
         this.ws.onmessage = (e) => {
@@ -75,12 +75,12 @@ export const useGameStore = defineStore('game', {
           }
 
           if (msg.type === "error") {
-            useErrorStore().notifyError( {status: 500} );
+            useToastStore().notifyApiError( {status: 500} );
           }
 
         };
       } catch (e) {
-        useErrorStore().notifyError(e);
+        useToastStore().notifyApiError(e);
       }
     },
 
@@ -88,7 +88,7 @@ export const useGameStore = defineStore('game', {
       try {
         await gameApi.joinQueue(this.ws);
       } catch (e) {
-        useErrorStore().notifyError(e);
+        useToastStore().notifyApiError(e);
       }
     },
 
@@ -100,7 +100,7 @@ export const useGameStore = defineStore('game', {
         router.push('/');
         this.$reset();
       } catch (e) {
-        useErrorStore().notifyError(e);
+        useToastStore().notifyApiError(e);
       }
     },
 
@@ -109,7 +109,7 @@ export const useGameStore = defineStore('game', {
         if (this.turn)
           await gameApi.playMove(this.ws, i, this.gameId, this.symbol);
         } catch (e) {
-        useErrorStore().notifyError(e);
+        useToastStore().notifyApiError(e);
         }
       },
 
@@ -118,7 +118,7 @@ export const useGameStore = defineStore('game', {
       try {
         this.startMatchmaking(mode);
       } catch (e) {
-        useErrorStore().notifyError(e);
+        useToastStore().notifyApiError(e);
       }
     }
     }
