@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by Sacha, ade-beco, esteba, akloster*
+*This project has been created as part of the 42 curriculum by ssenas-y, ade-beco, esteba, akloster*
 
 # Description
 
@@ -297,7 +297,7 @@ Records completed matches between two players.
 - Frontend entry: [`html/src/main.js`](html/src/main.js), [`html/src/App.vue`](html/src/App.vue), [`html/src/router/index.js`](html/src/router/index.js)
 - Backend entry: [`node/js/index.js`](node/js/index.js)
 
-**Team member(s):** ade-beco, Esteban, Sacha
+**Team member(s):** ade-beco, Esteban, ssenas-y
 
 ---
 
@@ -364,7 +364,7 @@ Records completed matches between two players.
 - [`html/src/stores/auth.js`](html/src/stores/auth.js), [`html/src/api/auth.js`](html/src/api/auth.js)
 - [`html/src/views/LoginView.vue`](html/src/views/LoginView.vue), [`html/src/views/RegisterView.vue`](html/src/views/RegisterView.vue), [`html/src/views/UserProfileView.vue`](html/src/views/UserProfileView.vue), [`html/src/views/FriendsView.vue`](html/src/views/FriendsView.vue)
 
-**Team member(s):** ade-beco, Esteban, Sacha
+**Team member(s):** ade-beco, Esteban, ssenas-y
 
 ---
 
@@ -386,7 +386,7 @@ Records completed matches between two players.
 - [`html/src/views/LeaderboardView.vue`](html/src/views/LeaderboardView.vue)
 - [`html/src/views/UserProfileView.vue`](html/src/views/UserProfileView.vue)
 
-**Team member(s):** ade-beco, Esteban, Sacha
+**Team member(s):** ade-beco, Esteban, ssenas-y
 
 ---
 
@@ -464,7 +464,7 @@ Records completed matches between two players.
 - [`html/vite.config.js`](html/vite.config.js) (VueI18nPlugin)
 - [`node/js/initdb.js`](node/js/initdb.js) (language CHECK constraint)
 
-**Team member(s):** ade-beco, Sacha
+**Team member(s):** ade-beco, ssenas-y
 
 ---
 
@@ -482,7 +482,7 @@ Records completed matches between two players.
 - [`html/src/components/ThemeSwitch.vue`](html/src/components/ThemeSwitch.vue)
 - [`html/src/assets/main.css`](html/src/assets/main.css) (CSS custom properties)
 
-**Team member(s):** Sacha
+**Team member(s):** ssenas-y
 
 # Individual Contributions
 
@@ -516,7 +516,7 @@ Implemented the **AI opponent game mode** on the backend, building the move stra
 - back end game (node.js)
 - back end nginx revers proxy
 ### Challenges & Solutions
-## Sacha
+## ssenas-y
 ### Contribution
 - front end
 - set up front with mock data
