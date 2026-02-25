@@ -1,10 +1,13 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 const history = ref([]);
 const loading = ref(true);
+
+const isEditing = ref(false);
+const editForm = ref({ username: '', avatar: '' });
 
 onMounted(async () => {
   await userStore.getProfile(userStore.user.id);
@@ -15,7 +18,46 @@ onMounted(async () => {
   }
 });
 
-const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username === userStore.user.id ? 'WIN' : 'LOSS');
+const startEdit = () => {
+  editForm.value.username = userStore.user.username;
+  editForm.value.avatar = userStore.user.profile_picture_url;
+  isEditing.value = true;
+};
+
+const saveProfile = () => {
+  if (!editForm.value.username.trim() || !editForm.value.avatar.trim())
+    return;
+
+  userStore.user.username = editForm.value.username;
+  userStore.user.profile_picture_url = editForm.value.avatar;
+
+  isEditing.value = false;
+};
+
+const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username ===
+userStore.user.username ? 'WIN' : 'LOSS');
+
+const formatDate = (dateString) => {
+  if (!dateString)
+    return '';
+  return new Date(dateString).toLocaleDateString('fr-FR');
+};
+
+
+const achievements = computed(() => {
+  const u = userStore.user;
+  if (!u)
+    return [];
+
+  const list = [];
+  if (u.wins >= 1) list.push({ icon: '🏅', title: 'Premier Sang', desc: 'Gagner 1 match' });
+  if (u.wins >= 10) list.push({ icon: '🏆', title: 'Vétéran', desc: '10 victoires' });
+  if (u.elo >= 1200) list.push({ icon: '🔥', title: 'Challenger', desc: '1200 Elo atteint' });
+  if (u.ties >= 5) list.push({ icon: '🤝', title: 'Pacifiste', desc: 'Faire 5 égalités' });
+
+  return list;
+});
+
 </script>
 
 <template>
@@ -23,18 +65,64 @@ const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_usern
     <h2 class="text-center">Mon Profil</h2>
 
     <article v-if="userStore.user">
-      <header class="flex-center">
-        <img :src="userStore.user.profile_picture_url" class="avatar">
-        <div>
-          <h2>{{ userStore.user.username }}</h2>
-          <small>Elo: {{ userStore.user.elo }}</small>
+
+      <header v-if="!isEditing" style="display: flex; align-items: center;">
+
+        <div style="flex: 1;"></div>
+
+        <div class="flex-center" style="display: flex; align-items: center; gap: 1rem;">
+          <img :src="userStore.user.profile_picture_url" class="avatar">
+          <div>
+            <h2 style="margin-bottom: 0;">{{ userStore.user.username }}</h2>
+            <small>Elo: {{ userStore.user.elo }}</small>
+          </div>
         </div>
+
+        <div style="flex: 1; text-align: right;">
+          <button
+            class="outline secondary"
+            style="width: auto; padding: 0.2rem 0.6rem; font-size: 0.8rem; margin: 0;"
+            @click="startEdit"
+          >
+            Éditer
+          </button>
+        </div>
+
       </header>
 
-      <div class="flex-center mb-2">
+      <header v-else>
+        <form @submit.prevent="saveProfile" style="margin-bottom: 0;">
+          <div class="grid">
+            <label>
+              Pseudo
+              <input type="text" v-model="editForm.username" required />
+            </label>
+            <label>
+              URL Avatar
+              <input type="url" v-model="editForm.avatar" required />
+            </label>
+          </div>
+          <div class="grid" style="margin-top: 1rem;">
+            <button type="button" class="secondary outline" @click="isEditing = false">Annuler</button>
+            <button type="submit">Enregistrer</button>
+          </div>
+        </form>
+      </header>
+
+      <div class="flex-center mb-2" style="margin-top: var(--pico-spacing); justify-content: space-around; display: flex;">
         <div class="text-center"><h3>{{ userStore.user.wins }}</h3><small>Victoires</small></div>
         <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>Défaites</small></div>
         <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>Nuls</small></div>
+      </div>
+      <div v-if="achievements.length > 0" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <h4 class="text-center">Succès</h4>
+        <div class="grid">
+          <div v-for="ach in achievements" :key="ach.title" class="text-center">
+            <div style="font-size: 2.5rem; line-height: 1.2;">{{ ach.icon }}</div>
+            <strong>{{ ach.title }}</strong>
+            <div><small class="text-muted">{{ ach.desc }}</small></div>
+          </div>
+        </div>
       </div>
 
       <footer v-if="!loading">
@@ -49,7 +137,7 @@ const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_usern
                   {{ getResult(g) }}
                 </span>
               </td>
-              <td>{{ g.created_at }}</td>
+              <td>{{ formatDate(g.created_at) }}</td>
             </tr>
           </tbody>
         </table>
