@@ -32,12 +32,12 @@ const getStatusClass = (s) => ({
 
 <template>
   <div class="container">
-    <h2 class="text-center">Mes Amis</h2>
-    <div v-if="loading" aria-busy="true">Chargement...</div>
+    <h2 class="text-center">{{ $t("friends.title") }}</h2>
+    <div v-if="loading" aria-busy="true">{{ $t("friends.loading") }}</div>
 
     <div v-else-if="friends.length === 0" class="text-center">
-      <p>Tu n'as pas encore d'amis.</p>
-      <RouterLink to="/leaderboard" class="contrast">Ajouter des amis depuis le classement</RouterLink>
+      <p>{{ $t("friends.no_friends") }}</p>
+      <RouterLink to="/leaderboard" class="contrast">{{ $t("friends.add_friends_leaderboard") }}</RouterLink>
     </div>
 
     <div v-else class="friends-grid">
@@ -45,26 +45,26 @@ const getStatusClass = (s) => ({
         <header class="text-center">
           <img :src="friend.profile_picture_url" class="avatar">
           <div :class="getStatusClass(friend.status)">
-            <small>● {{ friend.status }}</small>
+            <small>● {{ $t(`friends.${friend.status}`) }}</small>
           </div>
         </header>
         <div class="text-center">
           <strong>{{ friend.username }}</strong>
-          <p>Elo: {{ friend.elo }}</p>
+          <p>{{ $t("friends.elo") }}: {{ friend.elo }}</p>
         </div>
         <footer>
           <button
             class="outline secondary w-full"
             @click="removeFriend(friend.id)"
           >
-            Retirer
+            {{ $t("friends.remove") }}
           </button>
         </footer>
       </article>
     </div>
 
     <div class="text-center mt-2">
-      <RouterLink to="/" role="button" class="secondary outline">Retour</RouterLink>
+      <RouterLink to="/" role="button" class="secondary outline">{{ $t("friends.back") }}</RouterLink>
     </div>
   </div>
 </template>

@@ -46,6 +46,19 @@
 		"give_up" : "Abandonner",
 		"leave" : "Quitter"
 	},
+	"friends" : {
+		"title" : "Mes Amis",
+		"loading" : "Chargement",
+		"no_friends" : "Tu n'as pas encore d'amis.",
+		"add_friends_leaderboard" : "Ajouter des amis depuis le classement",
+		"online" : "En ligne",
+		"in-game" : "En jeu",
+		"offline" : "Hors-ligne",
+		"undefined" : "Incconu",
+		"elo" : "Elo",
+		"remove" : "Retirer",
+		"back" : "Retour"
+	},
 	"error": {
 		"bad_request": "Mauvaise requête - vérifiez vos données",
 		"already_exists": "Cet élément existe déjà",

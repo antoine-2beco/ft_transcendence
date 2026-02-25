@@ -46,6 +46,19 @@
 		"give_up" : "Give up",
 		"leave" : "Leave"
 	},
+	"friends" : {
+		"title" : "My Friends",
+		"loading" : "Loading",
+		"no_friends" : "You don't have friends.",
+		"add_friends_leaderboard" : "Add friends from the leaderboard",
+		"online" : "Online",
+		"in-game" : "In game",
+		"offline" : "Offline",
+		"undefined" : "Unknow",
+		"elo" : "Elo",
+		"remove" : "Remove",
+		"back" : "Back"
+	},
 	"error": {
 		"bad_request": "Bad request - check your data",
 		"already_exists": "This already exists",

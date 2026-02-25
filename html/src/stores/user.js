@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
 			id: null,
 			username: null,
 			profile_picture_url: null,
-			language: null,
+			status: null,
 			elo: null,
 			wins: null,
 			losses: null,
