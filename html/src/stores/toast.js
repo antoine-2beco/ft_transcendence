@@ -33,7 +33,7 @@ export const useToastStore = defineStore('toast', {
       };
       
       const handler = statusHandlers[err?.status] || { type: 'error', key: 'error.unknow_error' };
-      let message = `${t(handler.key)} : ${err.message}`;
+      let message = `${t(handler.key)}`;
       
       if (handler.type === 'warning') {
         showWarning(message);
@@ -44,17 +44,11 @@ export const useToastStore = defineStore('toast', {
       }
     },
 
-    notifyInfo(type) {
+    notifySuccess(type) {
       const { t } = i18n.global;
       const { showSuccess } = Toast();
-
-      const typeHandler = {
-        'register': 'toast.register',
-        'login': 'toast.login',
-        'logout': 'toast.logout'
-      }
   
-      let message = t(typeHandler[type]);
+      let message = t(`success.${type}`);
       showSuccess(message);
       this.lastToast = showSuccess;
     }

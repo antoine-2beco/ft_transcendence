@@ -122,10 +122,10 @@ export const removeFriend = async (id) => {
 	}
 }
 
-export const editUsername = async (newUsername) => {
+export const editUsername = async (username) => {
 	try {
-		await axios.post(`/api/editUsername`,
-			{ newUsername },
+		await axios.patch(`/api/editUsername`,
+			{ username },
 			{
 			headers: {
 				"Content-Type": "application/json"

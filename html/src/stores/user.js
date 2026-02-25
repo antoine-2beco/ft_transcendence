@@ -30,7 +30,7 @@ export const useUserStore = defineStore('user', {
 			try {
         this.user.username = await userApi.login(username, password);
 				await router.push('/');
-				useToastStore().notifyInfo('login');
+				useToastStore().notifySuccess('login');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}
@@ -40,7 +40,7 @@ export const useUserStore = defineStore('user', {
 			try {
 				await userApi.register(username, email, password);
 				await router.push('/login');
-				useToastStore().notifyInfo('register');
+				useToastStore().notifySuccess('register');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}
@@ -59,7 +59,7 @@ export const useUserStore = defineStore('user', {
 		async logout () {
 			try {
 				await userApi.logout();
-				useToastStore().notifyInfo('logout');
+				useToastStore().notifySuccess('logout');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}
@@ -99,7 +99,7 @@ export const useUserStore = defineStore('user', {
 		async addFriend (id) {
 			try {
 				await userApi.addFriend(id);
-				useToastStore().notifyInfo('add_friend');
+				useToastStore().notifySuccess('add_friend');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}
@@ -108,7 +108,7 @@ export const useUserStore = defineStore('user', {
 		async removeFriend (id) {
 			try {
 				await userApi.removeFriend(id);
-				useToastStore().notifyInfo('remove_friend');
+				useToastStore().notifySuccess('remove_friend');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}
@@ -117,7 +117,7 @@ export const useUserStore = defineStore('user', {
 		async editUsername (newUsername) {
 			try {
 				await userApi.editUsername(newUsername);
-				useToastStore().notifyInfo('edit_username');
+				useToastStore().notifySuccess('edit_username');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}
@@ -126,7 +126,7 @@ export const useUserStore = defineStore('user', {
 		async uploadProfilePicture (profilePicture) {
 			try {
 				await userApi.uploadProfilePicture(profilePicture);
-				useToastStore().notifyInfo('upload_profile_picture');
+				useToastStore().notifySuccess('upload_profile_picture');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
 			}

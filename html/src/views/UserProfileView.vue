@@ -27,11 +27,11 @@ const startEdit = () => {
 const saveProfile = () => {
   if (!editForm.value.username.trim() || !editForm.value.avatar.trim())
     return;
-
-  userStore.user.username = editForm.value.username;
-  userStore.user.profile_picture_url = editForm.value.avatar;
-
+  console.log("username : " + editForm.value.username);
+  userStore.editUsername(editForm.value.username);
+  userStore.uploadProfilePicture(editForm.value.avatar); // Must be a file not a link
   isEditing.value = false;
+  // window.location.reload(); // TO CHANGE (REFRESH DATA)
 };
 
 const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username ===
