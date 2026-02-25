@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
@@ -42,6 +42,21 @@ const formatDate = (dateString) => {
     return '';
   return new Date(dateString).toLocaleDateString('fr-FR');
 };
+
+
+const achievements = computed(() => {
+  const u = userStore.user;
+  if (!u)
+    return [];
+
+  const list = [];
+  if (u.wins >= 1) list.push({ icon: '🏅', title: 'Premier Sang', desc: 'Gagner 1 match' });
+  if (u.wins >= 10) list.push({ icon: '🏆', title: 'Vétéran', desc: '10 victoires' });
+  if (u.elo >= 1200) list.push({ icon: '🔥', title: 'Challenger', desc: '1200 Elo atteint' });
+  if (u.ties >= 5) list.push({ icon: '🤝', title: 'Pacifiste', desc: 'Faire 5 égalités' });
+
+  return list;
+});
 
 </script>
 
@@ -98,6 +113,16 @@ const formatDate = (dateString) => {
         <div class="text-center"><h3>{{ userStore.user.wins }}</h3><small>Victoires</small></div>
         <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>Défaites</small></div>
         <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>Nuls</small></div>
+      </div>
+      <div v-if="achievements.length > 0" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <h4 class="text-center">Succès</h4>
+        <div class="grid">
+          <div v-for="ach in achievements" :key="ach.title" class="text-center">
+            <div style="font-size: 2.5rem; line-height: 1.2;">{{ ach.icon }}</div>
+            <strong>{{ ach.title }}</strong>
+            <div><small class="text-muted">{{ ach.desc }}</small></div>
+          </div>
+        </div>
       </div>
 
       <footer v-if="!loading">
