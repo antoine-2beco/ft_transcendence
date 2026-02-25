@@ -70,6 +70,15 @@
 		"winner" : "Winner",
 		"back" : "Back"
 	},
+	"leaderboard" : {
+		"title" : "Leaderboard",
+		"loading" : "Loading...",
+		"player" : "Player",
+		"elo" : "Elo",
+		"win_rate" : "Ratio",
+		"add_friend" : "Add",
+		"back" : "Back"
+	},
 	"error" : {
 		"bad_request" : "Bad request - check your data",
 		"already_exists" : "This already exists",

@@ -37,26 +37,26 @@ const toggleFriend = async (player) => {
 
 <template>
   <div class="container">
-    <h2 class="text-center">Classement</h2>
+    <h2 class="text-center">{{ $t("leaderboard.title") }}</h2>
 
     <input
       type="search"
       v-model="searchQuery"
-      placeholder="Rechercher un pseudo..."
+      placeholder=""
       class="mb-2"
     >
 
-    <div v-if="loading" aria-busy="true">Chargement...</div>
+    <div v-if="loading" aria-busy="true">$t("leaderboard.loading")</div>
 
     <div v-else class="scroll-box">
       <table class="striped">
         <thead>
           <tr>
             <th>#</th>
-            <th>Joueur</th>
-            <th>Elo</th>
-            <th>Win Rate</th>
-            <th>Action</th>
+            <th>{{ $t("leaderboard.player") }}</th>
+            <th>{{ $t("leaderboard.elo") }}</th>
+            <th>{{ $t("leaderboard.win_rate") }}</th>
+            <th>{{ $t("leaderboard.add_friend") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -88,7 +88,7 @@ const toggleFriend = async (player) => {
     </div>
 
     <div class="text-center mt-2">
-      <RouterLink to="/" role="button" class="secondary outline">Retour</RouterLink>
+      <RouterLink to="/" role="button" class="secondary outline">{{ $t("leaderboard.back") }}</RouterLink>
     </div>
   </div>
 </template>

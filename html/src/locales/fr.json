@@ -70,6 +70,15 @@
 		"winner" : "Vainqueur",
 		"back" : "Retour"
 	},
+	"leaderboard" : {
+		"title" : "Classement",
+		"loading" : "Chargement...",
+		"player" : "Joueur",
+		"elo" : "Elo",
+		"win_rate" : "Ratio",
+		"add_friend" : "Ajouter",
+		"back" : "Retour"
+	},
 	"error" : {
 		"bad_request" : "Mauvaise requête - vérifiez vos données",
 		"already_exists" : "Cet élément existe déjà",
