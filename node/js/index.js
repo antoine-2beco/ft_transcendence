@@ -19,6 +19,8 @@ import { matchHistoryRoute } from "./routes/matchHistoryRoute.js";
 import { profileRoute } from "./routes/profileRoute.js";
 import { addFriendRoute } from "./routes/addFriendRoute.js";
 import { profilePicUploadRoute} from "./routes/profilePicUploadRoute.js";
+import { editUsernameRoute } from "./routes/editUsernameRoute.js";
+import { removeFriendRoute } from "./routes/removeFriendRoute.js";
 import "./db.js";
 
 const fastify = Fastify({
@@ -57,6 +59,8 @@ await fastify.register(matchHistoryRoute);
 await fastify.register(profileRoute);
 await fastify.register(addFriendRoute);
 await fastify.register(profilePicUploadRoute);
+await fastify.register(editUsernameRoute);
+await fastify.register(removeFriendRoute);
 
 async function start() 
 {
