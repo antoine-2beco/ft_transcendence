@@ -7,7 +7,8 @@ const history = ref([]);
 const loading = ref(true);
 
 const isEditing = ref(false);
-const editForm = ref({ username: '', avatar: '' });
+const editForm = ref({ username: '' });
+const selectedFile = ref(null);
 
 onMounted(async () => {
   await userStore.getProfile(userStore.user.id);
@@ -20,29 +21,35 @@ onMounted(async () => {
 
 const startEdit = () => {
   editForm.value.username = userStore.user.username;
-  editForm.value.avatar = userStore.user.profile_picture_url;
+  selectedFile.value = null;
   isEditing.value = true;
 };
 
+const handleFileChange = (event) => {
+  selectedFile.value = event.target.files[0];
+};
+
 const saveProfile = () => {
-  if (!editForm.value.username.trim() || !editForm.value.avatar.trim())
+  if (!editForm.value.username.trim())
     return;
+
   console.log("username : " + editForm.value.username);
   userStore.editUsername(editForm.value.username);
-  userStore.uploadProfilePicture(editForm.value.avatar); // Must be a file not a link
+
+  if (selectedFile.value)
+    userStore.uploadProfilePicture(selectedFile.value);
+
   isEditing.value = false;
   // window.location.reload(); // TO CHANGE (REFRESH DATA)
 };
 
-const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username ===
-userStore.user.username ? 'WIN' : 'LOSS');
+const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username === userStore.user.username ? 'WIN' : 'LOSS');
 
 const formatDate = (dateString) => {
   if (!dateString)
     return '';
   return new Date(dateString).toLocaleDateString('fr-FR');
 };
-
 
 const achievements = computed(() => {
   const u = userStore.user;
@@ -57,7 +64,6 @@ const achievements = computed(() => {
 
   return list;
 });
-
 </script>
 
 <template>
@@ -67,9 +73,7 @@ const achievements = computed(() => {
     <article v-if="userStore.user">
 
       <header v-if="!isEditing" style="display: flex; align-items: center;">
-
         <div style="flex: 1;"></div>
-
         <div class="flex-center" style="display: flex; align-items: center; gap: 1rem;">
           <img :src="userStore.user.profile_picture_url" class="avatar">
           <div>
@@ -77,7 +81,6 @@ const achievements = computed(() => {
             <small>Elo: {{ userStore.user.elo }}</small>
           </div>
         </div>
-
         <div style="flex: 1; text-align: right;">
           <button
             class="outline secondary"
@@ -87,7 +90,6 @@ const achievements = computed(() => {
             Éditer
           </button>
         </div>
-
       </header>
 
       <header v-else>
@@ -98,8 +100,8 @@ const achievements = computed(() => {
               <input type="text" v-model="editForm.username" required />
             </label>
             <label>
-              URL Avatar
-              <input type="url" v-model="editForm.avatar" required />
+              Avatar (Fichier local)
+              <input type="file" accept="image/*" @change="handleFileChange" />
             </label>
           </div>
           <div class="grid" style="margin-top: 1rem;">
@@ -114,6 +116,7 @@ const achievements = computed(() => {
         <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>Défaites</small></div>
         <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>Nuls</small></div>
       </div>
+
       <div v-if="achievements.length > 0" style="margin-top: 2rem; margin-bottom: 2rem;">
         <h4 class="text-center">Succès</h4>
         <div class="grid">
@@ -145,6 +148,7 @@ const achievements = computed(() => {
         <RouterLink to="/" role="button" class="secondary outline w-full mt-2">Retour</RouterLink>
       </footer>
       <div v-else aria-busy="true" class="text-center mt-2">Chargement...</div>
+
     </article>
   </div>
 </template>
