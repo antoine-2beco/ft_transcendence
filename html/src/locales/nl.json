@@ -1,0 +1,149 @@
+{
+    "head": {
+        "page_title": "Tic Tac Toe",
+        "site_title": "Tic Tac Toe"
+    },
+    "footer": {
+        "privacy_policy": "Privacybeleid",
+        "terms_of_service": "Gebruiksvoorwaarden", 
+        "copyright": "© 2026 Tic Tac Toe. Alle rechten voorbehouden."
+    },
+    "home": {
+        "play": "Spelen",
+        "my_profile": "Mijn Profiel",
+        "my_friends": "Mijn Vrienden",
+        "leaderboard": "Klassement",
+        "history": "Geschiedenis",
+        "logout": "Uitloggen",
+        "login": "Inloggen",
+        "register": "Registreren"
+    },
+    "login": {
+        "title": "Inloggen",
+        "username": "Gebruikersnaam",
+        "pseudo": "Alias",
+        "password": "Wachtwoord",
+        "submit_button": "Inloggen",
+        "no_account": "Nog geen account?",
+        "register": "Registreren"
+    },
+    "register": {
+        "title": "Registreren",
+        "username": "Gebruikersnaam",
+        "email": "E-mail",
+        "password": "Wachtwoord",
+        "bad_email": "Ongeldig e-mailformaat",
+        "submit_button": "Registreren",
+        "already_account": "Al een account?",
+        "login": "Inloggen"
+    },
+    "game": {
+        "title": "Tic Tac Toe",
+        "looking_opponent": "Zoek tegenstander...",
+        "your_turn": "Jouw beurt: ({symbol})",
+        "opponent_turn": "Tegenstander speelt...",
+        "winner": "Winnaar is {symobol}!",
+        "draw": "Gelijkspel!",
+        "replay": "Opnieuw spelen",
+        "play_matchmaking": "Speel tegen een tegenstander",
+        "play_ai": "Speel tegen AI",
+        "join_queue": "Sluit je aan bij de wachtrij",
+        "give_up": "Opgeven",
+        "leave": "Verlaten"
+    },
+    "friends": {
+        "title": "Mijn Vrienden",
+        "loading": "Laden...",
+        "no_friends": "Je hebt nog geen vrienden",
+        "add_friends_leaderboard": "Vrienden toevoegen via klassement",
+        "online": "Online",
+        "in-game": "In spel",
+        "offline": "Offline",
+        "undefined": "Onbekend",
+        "elo": "Elo",
+        "remove": "Verwijderen",
+        "back": "Terug"
+    },
+    "history": {
+        "title": "Volledige Geschiedenis",
+        "loading": "Laden...",
+        "date": "Datum",
+        "match": "Wedstrijd",
+        "result": "Resultaat",
+        "versus": "tegen",
+        "draw": "Gelijk",
+        "winner": "Winnaar",
+        "back": "Terug"
+    },
+    "leaderboard": {
+        "title": "Klassement",
+        "loading": "Laden...",
+        "player": "Speler",
+        "elo": "Elo",
+        "win_rate": "Win-verhouding",
+        "add_friend": "Toevoegen",
+        "back": "Terug"
+    },
+    "user_profile": {
+        "title": "Mijn Profiel",
+        "elo": "Elo",
+        "edit": "Bewerken",
+        "pseudo": "Alias",
+        "avatar": "Avatar",
+        "cancel": "Annuleren",
+        "save": "Opslaan",
+        "victories": "Overwinningen",
+        "defeats": "Verliezen",
+        "ties": "Gelijkspelen",
+        "achievements": "Prestaties",
+        "last_matches": "Recente Wedstrijden",
+        "towards": "Tegen",
+        "result": "Resultaat",
+        "date": "Datum",
+        "no_matches": "Geen wedstrijden",
+        "back": "Terug",
+        "loading": "Laden...",
+        "draw": "GELIJK",
+        "win": "GEWONNEN",
+        "loss": "VERLOREN"
+    },
+    "achievements": {
+        "first_blood": {
+            "title": "Eerste Bloed",
+            "desc": "1 overwinning"
+        },
+        "veteran": {
+            "title": "Veteraan",
+            "desc": "10 overwinningen"
+        },
+        "challenger": {
+            "title": "Uitdager",
+            "desc": "1200 Elo bereikt"
+        },
+        "pacifist": {
+            "title": "Pacifist",
+            "desc": "5 gelijkspelen"
+        }
+    },
+    "error": {
+        "bad_request": "Ongeldig verzoek - controleer je gegevens",
+        "already_exists": "Dit item bestaat al",
+        "bad_entries": "Ongeldige inloggegevens",
+        "forbidden": "Toegang verboden",
+        "not_found": "Resource niet gevonden",
+        "validation": "Validatiefout",
+        "network": "Verbinding verbroken",
+        "timeout": "Timeout verzoek",
+        "server": "Serverfout",
+        "unknow_error": "Er is een onverwachte fout opgetreden"
+    },
+    "success": {
+        "register": "Geregistreerd",
+        "login": "Ingelogd",
+        "logout": "Uitgelogd",
+        "add_friend": "Vriend toegevoegd",
+        "remove_friend": "Vriend verwijderd",
+        "edit_username": "Gebruikersnaam gewijzigd",
+        "upload_profile_picture": "Profiel foto bijgewerkt"
+    }
+}
