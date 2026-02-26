@@ -7,12 +7,12 @@ import { RouterLink } from 'vue-router'
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <p>2026 ft_transcendence. All rights reserved.</p>
+          <p>{{ $t("footer.copyright") }}</p>
         </div>
         <div class="footer-links">
-          <RouterLink to="/privacy" class="footer-link">Privacy Policy</RouterLink>
+          <RouterLink to="/privacy" class="footer-link">{{ $t("footer.privacy_policy") }}</RouterLink>
           <span class="separator">•</span>
-          <RouterLink to="/terms" class="footer-link">Terms of Service</RouterLink>
+          <RouterLink to="/terms" class="footer-link">{{ $t("footer.terms_of_service") }}</RouterLink>
         </div>
       </div>
     </div>
