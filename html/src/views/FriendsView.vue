@@ -18,12 +18,8 @@ onMounted(async () => {
 });
 
 const removeFriend = async (friendId) => {
-  try {
     await userStore.removeFriend(friendId);
     friends.value = friends.value.filter(f => f.id !== friendId);
-  } catch (error) {
-    console.error("Erreur lors de la suppression de l'ami :", error);
-  }
 };
 
 const getStatusClass = (s) => ({

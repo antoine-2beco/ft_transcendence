@@ -2,7 +2,6 @@
 export const joinQueue = async (ws) => {
   if (!ws || ws.readyState !== WebSocket.OPEN) {
 	  throw( {status: 500} );
-    return;
   }
   ws.send(JSON.stringify({ type: "queue:join" }));
   console.log("Sent join queue");

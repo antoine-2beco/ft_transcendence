@@ -18,12 +18,7 @@ const handleSubmit = async () => {
     error.value = t("register.bad_email");
     return;
   }
-
-  try {
-    await userStore.register(username.value, email.value, password.value);
-  } catch (e) {
-    error.value = e;
-  }
+  await userStore.register(username.value, email.value, password.value);
 };
 </script>
 

@@ -10,7 +10,7 @@
 	},
 	"home" : {
 		"play" : "Jouer",
-		"my_profile" : "Mon Profile",
+		"my_profile" : "Mon Profil",
 		"my_friends" : "Mes Amis",
 		"leaderboard" : "Classement",
 		"history" : "Historique",
@@ -40,7 +40,7 @@
 	"game" : {
 		"title" : "Tic Tac Toe",
 		"looking_opponent" : "Recherche d'un adversaire...",
-		"your_turn" : "Á votre tour: ({symbol})",
+		"your_turn" : "À votre tour: ({symbol})",
 		"opponent_turn" : "L'adversaire joue...",
 		"winner" : "Le gagnant est {symobol} !",
 		"draw" : "Match nul !",

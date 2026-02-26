@@ -70,6 +70,7 @@ export const useUserStore = defineStore('user', {
 		async getProfile () {
 			try {
 				const user = await userApi.getProfile();
+				this.user = user;
 				return user;
 			}
 			catch (e) {
