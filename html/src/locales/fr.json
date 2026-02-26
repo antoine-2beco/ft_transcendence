@@ -42,7 +42,7 @@
 		"looking_opponent": "Recherche d'un adversaire...",
 		"your_turn": "À votre tour: ({symbol})",
 		"opponent_turn": "L'adversaire joue...",
-		"winner": "Le gagnant est {symobol} !",
+		"winner": "Le gagnant est {symbol} !",
 		"draw": "Match nul !",
 		"replay": "Rejouer",
 		"play_matchmaking": "Jouer contre un adversaire",

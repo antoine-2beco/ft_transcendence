@@ -42,7 +42,7 @@
         "looking_opponent": "Zoek tegenstander...",
         "your_turn": "Jouw beurt: ({symbol})",
         "opponent_turn": "Tegenstander speelt...",
-        "winner": "Winnaar is {symobol}!",
+        "winner": "Winnaar is {symbol}!",
         "draw": "Gelijkspel!",
         "replay": "Opnieuw spelen",
         "play_matchmaking": "Speel tegen een tegenstander",
