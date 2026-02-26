@@ -1,0 +1,9 @@
+export { default as Article } from './Article.vue';
+export { default as HistoryView } from './HistoryView.vue';
+export { default as LeaderboardView } from './LeaderboardView.vue';
+export { default as FriendsView } from './FriendsView.vue';
+export { default as HomeView } from './HomeView.vue';
+export { default as LoginView } from './LoginView.vue';
+export { default as UserProfileView } from './UserProfileView.vue';
+export { default as GameView } from './GameView.vue';
+export { default as RegisterView } from './RegisterView.vue';

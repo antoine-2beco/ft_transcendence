@@ -1,5 +1,5 @@
 <template>
-  <div class="policy-container">
+  <div class="container">
 	<h1>Privacy Policy</h1>
 	<p class="last-updated">Last Updated:  February 17, 2026</p>
 
@@ -117,69 +117,3 @@
 	</section>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'PrivacyPolicy',
-  data() {
-	return {
-	  lastUpdated: new Date().toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	  }),
-	};
-  },
-};
-</script>
-
-<style scoped>
-.policy-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  line-height: 1.7;
-  color: #e0e0e0;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
-}
-
-.last-updated {
-  color: #888;
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-}
-
-h2 {
-  font-size: 1.3rem;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid #333;
-}
-
-h3 {
-  font-size: 1.1rem;
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-section {
-  margin-bottom: 1.5rem;
-}
-
-ul {
-  padding-left: 1.5rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-p {
-  margin-bottom: 0.75rem;
-}
-</style>

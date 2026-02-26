@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useUserStore } from '@/stores/user';
-import HomeView from '../views/HomeView.vue';
-import LoginView from '../views/LoginView.vue';
-import RegisterView from '../views/RegisterView.vue';
+import * as Views from '@/views';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,55 +8,59 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: Views.HomeView
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView
+      component: Views.LoginView
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterView
+      component: Views.RegisterView
     },
     {
       path: '/game',
       name: 'game',
-      component: () => import('../views/GameView.vue'),
+      component: Views.GameView,
       meta: { requiresAuth: true }
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('../views/UserProfileView.vue'),
+      component: Views.UserProfileView,
       meta: { requiresAuth: true }
     },
     {
       path: '/leaderboard',
       name: 'leaderboard',
-      component: () => import('../views/LeaderboardView.vue')
+      component: Views.LeaderboardView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/history',
       name: 'history',
-      component: () => import('../views/HistoryView.vue')
+      component: Views.HistoryView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/friends',
       name: 'friends',
-      component: () => import('../views/FriendsView.vue'),
+      component: Views.FriendsView,
       meta: { requiresAuth: true }
     },
     {
       path: '/privacy',
       name: 'privacy',
-      component: () => import('../views/PrivacyPolicy.vue')
+      component: Views.Article,
+      meta: { article: 'PrivacyPolicy' }
     },
     {
       path: '/terms',
       name: 'terms',
-      component: () => import('../views/TermsofService.vue')
+      component: Views.Article,
+      meta: { article: 'TermsofService' }
     }
   ]
 });
