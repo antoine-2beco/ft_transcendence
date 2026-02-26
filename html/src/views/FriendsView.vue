@@ -20,7 +20,6 @@ const removeFriend = async (friendId) => {
   const indexStore = userStore.user.friends.indexOf(friendId);
   if (indexStore > -1) await userStore.removeFriend(player.id);
   friends.value = friends.value.filter(f => f.id !== friendId);
-  window.location.reload(); // TO CHANGE (REFRESH DATA) (BLOQUE POTENTIELLES ERREURS)
 };
 
 const getStatusClass = (s) => ({

@@ -31,7 +31,6 @@ const toggleFriend = async (player) => {
   const index = userStore.user.friends.indexOf(player.id);
   if (index > -1) await userStore.removeFriend(player.id);
   else await userStore.addFriend(player.id);
-  window.location.reload(); // TO CHANGE (REFRESH DATA)
 };
 </script>
 

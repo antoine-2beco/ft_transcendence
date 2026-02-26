@@ -70,7 +70,11 @@ export const useUserStore = defineStore('user', {
 		async getProfile (id) {
 			try {
 				const user = await userApi.getProfile(id);
-				this.user = user;
+        if (this.user && this.user.id === id) {
+            this.user = user;
+        } else if (!this.user.id) {
+            this.user = user;
+        }
 				return user;
 			}
 			catch (e) {
@@ -99,6 +103,14 @@ export const useUserStore = defineStore('user', {
 		async addFriend (id) {
 			try {
 				await userApi.addFriend(id);
+        if (this.user) {
+            if (!this.user.friends) {
+                this.user.friends = [];
+            }
+            if (!this.user.friends.includes(id)) {
+                this.user.friends.push(id);
+            }
+        }
 				useToastStore().notifySuccess('add_friend');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -108,6 +120,15 @@ export const useUserStore = defineStore('user', {
 		async removeFriend (id) {
 			try {
 				await userApi.removeFriend(id);
+        if (this.user) {
+            if (!this.user.friends) {
+                this.user.friends = [];
+            }
+            const index = this.user.friends.indexOf(id);
+            if (index > -1) {
+                this.user.friends.splice(index, 1);
+            }
+        }
 				useToastStore().notifySuccess('remove_friend');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -117,6 +138,9 @@ export const useUserStore = defineStore('user', {
 		async editUsername (newUsername) {
 			try {
 				await userApi.editUsername(newUsername);
+        if (this.user) {
+            this.user.username = newUsername;
+        }
 				useToastStore().notifySuccess('edit_username');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
