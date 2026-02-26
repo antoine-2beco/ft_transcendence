@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const login = async (username, password) => {
     try {
-      const response = await axios.post('/api/login', 
+      const response = await axios.post('/api/login',
 		{username, password},
 		{
 			headers: {
@@ -17,7 +17,7 @@ export const login = async (username, password) => {
 
 export const register = async (username, email, password) => {
     try {
-      const response = await axios.post('/api/register', 
+      const response = await axios.post('/api/register',
 		{username, email, password},
 		{
 			headers: {
@@ -137,15 +137,16 @@ export const editUsername = async (username) => {
 }
 
 export const uploadProfilePicture = async (uploadProfilePicture) => {
-	try {
-		await axios.post(`/api/profilePicUpload`,
-			{ uploadProfilePicture },
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const formData = new FormData();
+        formData.append('file', uploadProfilePicture);
+        const response = await axios.post(`/api/profilePicUpload`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        return response.data;
+    } catch (e) {
+        throw (e);
+    }
 }

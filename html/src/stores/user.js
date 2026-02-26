@@ -147,14 +147,16 @@ export const useUserStore = defineStore('user', {
 			}
 		},
 
-		async uploadProfilePicture (profilePicture) {
-			try {
-				await userApi.uploadProfilePicture(profilePicture);
-				useToastStore().notifySuccess('upload_profile_picture');
-			} catch (e) {
-				useToastStore().notifyApiError(e);
-			}
-		}
-
+    async uploadProfilePicture (profilePicture) {
+      try {
+          const data = await userApi.uploadProfilePicture(profilePicture);
+          if (this.user && data && data.profile_picture_url) {
+              this.user.profile_picture_url = data.profile_picture_url;
+          }
+          useToastStore().notifySuccess('upload_profile_picture');
+      } catch (e) {
+          useToastStore().notifyApiError(e);
+      }
+  },
 	}
 });

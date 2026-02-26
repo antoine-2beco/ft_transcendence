@@ -30,17 +30,18 @@ const handleFileChange = (event) => {
 };
 
 const saveProfile = () => {
-  if (!editForm.value.username.trim())
+  const newUsername = editForm.value.username.trim();
+
+  if (!newUsername)
     return;
-
-  console.log("username : " + editForm.value.username);
-  userStore.editUsername(editForm.value.username);
-
-  if (selectedFile.value)
+  if (newUsername !== userStore.user.username) {
+    console.log("username : " + newUsername);
+    userStore.editUsername(newUsername);
+  }
+  if (selectedFile.value) {
     userStore.uploadProfilePicture(selectedFile.value);
-
+  }
   isEditing.value = false;
-  // window.location.reload(); // TO CHANGE (REFRESH DATA)
 };
 
 const getResult = (g) => g.winner_username === 'Draw' ? 'DRAW' : (g.winner_username === userStore.user.username ? 'WIN' : 'LOSS');
