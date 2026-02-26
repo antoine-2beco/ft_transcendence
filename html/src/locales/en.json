@@ -3,6 +3,11 @@
 		"page_title" : "Tic Tac Toe",
 		"site_title" : "Tic Tac Toe"
 	},
+	"footer": {
+		"privacy_policy": "Privacy Policy",
+		"terms_of_service": "Terms of Service",
+		"copyright": "© 2026 Tic Tac Toe. All rights reserved."
+	},
 	"home" : {
 		"play" : "Play",
 		"my_profile" : "My Profile",

@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import ThemeSwitch from './components/ThemeSwitch.vue'
 import LangSwitch from './components/LangSwitch.vue'
+import Footer from './components/Footer.vue'
 </script>
 
 <template>
@@ -13,6 +14,10 @@ import LangSwitch from './components/LangSwitch.vue'
   <main class="container">
     <RouterView />
   </main>
+
+  <div>
+    <Footer />
+  </div>
 </template>
 
 
