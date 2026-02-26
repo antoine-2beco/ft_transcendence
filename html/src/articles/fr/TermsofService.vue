@@ -1,5 +1,5 @@
 <template>
-  <div class="terms-container">
+  <div class="terms-article">
 	<h1>Conditions d'Utilisation</h1>
 	<p class="last-updated">Dernière mise à jour : 17 février 2026</p>
 

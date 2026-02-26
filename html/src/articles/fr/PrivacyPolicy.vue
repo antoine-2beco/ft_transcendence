@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="article">
 	<h1>Politique de Confidentialité</h1>
 	<p class="last-updated">Dernière mise à jour : 17 février 2026</p>
 

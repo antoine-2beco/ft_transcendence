@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="article">
 	<h1>Privacybeleid</h1>
 	<p class="last-updated">Laatst bijgewerkt: 17 februari 2026</p>
 

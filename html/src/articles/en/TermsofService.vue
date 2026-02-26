@@ -1,5 +1,5 @@
 <template>
-  <div class="terms-container">
+  <div class="terms-article">
 	<h1>Terms of Service</h1>
 	<p class="last-updated">Last Updated: February 17, 2026</p>
 

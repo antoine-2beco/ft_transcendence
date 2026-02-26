@@ -24,7 +24,7 @@ watchEffect(async () => {
 </template>
 
 <style>
-.container {
+.article {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
@@ -32,18 +32,18 @@ watchEffect(async () => {
   color: #e0e0e0;
 }
 
-h1 {
+h1 .article {
   font-size: 2rem;
   margin-bottom: 0.25rem;
 }
 
-.last-updated {
+.last-updated .article {
   color: #888;
   font-size: 0.9rem;
   margin-bottom: 2rem;
 }
 
-h2 {
+h2 .article {
   font-size: 1.3rem;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
@@ -51,19 +51,19 @@ h2 {
   border-bottom: 1px solid #333;
 }
 
-section {
+section .article {
   margin-bottom: 1.5rem;
 }
 
-ul {
+ul .article {
   padding-left: 1.5rem;
 }
 
-li {
+li .article {
   margin-bottom: 0.5rem;
 }
 
-p {
+p .article {
   margin-bottom: 0.75rem;
 }
 </style>

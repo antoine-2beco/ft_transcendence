@@ -1,5 +1,5 @@
 <template>
-  <div class="terms-container">
+  <div class="terms-article">
 	<h1>Gebruiksvoorwaarden</h1>
 	<p class="last-updated">Laatst bijgewerkt: 17 februari 2026</p>
 
