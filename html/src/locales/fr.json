@@ -54,7 +54,7 @@
 	"friends" : {
 		"title" : "Mes Amis",
 		"loading" : "Chargement...",
-		"no_friends" : "Tu n'as pas encore d'amis.",
+		"no_friends" : "Tu n'as pas encore d'amis",
 		"add_friends_leaderboard" : "Ajouter des amis depuis le classement",
 		"online" : "En ligne",
 		"in-game" : "En jeu",
@@ -83,6 +83,47 @@
 		"win_rate" : "Ratio",
 		"add_friend" : "Ajouter",
 		"back" : "Retour"
+	},
+	"user_profile" : {
+		"title" : "Mon Profil",
+		"elo" : "Elo",
+		"edit" : "Éditer",
+		"pseudo" : "Pseudo",
+		"avatar" : "Avatar",
+		"cancel" : "Annuler",
+		"save" : "Enregistrer",
+		"victories" : "Victoires",
+		"defeats" : "Défaites",
+		"ties" : "Nuls",
+		"achievements" : "Succès",
+		"last_matches" : "Derniers Matchs",
+		"towards" : "Contre",
+		"result" : "Résultat",
+		"date" : "Date",
+		"no_matches" : "Aucuns matchs",
+		"back" : "Retour",
+		"loading" : "Chargement...",
+		"draw" : "NUL",
+		"win" : "GAGNÉ",
+		"loss" : "PERDU"
+	},
+	"achievements" : {
+		"first_blood" : {
+			"title" : "Premier Sang",
+			"desc" : "1 victoire"
+		},
+		"veteran" : {
+			"title" : "Vétéran",
+			"desc" : "10 victoires"
+		},
+		"challenger" : {
+			"title" : "Challenger",
+			"desc" : "1200 Elo atteint"
+		},
+		"pacifist" : {
+			"title" : "Pacifiste",
+			"desc" : "Faire 5 égalités"
+		}
 	},
 	"error" : {
 		"bad_request" : "Mauvaise requête - vérifiez vos données",

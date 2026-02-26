@@ -54,7 +54,7 @@
 	"friends" : {
 		"title" : "My Friends",
 		"loading" : "Loading...",
-		"no_friends" : "You don't have friends.",
+		"no_friends" : "You don't have friends",
 		"add_friends_leaderboard" : "Add friends from the leaderboard",
 		"online" : "Online",
 		"in-game" : "In game",
@@ -83,6 +83,47 @@
 		"win_rate" : "Ratio",
 		"add_friend" : "Add",
 		"back" : "Back"
+	},
+	"user_profile" : {
+		"title" : "My Profile",
+		"elo" : "Elo",
+		"edit" : "Edit",
+		"pseudo" : "Pseudo",
+		"avatar" : "Avatar",
+		"cancel" : "Cancel",
+		"save" : "Save",
+		"victories" : "Victories",
+		"defeats" : "Defeats",
+		"ties" : "Ties",
+		"achievements" : "Achievements",
+		"last_matches" : "Last Matches",
+		"towards" : "Towards",
+		"result" : "Result",
+		"date" : "Date",
+		"no_matches" : "No matches",
+		"back" : "Back",
+		"loading" : "Loading...",
+		"draw" : "DRAW",
+		"win" : "WIN",
+		"loss" : "LOSS"
+	},
+	"achievements" : {
+		"first_blood" : {
+			"title" : "First Blood",
+			"desc" : "1 victory"
+		},
+		"veteran" : {
+			"title" : "Veteran",
+			"desc" : "10 victories"
+		},
+		"challenger" : {
+			"title" : "Challenger",
+			"desc" : "1200 Elo reached"
+		},
+		"pacifist" : {
+			"title" : "Pacifist",
+			"desc" : "Make 5 ties"
+		}
 	},
 	"error" : {
 		"bad_request" : "Bad request - check your data",
