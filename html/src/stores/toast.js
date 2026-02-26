@@ -51,6 +51,15 @@ export const useToastStore = defineStore('toast', {
       let message = t(`success.${type}`);
       showSuccess(message);
       this.lastToast = showSuccess;
+    },
+
+    notifyWarning(type) {
+      const { t } = i18n.global;
+      const { showWarning } = Toast();
+  
+      let message = t(`warning.${type}`);
+      showWarning(message);
+      this.lastToast = showWarning;
     }
   },
 })

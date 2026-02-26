@@ -1,149 +1,153 @@
 {
-	"head" : {
-		"page_title" : "Tic Tac Toe",
-		"site_title" : "Tic Tac Toe"
+	"head": {
+		"page_title": "Tic Tac Toe",
+		"site_title": "Tic Tac Toe"
 	},
 	"footer": {
 		"privacy_policy": "Politique de confidentialité",
 		"terms_of_service": "Conditions d'utilisation",
 		"copyright": "© 2026 Tic Tac Toe. Tous droits réservés."
 	},
-	"home" : {
-		"play" : "Jouer",
-		"my_profile" : "Mon Profil",
-		"my_friends" : "Mes Amis",
-		"leaderboard" : "Classement",
-		"history" : "Historique",
-		"logout" : "Se déconnecter",
-		"login" : "Se connecter",
-		"register" : "S'inscrire"
+	"home": {
+		"play": "Jouer",
+		"my_profile": "Mon Profil",
+		"my_friends": "Mes Amis",
+		"leaderboard": "Classement",
+		"history": "Historique",
+		"logout": "Se déconnecter",
+		"login": "Se connecter",
+		"register": "S'inscrire"
 	},
-	"login" : {
-		"title" : "Se connecter",
-		"username" : "Nom d'utilisateur",
-		"pseudo" : "Pseudo",
-		"password" : "Mot de passe",
-		"submit_button" : "Se connecter",
-		"no_account" : "Pas encore de compte ?",
-		"register" : "S'inscrire"
+	"login": {
+		"title": "Se connecter",
+		"username": "Nom d'utilisateur",
+		"pseudo": "Pseudo",
+		"password": "Mot de passe",
+		"submit_button": "Se connecter",
+		"no_account": "Pas encore de compte ?",
+		"register": "S'inscrire"
 	},
-	"register" : {
-		"title" : "S'inscrire",
-		"username" : "Nom d'utilisateur",
-		"email" : "Mail",
-		"password" : "Mot de passe",
-		"bad_email" : "Mauvais format d'email",
-		"submit_button" : "S'inscrire",
-		"already_account" : "Vous avez déjà un compte ?",
-		"login" : "Se connecter"
+	"register": {
+		"title": "S'inscrire",
+		"username": "Nom d'utilisateur",
+		"email": "Mail",
+		"password": "Mot de passe",
+		"bad_email": "Mauvais format d'email",
+		"submit_button": "S'inscrire",
+		"already_account": "Vous avez déjà un compte ?",
+		"login": "Se connecter"
 	},
-	"game" : {
-		"title" : "Tic Tac Toe",
-		"looking_opponent" : "Recherche d'un adversaire...",
-		"your_turn" : "À votre tour: ({symbol})",
-		"opponent_turn" : "L'adversaire joue...",
-		"winner" : "Le gagnant est {symobol} !",
-		"draw" : "Match nul !",
-		"replay" : "Rejouer",
-		"play_matchmaking" : "Jouer contre un adversaire",
-		"play_ai" : "Jouer contre une IA",
-		"join_queue" : "Rejoindre la file d'attente",
-		"give_up" : "Abandonner",
-		"leave" : "Quitter"
+	"game": {
+		"title": "Tic Tac Toe",
+		"looking_opponent": "Recherche d'un adversaire...",
+		"your_turn": "À votre tour: ({symbol})",
+		"opponent_turn": "L'adversaire joue...",
+		"winner": "Le gagnant est {symobol} !",
+		"draw": "Match nul !",
+		"replay": "Rejouer",
+		"play_matchmaking": "Jouer contre un adversaire",
+		"play_ai": "Jouer contre une IA",
+		"join_queue": "Rejoindre la file d'attente",
+		"give_up": "Abandonner",
+		"leave": "Quitter"
 	},
-	"friends" : {
-		"title" : "Mes Amis",
-		"loading" : "Chargement...",
-		"no_friends" : "Tu n'as pas encore d'amis",
-		"add_friends_leaderboard" : "Ajouter des amis depuis le classement",
-		"online" : "En ligne",
-		"in-game" : "En jeu",
-		"offline" : "Hors-ligne",
-		"undefined" : "Incconu",
-		"elo" : "Elo",
-		"remove" : "Retirer",
-		"back" : "Retour"
+	"friends": {
+		"title": "Mes Amis",
+		"loading": "Chargement...",
+		"no_friends": "Tu n'as pas encore d'amis",
+		"add_friends_leaderboard": "Ajouter des amis depuis le classement",
+		"online": "En ligne",
+		"in-game": "En jeu",
+		"offline": "Hors-ligne",
+		"undefined": "Incconu",
+		"elo": "Elo",
+		"remove": "Retirer",
+		"back": "Retour"
 	},
-	"history" : {
-		"title" : "Historique Global",
-		"loading" : "Chargement...",
-		"date" : "Date",
-		"match" : "Match",
-		"result" : "Résultat",
-		"versus" : "vs",
-		"draw" : "Nul",
-		"winner" : "Vainqueur",
-		"back" : "Retour"
+	"history": {
+		"title": "Historique Global",
+		"loading": "Chargement...",
+		"date": "Date",
+		"match": "Match",
+		"result": "Résultat",
+		"versus": "vs",
+		"draw": "Nul",
+		"winner": "Vainqueur",
+		"back": "Retour"
 	},
-	"leaderboard" : {
-		"title" : "Classement",
-		"loading" : "Chargement...",
-		"player" : "Joueur",
-		"elo" : "Elo",
-		"win_rate" : "Ratio",
-		"add_friend" : "Ajouter",
-		"back" : "Retour"
+	"leaderboard": {
+		"title": "Classement",
+		"loading": "Chargement...",
+		"player": "Joueur",
+		"elo": "Elo",
+		"win_rate": "Ratio",
+		"add_friend": "Ajouter",
+		"back": "Retour"
 	},
-	"user_profile" : {
-		"title" : "Mon Profil",
-		"elo" : "Elo",
-		"edit" : "Éditer",
-		"pseudo" : "Pseudo",
-		"avatar" : "Avatar",
-		"cancel" : "Annuler",
-		"save" : "Enregistrer",
-		"victories" : "Victoires",
-		"defeats" : "Défaites",
-		"ties" : "Nuls",
-		"achievements" : "Succès",
-		"last_matches" : "Derniers Matchs",
-		"towards" : "Contre",
-		"result" : "Résultat",
-		"date" : "Date",
-		"no_matches" : "Aucuns matchs",
-		"back" : "Retour",
-		"loading" : "Chargement...",
-		"draw" : "NUL",
-		"win" : "GAGNÉ",
-		"loss" : "PERDU"
+	"user_profile": {
+		"title": "Mon Profil",
+		"elo": "Elo",
+		"edit": "Éditer",
+		"pseudo": "Pseudo",
+		"avatar": "Avatar",
+		"cancel": "Annuler",
+		"save": "Enregistrer",
+		"victories": "Victoires",
+		"defeats": "Défaites",
+		"ties": "Nuls",
+		"achievements": "Succès",
+		"last_matches": "Derniers Matchs",
+		"towards": "Contre",
+		"result": "Résultat",
+		"date": "Date",
+		"no_matches": "Aucuns matchs",
+		"back": "Retour",
+		"loading": "Chargement...",
+		"draw": "NUL",
+		"win": "GAGNÉ",
+		"loss": "PERDU"
 	},
-	"achievements" : {
-		"first_blood" : {
-			"title" : "Premier Sang",
-			"desc" : "1 victoire"
+	"achievements": {
+		"first_blood": {
+			"title": "Premier Sang",
+			"desc": "1 victoire"
 		},
-		"veteran" : {
-			"title" : "Vétéran",
-			"desc" : "10 victoires"
+		"veteran": {
+			"title": "Vétéran",
+			"desc": "10 victoires"
 		},
-		"challenger" : {
-			"title" : "Challenger",
-			"desc" : "1200 Elo atteint"
+		"challenger": {
+			"title": "Challenger",
+			"desc": "1200 Elo atteint"
 		},
-		"pacifist" : {
-			"title" : "Pacifiste",
-			"desc" : "Faire 5 égalités"
+		"pacifist": {
+			"title": "Pacifiste",
+			"desc": "Faire 5 égalités"
 		}
 	},
-	"error" : {
-		"bad_request" : "Mauvaise requête - vérifiez vos données",
-		"already_exists" : "Cet élément existe déjà",
-		"bad_entries" : "Identifiants incorrects",
-		"forbidden" : "Accès interdit",
-		"not_found" : "Ressource non trouvée",
-		"validation" : "Échec de validation",
-		"network" : "Connexion perdue",
-		"timeout" : "Délai de requête dépassé",
-		"server" : "Erreur serveur",
-		"unknow_error" : "Une erreur inattendue est survenue"
+	"error": {
+		"bad_request": "Mauvaise requête - vérifiez vos données",
+		"already_exists": "Cet élément existe déjà",
+		"bad_entries": "Identifiants incorrects",
+		"forbidden": "Accès interdit",
+		"not_found": "Ressource non trouvée",
+		"validation": "Échec de validation",
+		"network": "Connexion perdue",
+		"timeout": "Délai de requête dépassé",
+		"server": "Erreur serveur",
+		"unknow_error": "Une erreur inattendue est survenue"
 	},
 	"success": {
-		"register" : "Enregistré",
-		"login" : "Conecté",
-		"logout" : "Déconnecté",
-		"add_friend" : "Ami ajouté",
-		"remove_friend" : "Ami retiré",
-		"edit_username" : "Nom d'utilisateur modifié",
-		"upload_profile_picture" : "Photo de profil mise à jour"
+		"register": "Enregistré",
+		"login": "Conecté",
+		"logout": "Déconnecté",
+		"add_friend": "Ami ajouté",
+		"remove_friend": "Ami retiré",
+		"edit_username": "Nom d'utilisateur modifié",
+		"upload_profile_picture": "Photo de profil mise à jour"
+	},
+	"warning": {
+		"win_by_forfeit": "Tu as gagné car ton adversaire a déclaré forfait.",
+		"loose_by_forfeit": "Tu a déclaré forfait."
 	}
 }

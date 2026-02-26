@@ -10,6 +10,7 @@ export const useGameStore = defineStore('game', {
     mode: null,
     searching: false,
     opponent: false,
+    win_forfeit: false,
 
     board: Array(9).fill(null),
 
@@ -74,6 +75,11 @@ export const useGameStore = defineStore('game', {
             this.winner = msg.winner;
           }
 
+          if (msg.type === "opponent:disconnected") {
+            this.win_forfeit = true;
+            this.leaveGame();
+          }
+
           if (msg.type === "error") {
             useToastStore().notifyApiError( {status: 500} );
           }
@@ -94,10 +100,22 @@ export const useGameStore = defineStore('game', {
 
     async leaveGame() {
       try {
-        console.log(this.ws);
-        if (this.ws)
+        if (this.searching)
+          await gameApi.leaveQueue(this.ws);
+        else if (this.opponent && !this.winner)
+          await gameApi.forfeit(this.ws);
+        if (this.mode)
           await gameApi.leaveGame(this.ws);
-        router.push('/');
+
+        await router.push('/');
+
+        if (this.opponent && !this.winner) {
+          if (this.win_forfeit)
+            useToastStore().notifyWarning('win_by_forfeit');
+          else
+            useToastStore().notifyWarning('loose_by_forfeit');
+        }
+
         this.$reset();
       } catch (e) {
         useToastStore().notifyApiError(e);

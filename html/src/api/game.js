@@ -4,16 +4,6 @@ export const joinQueue = async (ws) => {
 	  throw( {status: 500} );
   }
   ws.send(JSON.stringify({ type: "queue:join" }));
-  console.log("Sent join queue");
-}
-
-export const leaveGame = async (ws) => {
-  if (!ws || ws.readyState !== WebSocket.OPEN) {
-	  console.log("WS not open");
-	  return;
-  }
-  ws.send(JSON.stringify({ type: "close" }));
-  console.log("Sent close");
 }
 
 export const playMove = async (ws, cell, gameId, symbol) => {
@@ -28,4 +18,24 @@ export const playMove = async (ws, cell, gameId, symbol) => {
     cell,
     symbol,
   }));
+}
+
+export const leaveQueue = async (ws) => {
+  if (!ws || ws.readyState !== WebSocket.OPEN)
+	  throw( {status: 500, message: "WS not open"} );
+  console.log("sent leave queue")
+  ws.send(JSON.stringify({ type: "queue:leave" }));
+}
+
+export const forfeit = async (ws) => {
+  if (!ws || ws.readyState !== WebSocket.OPEN)
+	  throw( {status: 500, message: "WS not open"} );
+  console.log("sent forfeit")
+  ws.send(JSON.stringify({ type: "game:manualForfeit" }));
+}
+
+export const leaveGame = async (ws) => {
+  if (!ws || ws.readyState !== WebSocket.OPEN)
+	  throw( {status: 500, message: "WS not open"} );
+  ws.close()
 }
