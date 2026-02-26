@@ -52,10 +52,9 @@ export const logout = async () => {
   }
 }
 
-export const getProfile = async (id) => {
+export const getProfile = async () => {
 	try {
 		const response = await axios.get('/api/profile',
-			{id},
 			{
 			headers: {
 				"Content-Type": "application/json"

@@ -116,7 +116,7 @@ export const useGameStore = defineStore('game', {
     async replay(mode) {
       this.$reset();
       try {
-        this.startMatchmaking(mode);
+        this.startGame(mode);
       } catch (e) {
         useToastStore().notifyApiError(e);
       }

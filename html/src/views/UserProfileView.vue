@@ -11,7 +11,7 @@ const editForm = ref({ username: '' });
 const selectedFile = ref(null);
 
 onMounted(async () => {
-  await userStore.getProfile(userStore.user.id);
+  await userStore.getProfile();
   if (userStore.user) {
     const allGames = await userStore.getGames(userStore.user.id);
     history.value = allGames.slice(0, 5);

@@ -8,7 +8,7 @@ const loading = ref(true);
 
 onMounted(async () => {
   if (userStore.user) {
-    await userStore.getProfile(userStore.user.id);
+    await userStore.getProfile();
     const allUsers = await userStore.getLeaderboard();
     if (userStore.user.friends && Array.isArray(userStore.user.friends)) {
       friends.value = allUsers.filter(user => userStore.user.friends.includes(user.id));

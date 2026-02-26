@@ -8,7 +8,7 @@ const searchQuery = ref('');
 const userStore = useUserStore();
 
 onMounted(async () => {
-  await userStore.getProfile(userStore.user.id);
+  await userStore.getProfile();
   leaderboard.value = await userStore.getLeaderboard();
   loading.value = false;
 });
