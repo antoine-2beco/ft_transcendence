@@ -10,8 +10,8 @@ export const login = async (username, password) => {
 			}
 		});
 		return response.data.username;
-    } catch (error) {
-      throw (error);
+    } catch (e) {
+      throw (e);
     }
   }
 
@@ -25,8 +25,8 @@ export const register = async (username, email, password) => {
 			}
 		});
 		return response.data.username;
-    } catch (error) {
-		throw (error);
+    } catch (e) {
+		throw (e);
     }
   }
 
@@ -39,16 +39,16 @@ export const checkAuth = async () => {
 			}
 		});
 		return response;
-    } catch (error) {
-      throw(error);
+    } catch (e) {
+      void (e);
     }
 }
 
 export const logout = async () => {
   try {
     await axios.post('/api/logout');
-  } catch (error) {
-    throw (error);
+  } catch (e) {
+    throw (e);
   }
 }
 

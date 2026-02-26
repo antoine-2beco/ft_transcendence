@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import * as userApi from '../api/user'
 import { useToastStore } from '@/stores/toast'
-import { useLocalStorage } from '@vueuse/core'
 import router from '@/router'
 
 
