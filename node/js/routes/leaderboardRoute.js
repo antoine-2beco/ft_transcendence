@@ -6,7 +6,7 @@ export async function leaderboardRoute(fastify)
         const users = await User.query()
             .select("id", "username", "profile_picture_url", "elo", "wins", "losses", "ties")
             .orderBy("elo", "desc")
-            .limit(50);
+            // .limit(50);
     
         return { ok: true, users };
     });

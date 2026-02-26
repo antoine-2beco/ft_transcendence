@@ -1,10 +1,32 @@
 import { requireAuth } from "../authPreHandler.js";
+import { User } from "../models/User.js";
 import { db } from "../db.js";
 
 export async function addFriendRoute(fastify) 
 {
     fastify.post("/addFriend/:friendId", { preHandler: requireAuth }, async (req, reply) => {
         const userId = Number(req.user.sub);
+    
+        const user = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+            );
+    
+        if (!user) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+
         const friendId = Number(req.params.friendId);
 
         if (!Number.isInteger(friendId)) 
@@ -33,6 +55,6 @@ export async function addFriendRoute(fastify)
                 friends: db.raw("array_append(friends, ?)", [friendId]),
         });
 
-        return { ok: true };
+        return { ok: true, user };
     });
 }

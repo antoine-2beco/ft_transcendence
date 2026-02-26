@@ -1,10 +1,32 @@
 import { requireAuth } from "../authPreHandler.js";
 import { db } from "../db.js";
+import { User } from "../models/User.js";
 
 export async function removeFriendRoute(fastify)
 {
     fastify.delete("/removeFriend/:friendId", { preHandler: requireAuth }, async (req, reply) => {
         const userId = Number(req.user.sub);
+    
+        const user = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+            );
+    
+        if (!user) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+
         const friendId = Number(req.params.friendId);
     
         if (!Number.isInteger(friendId)) 
@@ -25,6 +47,6 @@ export async function removeFriendRoute(fastify)
                 friends: db.raw("array_remove(friends, ?)", [friendId]),
         });
     
-        return { ok: true };
+        return { ok: true, user };
     });
 }

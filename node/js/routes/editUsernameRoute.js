@@ -1,10 +1,32 @@
 import { requireAuth } from "../authPreHandler.js";
+import { User } from "../models/User.js";
 import { db } from "../db.js";
 
 export async function editUsernameRoute(fastify) 
 {
   fastify.patch("/editUsername", { preHandler: requireAuth }, async (req, reply) => {
         const userId = Number(req.user.sub);
+    
+        const user = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+            );
+    
+        if (!user) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+
         const { username } = req.body || {};
 
         if (!username || typeof username !== "string") 
@@ -34,7 +56,7 @@ export async function editUsernameRoute(fastify)
                 path: "/",
             });
 
-            return { ok: true, username: user.username };
+            return { ok: true, username: user.username, user };
         } 
         catch (e) 
         {
