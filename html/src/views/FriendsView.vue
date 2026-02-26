@@ -8,18 +8,22 @@ const loading = ref(true);
 
 onMounted(async () => {
   if (userStore.user) {
-    const user = await userStore.getProfile(userStore.user.id);
-    for (let friend_id in user.friends) {
-      friends.value.push(await userStore.getProfile(friend_id));
+    await userStore.getProfile(userStore.user.id);
+    const allUsers = await userStore.getLeaderboard();
+    if (userStore.user.friends && Array.isArray(userStore.user.friends)) {
+      friends.value = allUsers.filter(user => userStore.user.friends.includes(user.id));
     }
     loading.value = false;
   }
 });
 
 const removeFriend = async (friendId) => {
-  const indexStore = userStore.user.friends.indexOf(friendId);
-  if (indexStore > -1) await userStore.removeFriend(player.id);
-  friends.value = friends.value.filter(f => f.id !== friendId);
+  try {
+    await userStore.removeFriend(friendId);
+    friends.value = friends.value.filter(f => f.id !== friendId);
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'ami :", error);
+  }
 };
 
 const getStatusClass = (s) => ({
