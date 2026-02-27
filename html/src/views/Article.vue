@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent, watchEffect, shallowRef } from 'vue';
+import { watchEffect, shallowRef } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 

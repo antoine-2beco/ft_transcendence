@@ -8,9 +8,9 @@ const password = ref('');
 </script>
 
 <template>
-  <div class="container" style="max-width: 400px; margin-top: 10vh;">
+  <div class="container" style="max-width: 400px; margin-top: 5vh;">
     <article>
-      <header>{{ $t("login.title")}}</header>
+      <header>{{ $t("login.second_title")}}</header>
       <form @submit.prevent="userStore.login(username, password)">
         <label>
           {{ $t("login.username") }}

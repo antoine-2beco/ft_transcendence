@@ -31,7 +31,6 @@ const getStatusClass = (s) => ({
 
 <template>
   <div class="container">
-    <h2 class="text-center">{{ $t("friends.title") }}</h2>
     <div v-if="loading" aria-busy="true">{{ $t("friends.loading") }}</div>
 
     <div v-else-if="friends.length === 0" class="text-center">

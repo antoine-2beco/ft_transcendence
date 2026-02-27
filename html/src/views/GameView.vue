@@ -6,10 +6,6 @@ const game = useGameStore();
 
 <template>
   <div class="text-center">
-    <header>
-      <h1>{{$t("game.title")}}</h1>
-    </header>
-
     <article v-if="game.searching || game.opponent">
       <h3 v-if="game.searching">{{ $t("game.looking_opponent") }}</h3>
       <h3 v-if="game.opponent && !game.winner">

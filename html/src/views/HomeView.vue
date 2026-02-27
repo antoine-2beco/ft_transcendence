@@ -6,8 +6,6 @@ const userStore = useUserStore();
 
 <template>
   <div class="text-center mt-2">
-    <h1>{{ $t("head.site_title") }}</h1>
-
     <nav class="menu">
       <template v-if="userStore.isAuthenticated">
         <RouterLink to="/game" role="button">{{ $t("home.play")}}</RouterLink>

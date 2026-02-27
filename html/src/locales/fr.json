@@ -1,6 +1,6 @@
 {
 	"head": {
-		"page_title": "Tic Tac Toe",
+		"title": "Tic Tac Toe",
 		"site_title": "Tic Tac Toe"
 	},
 	"footer": {
@@ -9,6 +9,7 @@
 		"copyright": "© 2026 Tic Tac Toe. Tous droits réservés."
 	},
 	"home": {
+		"title" : "Tic Tac Toe",
 		"play": "Jouer",
 		"my_profile": "Mon Profil",
 		"my_friends": "Mes Amis",
@@ -19,7 +20,7 @@
 		"register": "S'inscrire"
 	},
 	"login": {
-		"title": "Se connecter",
+		"second_title": "Se connecter",
 		"username": "Nom d'utilisateur",
 		"pseudo": "Pseudo",
 		"password": "Mot de passe",
@@ -28,7 +29,7 @@
 		"register": "S'inscrire"
 	},
 	"register": {
-		"title": "S'inscrire",
+		"second_title": "S'inscrire",
 		"username": "Nom d'utilisateur",
 		"email": "Mail",
 		"password": "Mot de passe",
@@ -84,7 +85,7 @@
 		"add_friend": "Ajouter",
 		"back": "Retour"
 	},
-	"user_profile": {
+	"profile": {
 		"title": "Mon Profil",
 		"elo": "Elo",
 		"edit": "Éditer",
@@ -106,6 +107,10 @@
 		"draw": "NUL",
 		"win": "GAGNÉ",
 		"loss": "PERDU"
+	},
+	"articles": {
+		"title": "Tic Tac Toe",
+		"back": "Retour"
 	},
 	"achievements": {
 		"first_blood": {
