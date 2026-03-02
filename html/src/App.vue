@@ -22,22 +22,24 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <div class="text-center mt-2" :key="title">
-    <h1>{{ title }}</h1>
+  <div style="display: flex; flex-direction: column; min-height: 100vh;">
+    <div class="text-center mt-2" :key="title">
+      <h1>{{ title }}</h1>
+    </div>
+
+    <div class="switches">
+      <LangSwitch />
+      <ThemeSwitch />
+    </div>
+
+    <main class="container" style="flex: 1;">
+      <RouterView />
+    </main>
+
+    <footer>
+      <Footer />
+    </footer>
   </div>
-
-  <div class="switches">
-    <LangSwitch />
-    <ThemeSwitch />
-  </div>
-
-  <main class="container">
-    <RouterView />
-  </main>
-
-  <footer>
-    <Footer />
-  </footer>
 </template>
 
 
@@ -47,7 +49,7 @@ watchEffect(async () => {
   top: 1rem;
   right: 1rem;
   display: flex;
-  flex-direction: line;
+  flex-direction: row;
   gap: 0.75rem;
   z-index: 1000;
 }
