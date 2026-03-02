@@ -1,19 +1,34 @@
-all : build up
+# SHELL := /bin/sh
+DC := docker compose -f docker-compose.yml
 
-build :
-	@docker-compose -f docker-compose.yml build
+# define BAR
+# 	@printf "[##########] %s\n" "$(1)"
+# endef
 
-up :
-	@docker-compose -f docker-compose.yml up -d
+.PHONY: all build up down clean start stop
 
-down :
-	@docker-compose -f docker-compose.yml down -v
+all: build up
 
-start :
-	@docker-compose -f docker-compose.yml start
+build:
+	$(call BAR,build)
+	@$(DC) build
 
-stop :
-	@docker-compose -f docker-compose.yml stop
+up:
+	$(call BAR,up)
+	@$(DC) up -d
 
-status :
-	@docker ps
+down:
+	$(call BAR,down)
+	@$(DC) down
+
+clean:
+	$(call BAR,clean)
+	@$(DC) down -v
+
+start:
+	$(call BAR,start)
+	@$(DC) start
+
+stop:
+	$(call BAR,stop)
+	@$(DC) stop
