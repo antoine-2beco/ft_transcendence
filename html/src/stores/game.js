@@ -75,7 +75,19 @@ export const useGameStore = defineStore('game', {
             this.winner = msg.winner;
           }
 
+          if (msg.type === "oppenent:reconnected") {
+            this.gameId = msg.gameId;
+            this.symbol = msg.symbol;
+            this.board = msg.board;
+            this.turn = msg.turn;
+          }
+
           if (msg.type === "opponent:disconnected") {
+            ;
+            // Faire qqch
+          }
+
+          if (msg.type === "game:manualForfeit" || msg.type === "game:forfeit") {
             this.win_forfeit = true;
             this.leaveGame();
           }
@@ -103,7 +115,7 @@ export const useGameStore = defineStore('game', {
         if (this.searching)
           await gameApi.leaveQueue(this.ws);
         else if (this.opponent && !this.winner)
-          await gameApi.forfeit(this.ws);
+          await gameApi.forfeit(this.ws, this.gameId);
         if (this.mode)
           await gameApi.leaveGame(this.ws);
 
