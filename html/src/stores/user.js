@@ -50,10 +50,15 @@ export const useUserStore = defineStore('user', {
     async checkAuth () {
       try {
         const response = await userApi.checkAuth();
-        this.user.username = response.data.user.username;
-        this.user.id = response.data.user.id;
+        if (response.data.error === 'unauthorized') {
+          this.user.username = false;
+        }
+        else {
+          this.user.id = response.data.user.id;
+          this.user.username = response.data.user.username;
+        }
       } catch (e) {
-        this.user.username = false;
+        useToastStore().notifyApiError(e);
       }
     },
 
@@ -139,6 +144,7 @@ export const useUserStore = defineStore('user', {
 
     async setStatus (status) {
       try {
+        if (!this.isAuthenticated) return
         const response = await userApi.setStatus(status);
         this.user.status = status;
       } catch (e) {

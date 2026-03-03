@@ -2,6 +2,13 @@ import { defineStore } from 'pinia'
 import { Toast } from '../composables/ToastError.js'
 import { i18n } from '@/locales'
 
+function getT() {
+  try {
+    return i18n.global.t.bind(i18n.global);
+  } catch {
+    return (key) => key;
+  }
+}
 
 export const useToastStore = defineStore('toast', {
 
@@ -12,10 +19,8 @@ export const useToastStore = defineStore('toast', {
   actions: {
 
     notifyApiError(err) {
-      const { t } = i18n.global;
+      const t = getT();
       const { showError, showWarning } = Toast();
-
-      console.error("DEV LOG 1 : " + err.message); // DEV
 
       const status = err?.response?.status ?? err?.status ?? null;
 
@@ -47,7 +52,7 @@ export const useToastStore = defineStore('toast', {
     },
 
     notifySuccess(type) {
-      const { t } = i18n.global;
+      const t = getT();
       const { showSuccess } = Toast();
   
       let message = t(`success.${type}`);
@@ -56,7 +61,7 @@ export const useToastStore = defineStore('toast', {
     },
 
     notifyWarning(type) {
-      const { t } = i18n.global;
+      const t = getT();
       const { showWarning } = Toast();
   
       let message = t(`warning.${type}`);

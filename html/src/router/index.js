@@ -67,8 +67,10 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
+  const publicPages = ['login', 'register', 'privacy', 'terms'];
+  const isPublic = publicPages.includes(to.name);
 
-  if (!userStore.user.username) {
+  if (!isPublic && !userStore.user.username) {
     await userStore.checkAuth();
   }
 
