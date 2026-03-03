@@ -3,8 +3,6 @@ import * as userApi from '../api/user'
 import { useToastStore } from '@/stores/toast'
 import router from '@/router'
 
-const DEFAULT_AVATAR = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
-
 export const useUserStore = defineStore('user', {
 
 	state: () => ({
@@ -22,13 +20,13 @@ export const useUserStore = defineStore('user', {
 	}),
 
 	getters: {
-    isAuthenticated: (state) => !!state?.user.username
+    	isAuthenticated: (state) => !!state?.user.username
 	},
 
 	actions: {
 		async login (username, password) {
 			try {
-        const response = await userApi.login(username, password);
+        		const response = await userApi.login(username, password);
 				this.user.username = response.data.user;
 				await router.push('/');
 				useToastStore().notifySuccess('login');
@@ -72,8 +70,6 @@ export const useUserStore = defineStore('user', {
 			try {
 				const response = await userApi.getProfile();
 				this.user = response.data.user;
-        		if (!this.user.profile_picture_url)
-          			this.user.profile_picture_url = DEFAULT_AVATAR;
 				return response.data.user;
 			}
 			catch (e) {
@@ -93,10 +89,6 @@ export const useUserStore = defineStore('user', {
 		async getLeaderboard () {
 			try {
 				const users = await userApi.getLeaderboard();
-				users.forEach(u => {
-				if (!u.profile_picture_url)
-					u.profile_picture_url = DEFAULT_AVATAR;
-				});
 				return users;
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -135,9 +127,9 @@ export const useUserStore = defineStore('user', {
 
     async uploadProfilePicture (profilePicture) {
       try {
-          const response = await userApi.uploadProfilePicture(profilePicture);
+          	const response = await userApi.uploadProfilePicture(profilePicture);
         	this.user = response.data.user;
-          useToastStore().notifySuccess('upload_profile_picture');
+          	useToastStore().notifySuccess('upload_profile_picture');
       } catch (e) {
           useToastStore().notifyApiError(e);
       }

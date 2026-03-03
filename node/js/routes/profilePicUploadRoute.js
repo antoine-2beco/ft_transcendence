@@ -67,6 +67,26 @@ export async function profilePicUploadRoute(fastify)
             .where({ id: userId })
             .update({ profile_picture_url: urlPath });
 
-        return { ok: true, profile_picture_url: urlPath, user };
+        const userData = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+        );
+    
+        if (!userData) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+
+        return { ok: true, user: userData };
     });
 }

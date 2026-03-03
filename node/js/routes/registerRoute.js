@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const DEFAULT_AVATAR = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
+
 export async function registerRoute(fastify)
 {
     const SALT_ROUNDS = 12;
@@ -22,7 +24,7 @@ export async function registerRoute(fastify)
         const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
         try 
         {
-            const user = await User.query().insert({ username, email: normalizedEmail, password_hash });
+            const user = await User.query().insert({ username, email: normalizedEmail, profile_picture_url: DEFAULT_AVATAR, password_hash });
             return { id: user.id, username: user.username, email: user.email };
         }
         catch (e) 
