@@ -61,7 +61,7 @@ const toggleFriend = async (player) => {
             <td>{{ i + 1 }}</td>
 
             <td style="display: flex; align-items: center; gap: 10px;">
-              <img :src="p.profile_picture_url" style="width: 30px; border-radius: 50%;">
+              <img :src="p.profile_picture_url" class="avatar">
               <strong>{{ p.username }}</strong>
             </td>
 
@@ -111,5 +111,11 @@ thead th {
 .highlight {
   background-color: var(--pico-primary-background) !important;
   color: white;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 </style>
