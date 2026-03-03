@@ -6,7 +6,7 @@
     },
     "footer": {
         "privacy_policy": "Privacybeleid",
-        "terms_of_service": "Gebruiksvoorwaarden", 
+        "terms_of_service": "Gebruiksvoorwaarden",
         "copyright": "© 2026 Tic Tac Toe. Alle rechten voorbehouden."
     },
     "home": {
@@ -103,7 +103,8 @@
         "loading": "Laden...",
         "draw": "GELIJK",
         "win": "GEWONNEN",
-        "loss": "VERLOREN"
+        "loss": "VERLOREN",
+        "level": "Niveau"
     },
 	"articles": {
 		"title": "Tic Tac Toe",

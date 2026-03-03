@@ -3,6 +3,7 @@ import * as userApi from '../api/user'
 import { useToastStore } from '@/stores/toast'
 import router from '@/router'
 
+const DEFAULT_AVATAR = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
 
 export const useUserStore = defineStore('user', {
 
@@ -69,6 +70,8 @@ export const useUserStore = defineStore('user', {
 		async getProfile () {
 			try {
 				const user = await userApi.getProfile();
+        if (!user.profile_picture_url)
+          user.profile_picture_url = DEFAULT_AVATAR;
 				this.user = user;
 				return user;
 			}
@@ -89,6 +92,10 @@ export const useUserStore = defineStore('user', {
 		async getLeaderboard () {
 			try {
 				const users = await userApi.getLeaderboard();
+        users.forEach(u => {
+          if (!u.profile_picture_url)
+            u.profile_picture_url = DEFAULT_AVATAR;
+        });
 				return users;
 			} catch (e) {
 				useToastStore().notifyApiError(e);
