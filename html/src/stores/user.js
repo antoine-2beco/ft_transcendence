@@ -28,7 +28,8 @@ export const useUserStore = defineStore('user', {
 	actions: {
 		async login (username, password) {
 			try {
-        this.user.username = await userApi.login(username, password);
+        		const response = await userApi.login(username, password);
+				this.user = response.data.user;
 				await router.push('/');
 				useToastStore().notifySuccess('login');
 			} catch (e) {
@@ -38,7 +39,8 @@ export const useUserStore = defineStore('user', {
 
 		async register (username, email, password) {
 			try {
-				await userApi.register(username, email, password);
+				const response = await userApi.register(username, email, password);
+				this.user = response.data.user;
 				await router.push('/login');
 				useToastStore().notifySuccess('register');
 			} catch (e) {
@@ -104,15 +106,8 @@ export const useUserStore = defineStore('user', {
 
 		async addFriend (id) {
 			try {
-				await userApi.addFriend(id);
-				if (this.user) {
-					if (!this.user.friends) {
-						this.user.friends = [];
-					}
-					if (!this.user.friends.includes(id)) {
-						this.user.friends.push(id);
-					}
-				}
+				const response = await userApi.addFriend(id);
+				this.user = response.data.user;
 				useToastStore().notifySuccess('add_friend');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -121,16 +116,8 @@ export const useUserStore = defineStore('user', {
 
 		async removeFriend (id) {
 			try {
-				await userApi.removeFriend(id);
-				if (this.user) {
-					if (!this.user.friends) {
-						this.user.friends = [];
-					}
-					const index = this.user.friends.indexOf(id);
-					if (index > -1) {
-						this.user.friends.splice(index, 1);
-					}
-				}
+				const response = await userApi.removeFriend(id);
+				this.user = response.data.user;
 				useToastStore().notifySuccess('remove_friend');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -139,10 +126,8 @@ export const useUserStore = defineStore('user', {
 
 		async editUsername (newUsername) {
 			try {
-				await userApi.editUsername(newUsername);
-				if (this.user) {
-					this.user.username = newUsername;
-				}
+				const response = await userApi.editUsername(newUsername);
+				this.user = response.data.user;
 				useToastStore().notifySuccess('edit_username');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -151,10 +136,8 @@ export const useUserStore = defineStore('user', {
 
     async uploadProfilePicture (profilePicture) {
       try {
-          const data = await userApi.uploadProfilePicture(profilePicture);
-          if (this.user && data && data.profile_picture_url) {
-              this.user.profile_picture_url = data.profile_picture_url;
-          }
+          const response = await userApi.uploadProfilePicture(profilePicture);
+        	this.user = response.data.user;
           useToastStore().notifySuccess('upload_profile_picture');
       } catch (e) {
           useToastStore().notifyApiError(e);
