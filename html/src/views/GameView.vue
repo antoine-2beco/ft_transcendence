@@ -1,7 +1,26 @@
 <script setup>
+import { computed } from 'vue';
 import { useGameStore } from '@/stores/game';
 
 const game = useGameStore();
+
+const winningLine = computed(() => {
+  if (!game.winner || game.winner === 'draw')
+    return [];
+
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+  ];
+
+  for (let line of lines) {
+    const [a, b, c] = line;
+    if (game.board[a] && game.board[a] === game.board[b] && game.board[a] === game.board[c])
+      return line;
+  }
+  return [];
+});
 </script>
 
 <template>
@@ -18,7 +37,7 @@ const game = useGameStore();
 
     <div v-if="game.opponent" class="board-container">
       <div class="board">
-        <div v-for="(cell, i) in game.board" :key="i" class="cell" @click="game.playMove(i)">
+        <div v-for="(cell, i) in game.board" :key="i" class="cell" :style="{ opacity: game.winner && game.winner !== 'draw' && !winningLine.includes(i) ? 0.3 : 1 }" @click="game.playMove(i)">
           <span v-if="cell === 'X'" style="color: var(--pico-primary)">X</span>
           <span v-if="cell === 'O'" style="color: var(--pico-del-color)">O</span>
         </div>
