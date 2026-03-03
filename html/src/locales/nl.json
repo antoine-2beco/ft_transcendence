@@ -151,6 +151,7 @@
     },
 	"warning": {
 		"win_by_forfeit": "Je hebt gewonnen omdat je tegenstander verbeurd heeft verklaard.",
-		"loose_by_forfeit": "Jij verspeelde."
+		"loose_by_forfeit": "Jij verspeelde.",
+		"opponent_disconnected": "Je tegenstander heeft de verbinding verbroken, je wint automatisch over 30 seconden als hij niet terug is."
 	}
 }

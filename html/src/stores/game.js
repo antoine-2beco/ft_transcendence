@@ -38,13 +38,8 @@ export const useGameStore = defineStore('game', {
           return;
         
         this.ws.onopen = () => {
-          console.log("ws open");
           if (mode === 'ai')
             this.joinQueue();
-        };
-
-        this.ws.onclose = (e) => {
-          console.log("ws closed", e.code, e.reason || "");
         };
 
         this.ws.onerror = () => {
@@ -53,11 +48,9 @@ export const useGameStore = defineStore('game', {
 
         this.ws.onmessage = (e) => {
           const msg = JSON.parse(e.data);
-          console.log("ws sent:", msg.type);
 
           if (msg.type === "queue:waiting") {
             this.searching = true;
-            console.log("Waiting for opponent...");
           }
 
           if (msg.type === "match:found") {
@@ -83,8 +76,7 @@ export const useGameStore = defineStore('game', {
           }
 
           if (msg.type === "opponent:disconnected") {
-            ;
-            // Faire qqch
+            useToastStore().notifyWarning('opponent_disconnected');
           }
 
           if (msg.type === "game:manualForfeit" || msg.type === "game:forfeit") {

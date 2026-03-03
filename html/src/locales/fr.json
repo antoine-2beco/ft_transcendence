@@ -151,6 +151,7 @@
 	},
 	"warning": {
 		"win_by_forfeit": "Tu as gagné car ton adversaire a déclaré forfait.",
-		"loose_by_forfeit": "Tu a déclaré forfait."
+		"loose_by_forfeit": "Tu a déclaré forfait.",
+		"opponent_disconnected": "Votre adversaire s'est déconnecté, vous gagnerez automatiquement dans 30 secondes s'il n'est pas de retour."
 	}
 }

@@ -151,6 +151,7 @@
 	},
 	"warning": {
 		"win_by_forfeit": "You won because your opponent forfeited.",
-		"loose_by_forfeit": "You forfeited."
+		"loose_by_forfeit": "You forfeited.",
+		"opponent_disconnected": "Your opponent has disconnected, you will automatically win in 30 seconds if he is not back."
 	}
 }

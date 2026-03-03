@@ -23,14 +23,12 @@ export const playMove = async (ws, cell, gameId, symbol) => {
 export const leaveQueue = async (ws) => {
   if (!ws || ws.readyState !== WebSocket.OPEN)
 	  throw( {status: 500, message: "WS not open"} );
-  console.log("sent leave queue")
   ws.send(JSON.stringify({ type: "queue:leave" }));
 }
 
 export const forfeit = async (ws, gameId) => {
   if (!ws || ws.readyState !== WebSocket.OPEN)
 	  throw( {status: 500, message: "WS not open"} );
-  console.log("sent forfeit")
   ws.send(JSON.stringify({ type: "game:manualForfeit", gameId }));
 }
 
