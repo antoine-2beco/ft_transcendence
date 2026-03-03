@@ -45,6 +45,7 @@ export async function loginRoute(fastify)
                 "losses",
                 "ties",
                 "friends",
+                "online",
             );
         if (!userData) 
         {

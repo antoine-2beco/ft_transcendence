@@ -79,6 +79,7 @@ export async function profilePicUploadRoute(fastify)
                 "losses",
                 "ties",
                 "friends",
+                "online",
         );
     
         if (!userData) 

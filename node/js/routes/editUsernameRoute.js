@@ -48,6 +48,7 @@ export async function editUsernameRoute(fastify)
                 "losses",
                 "ties",
                 "friends",
+                "online",
             );
     
             if (!userData)
