@@ -36,8 +36,6 @@ const toggleFriend = async (player) => {
 
 <template>
   <div class="container">
-    <h2 class="text-center">{{ $t("leaderboard.title") }}</h2>
-
     <input
       type="search"
       v-model="searchQuery"

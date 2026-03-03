@@ -1,6 +1,6 @@
 {
     "head": {
-        "page_title": "Tic Tac Toe",
+        "title": "Tic Tac Toe",
         "site_title": "Tic Tac Toe",
 		"back": "Terug"
     },
@@ -10,6 +10,7 @@
         "copyright": "© 2026 Tic Tac Toe. Alle rechten voorbehouden."
     },
     "home": {
+		"title" : "Tic Tac Toe",
         "play": "Spelen",
         "my_profile": "Mijn Profiel",
         "my_friends": "Mijn Vrienden",
@@ -20,7 +21,7 @@
         "register": "Registreren"
     },
     "login": {
-        "title": "Inloggen",
+        "second_title": "Inloggen",
         "username": "Gebruikersnaam",
         "pseudo": "Alias",
         "password": "Wachtwoord",
@@ -29,7 +30,7 @@
         "register": "Registreren"
     },
     "register": {
-        "title": "Registreren",
+        "second_title": "Registreren",
         "username": "Gebruikersnaam",
         "email": "E-mail",
         "password": "Wachtwoord",
@@ -82,7 +83,7 @@
         "win_rate": "Win-verhouding",
         "add_friend": "Toevoegen"
     },
-    "user_profile": {
+    "profile": {
         "title": "Mijn Profiel",
         "elo": "Elo",
         "edit": "Bewerken",
@@ -104,6 +105,10 @@
         "win": "GEWONNEN",
         "loss": "VERLOREN"
     },
+	"articles": {
+		"title": "Tic Tac Toe",
+		"back": "Terug"
+	},
     "achievements": {
         "first_blood": {
             "title": "Eerste Bloed",

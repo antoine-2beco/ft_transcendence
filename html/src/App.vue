@@ -1,11 +1,31 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { watchEffect, ref } from 'vue'
 import ThemeSwitch from './components/ThemeSwitch.vue'
 import LangSwitch from './components/LangSwitch.vue'
 import Footer from './components/Footer.vue'
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+const router = useRouter();
+const page = ref(router.currentRoute.value.name);
+const title = ref('');
+
+watchEffect(async () => {
+  page.value = router.currentRoute.value.name;
+  if (t(`${page.value}.title`) === `${page.value}.title`)
+    title.value = t('head.title');
+  else
+    title.value = t(`${page.value}.title`);
+})
+
 </script>
 
 <template>
+  <div class="text-center mt-2" :key="title">
+    <h1>{{ title }}</h1>
+  </div>
+
   <div class="switches">
     <LangSwitch />
     <ThemeSwitch />
@@ -15,9 +35,9 @@ import Footer from './components/Footer.vue'
     <RouterView />
   </main>
 
-  <div>
+  <footer>
     <Footer />
-  </div>
+  </footer>
 </template>
 
 

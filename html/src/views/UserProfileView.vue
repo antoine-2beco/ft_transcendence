@@ -45,7 +45,7 @@ const saveProfile = () => {
   isEditing.value = false;
 };
 
-const getResult = (g) => g.winner_username === 'Draw' ? t("user_profile.draw") : (g.winner_username === userStore.user.username ? t("user_profile.win") : t("user_profile.loss"));
+const getResult = (g) => g.winner_username === 'Draw' ? t("profile.draw") : (g.winner_username === userStore.user.username ? t("profile.win") : t("profile.loss"));
 
 const formatDate = (dateString) => {
   if (!dateString)
@@ -70,8 +70,6 @@ const achievements = computed(() => {
 
 <template>
   <div class="container">
-    <h2 class="text-center">{{ $t("user_profile.title") }}</h2>
-
     <article v-if="userStore.user">
 
       <header v-if="!isEditing" style="display: flex; align-items: center;">
@@ -80,7 +78,7 @@ const achievements = computed(() => {
           <img :src="userStore.user.profile_picture_url" class="avatar">
           <div>
             <h2 style="margin-bottom: 0;">{{ userStore.user.username }}</h2>
-            <small>{{ $t("user_profile.elo") }}: {{ userStore.user.elo }}</small>
+            <small>{{ $t("profile.elo") }}: {{ userStore.user.elo }}</small>
           </div>
         </div>
         <div style="flex: 1; text-align: right;">
@@ -89,7 +87,7 @@ const achievements = computed(() => {
             style="width: auto; padding: 0.2rem 0.6rem; font-size: 0.8rem; margin: 0;"
             @click="startEdit"
           >
-            {{ $t("user_profile.edit") }}
+            {{ $t("profile.edit") }}
           </button>
         </div>
       </header>
@@ -98,29 +96,29 @@ const achievements = computed(() => {
         <form @submit.prevent="saveProfile" style="margin-bottom: 0;">
           <div class="grid">
             <label>
-              {{ $t("user_profile.pseudo") }}
+              {{ $t("profile.pseudo") }}
               <input type="text" v-model="editForm.username" required />
             </label>
             <label>
-              {{ $t("user_profile.avatar") }}
+              {{ $t("profile.avatar") }}
               <input type="file" accept="image/*" @change="handleFileChange" />
             </label>
           </div>
           <div class="grid" style="margin-top: 1rem;">
-            <button type="button" class="secondary outline" @click="isEditing = false">{{ $t("user_profile.cancel") }}</button>
-            <button type="submit">{{ $t("user_profile.save") }}</button>
+            <button type="button" class="secondary outline" @click="isEditing = false">{{ $t("profile.cancel") }}</button>
+            <button type="submit">{{ $t("profile.save") }}</button>
           </div>
         </form>
       </header>
 
       <div class="flex-center mb-2" style="margin-top: var(--pico-spacing); justify-content: space-around; display: flex;">
-        <div class="text-center"><h3>{{ userStore.user.wins }}</h3><small>{{ $t("user_profile.victories") }}</small></div>
-        <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>{{ $t("user_profile.defeats") }}</small></div>
-        <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>{{ $t("user_profile.ties") }}</small></div>
+        <div class="text-center"><h3>{{ userStore.user.wins }}</h3><small>{{ $t("profile.victories") }}</small></div>
+        <div class="text-center"><h3>{{ userStore.user.losses }}</h3><small>{{ $t("profile.defeats") }}</small></div>
+        <div class="text-center"><h3>{{ userStore.user.ties }}</h3><small>{{ $t("profile.ties") }}</small></div>
       </div>
 
       <div v-if="achievements.length > 0" style="margin-top: 2rem; margin-bottom: 2rem;">
-        <h4 class="text-center">{{ $t("user_profile.achievements") }}</h4>
+        <h4 class="text-center">{{ $t("profile.achievements") }}</h4>
         <div class="grid">
           <div v-for="ach in achievements" :key="ach.title" class="text-center">
             <div style="font-size: 2.5rem; line-height: 1.2;">{{ ach.icon }}</div>
@@ -131,9 +129,9 @@ const achievements = computed(() => {
       </div>
 
       <footer v-if="!loading">
-        <h4>{{ $t("user_profile.last_matches") }}</h4>
+        <h4>{{ $t("profile.last_matches") }}</h4>
         <table class="striped" v-if="history.length > 0">
-          <thead><tr><th>{{ $t("user_profile.towards") }}</th><th>{{ $t("user_profile.result") }}</th><th>{{ $t("user_profile.date") }}</th></tr></thead>
+          <thead><tr><th>{{ $t("profile.towards") }}</th><th>{{ $t("profile.result") }}</th><th>{{ $t("profile.date") }}</th></tr></thead>
           <tbody>
             <tr v-for="g in history" :key="g.id">
               <td>{{ g.player1_username === userStore.user.username ? g.player2_username : g.player1_username }}</td>
@@ -146,10 +144,10 @@ const achievements = computed(() => {
             </tr>
           </tbody>
         </table>
-        <div v-else class="text-center"><small>{{ $t("user_profile.no_matches") }}</small></div>
+        <div v-else class="text-center"><small>{{ $t("profile.no_matches") }}</small></div>
         <RouterLink to="/" role="button" class="secondary outline w-full mt-2">{{ $t("head.back") }}</RouterLink>
       </footer>
-      <div v-else aria-busy="true" class="text-center mt-2">{{ $t("user_profile.loading") }}</div>
+      <div v-else aria-busy="true" class="text-center mt-2">{{ $t("profile.loading") }}</div>
 
     </article>
   </div>

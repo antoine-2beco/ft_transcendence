@@ -21,8 +21,6 @@ const formatDate = (dateString) => {
 
 <template>
   <div class="container">
-    <h2 class="text-center">{{ $t("history.title") }}</h2>
-
     <div v-if="loading" aria-busy="true">{{ $t("history.loading") }}</div>
 
     <div v-else class="scroll-box">

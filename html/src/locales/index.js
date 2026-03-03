@@ -4,7 +4,6 @@ import fr from "./fr.json"
 import nl from "./nl.json"
 
 export const i18n = createI18n({
-  locale: 'en',
   globalInjection: true,
   messages: {
     fr,

@@ -23,9 +23,9 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="container" style="max-width: 400px; margin-top: 10vh;">
+  <div class="container" style="max-width: 400px; margin-top: 5vh;">
     <article>
-      <header>{{ $t("register.title") }}</header>
+      <header>{{ $t("register.second_title") }}</header>
       <form @submit.prevent="handleSubmit" novalidate>
         <label>
           {{ $t("register.username") }}
