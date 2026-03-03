@@ -21,6 +21,7 @@ watchEffect(async () => {
 
 <template>
   <component :is="ArticleComponent" :key="locale" v-if="ArticleComponent" />
+  <RouterLink to="/" role="button" class="secondary outline w-full">{{ $t("head.back") }}</RouterLink>
 </template>
 
 <style>

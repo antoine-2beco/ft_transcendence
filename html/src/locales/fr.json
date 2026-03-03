@@ -1,7 +1,8 @@
 {
 	"head": {
 		"page_title": "Tic Tac Toe",
-		"site_title": "Tic Tac Toe"
+		"site_title": "Tic Tac Toe",
+		"back": "Retour"
 	},
 	"footer": {
 		"privacy_policy": "Politique de confidentialité",
@@ -61,8 +62,7 @@
 		"offline": "Hors-ligne",
 		"undefined": "Incconu",
 		"elo": "Elo",
-		"remove": "Retirer",
-		"back": "Retour"
+		"remove": "Retirer"
 	},
 	"history": {
 		"title": "Historique Global",
@@ -72,8 +72,7 @@
 		"result": "Résultat",
 		"versus": "vs",
 		"draw": "Nul",
-		"winner": "Vainqueur",
-		"back": "Retour"
+		"winner": "Vainqueur"
 	},
 	"leaderboard": {
 		"title": "Classement",
@@ -81,8 +80,7 @@
 		"player": "Joueur",
 		"elo": "Elo",
 		"win_rate": "Ratio",
-		"add_friend": "Ajouter",
-		"back": "Retour"
+		"add_friend": "Ajouter"
 	},
 	"user_profile": {
 		"title": "Mon Profil",
@@ -101,7 +99,6 @@
 		"result": "Résultat",
 		"date": "Date",
 		"no_matches": "Aucuns matchs",
-		"back": "Retour",
 		"loading": "Chargement...",
 		"draw": "NUL",
 		"win": "GAGNÉ",

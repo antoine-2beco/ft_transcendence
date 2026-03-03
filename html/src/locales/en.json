@@ -1,7 +1,8 @@
 {
 	"head": {
 		"page_title": "Tic Tac Toe",
-		"site_title": "Tic Tac Toe"
+		"site_title": "Tic Tac Toe",
+		"back": "Back"
 	},
 	"footer": {
 		"privacy_policy": "Privacy Policy",
@@ -61,8 +62,7 @@
 		"offline": "Offline",
 		"undefined": "Unknow",
 		"elo": "Elo",
-		"remove": "Remove",
-		"back": "Back"
+		"remove": "Remove"
 	},
 	"history": {
 		"title": "Global History",
@@ -72,8 +72,7 @@
 		"result": "Result",
 		"versus": "vs",
 		"draw": "Draw",
-		"winner": "Winner",
-		"back": "Back"
+		"winner": "Winner"
 	},
 	"leaderboard": {
 		"title": "Leaderboard",
@@ -81,8 +80,7 @@
 		"player": "Player",
 		"elo": "Elo",
 		"win_rate": "Ratio",
-		"add_friend": "Add",
-		"back": "Back"
+		"add_friend": "Add"
 	},
 	"user_profile": {
 		"title": "My Profile",
@@ -101,7 +99,6 @@
 		"result": "Result",
 		"date": "Date",
 		"no_matches": "No matches",
-		"back": "Back",
 		"loading": "Loading...",
 		"draw": "DRAW",
 		"win": "WIN",

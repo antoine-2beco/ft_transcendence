@@ -50,5 +50,6 @@ const handleSubmit = async () => {
         <small>{{ $t("register.already_account") }} <RouterLink to="/login">{{ $t("register.login") }}</RouterLink></small>
       </footer>
     </article>
+    <RouterLink to="/" role="button" class="secondary outline w-full">{{ $t("head.back") }}</RouterLink>
   </div>
 </template>

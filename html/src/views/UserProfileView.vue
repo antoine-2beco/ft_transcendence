@@ -147,7 +147,7 @@ const achievements = computed(() => {
           </tbody>
         </table>
         <div v-else class="text-center"><small>{{ $t("user_profile.no_matches") }}</small></div>
-        <RouterLink to="/" role="button" class="secondary outline w-full mt-2">{{ $t("user_profile.back") }}</RouterLink>
+        <RouterLink to="/" role="button" class="secondary outline w-full mt-2">{{ $t("head.back") }}</RouterLink>
       </footer>
       <div v-else aria-busy="true" class="text-center mt-2">{{ $t("user_profile.loading") }}</div>
 

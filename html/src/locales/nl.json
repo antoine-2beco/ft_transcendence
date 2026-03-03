@@ -1,7 +1,8 @@
 {
     "head": {
         "page_title": "Tic Tac Toe",
-        "site_title": "Tic Tac Toe"
+        "site_title": "Tic Tac Toe",
+		"back": "Terug"
     },
     "footer": {
         "privacy_policy": "Privacybeleid",
@@ -61,8 +62,7 @@
         "offline": "Offline",
         "undefined": "Onbekend",
         "elo": "Elo",
-        "remove": "Verwijderen",
-        "back": "Terug"
+        "remove": "Verwijderen"
     },
     "history": {
         "title": "Volledige Geschiedenis",
@@ -72,8 +72,7 @@
         "result": "Resultaat",
         "versus": "tegen",
         "draw": "Gelijk",
-        "winner": "Winnaar",
-        "back": "Terug"
+        "winner": "Winnaar"
     },
     "leaderboard": {
         "title": "Klassement",
@@ -81,8 +80,7 @@
         "player": "Speler",
         "elo": "Elo",
         "win_rate": "Win-verhouding",
-        "add_friend": "Toevoegen",
-        "back": "Terug"
+        "add_friend": "Toevoegen"
     },
     "user_profile": {
         "title": "Mijn Profiel",
@@ -101,7 +99,6 @@
         "result": "Resultaat",
         "date": "Datum",
         "no_matches": "Geen wedstrijden",
-        "back": "Terug",
         "loading": "Laden...",
         "draw": "GELIJK",
         "win": "GEWONNEN",

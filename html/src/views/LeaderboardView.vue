@@ -87,7 +87,7 @@ const toggleFriend = async (player) => {
     </div>
 
     <div class="text-center mt-2">
-      <RouterLink to="/" role="button" class="secondary outline">{{ $t("leaderboard.back") }}</RouterLink>
+      <RouterLink to="/" role="button" class="secondary outline">{{ $t("head.back") }}</RouterLink>
     </div>
   </div>
 </template>

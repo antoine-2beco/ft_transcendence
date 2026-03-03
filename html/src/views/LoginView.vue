@@ -24,5 +24,6 @@ const password = ref('');
         <small>{{ $t("login.no_account") }} <RouterLink to="/register">{{ $t("login.register") }}</RouterLink></small>
       </footer>
     </article>
+    <RouterLink to="/" role="button" class="secondary outline w-full">{{ $t("head.back") }}</RouterLink>
   </div>
 </template>
