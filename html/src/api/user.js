@@ -3,13 +3,13 @@ import axios from 'axios'
 export const login = async (username, password) => {
     try {
       const response = await axios.post('/api/login',
-		{username, password},
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
+        {username, password},
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
     } catch (e) {
       throw (e);
     }
@@ -18,27 +18,27 @@ export const login = async (username, password) => {
 export const register = async (username, email, password) => {
     try {
       const response = await axios.post('/api/register',
-		{username, email, password},
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
+        {username, email, password},
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
     } catch (e) {
-		throw (e);
+        throw (e);
     }
   }
 
 export const checkAuth = async () => {
-	try {
+    try {
       const response = await axios.get('/api/me',
-		{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
     } catch (e) {
       void (e);
     }
@@ -53,89 +53,89 @@ export const logout = async () => {
 }
 
 export const getProfile = async () => {
-	try {
-		const response = await axios.get('/api/profile',
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const response = await axios.get('/api/profile',
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
+    } catch (e) {
+        throw (e);
+    }
 }
 
 export const getGames = async (id) => {
-	try {
-		const response = await axios.get('/api/match-history',
-			{id},
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response.data.games;
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const response = await axios.get('/api/match-history',
+            {id},
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response.data.games;
+    } catch (e) {
+        throw (e);
+    }
 }
 
 export const getLeaderboard = async () => {
-	try {
-		const response = await axios.get('/api/leaderboard',
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response.data.users;
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const response = await axios.get('/api/leaderboard',
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response.data.users;
+    } catch (e) {
+        throw (e);
+    }
 }
 
 export const addFriend = async (id) => {
-	try {
-		const response = await axios.post(`/api/addFriend/${id}`,
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const response = await axios.post(`/api/addFriend/${id}`,
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
+    } catch (e) {
+        throw (e);
+    }
 }
 
 export const removeFriend = async (id) => {
-	try {
-		const response = await axios.delete(`/api/removeFriend/${id}`,
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const response = await axios.delete(`/api/removeFriend/${id}`,
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
+    } catch (e) {
+        throw (e);
+    }
 }
 
 export const editUsername = async (username) => {
-	try {
-		const response = await axios.patch(`/api/editUsername`,
-			{ username },
-			{
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
-		return response;
-	} catch (e) {
-		throw (e);
-	}
+    try {
+        const response = await axios.patch(`/api/editUsername`,
+            { username },
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return response;
+    } catch (e) {
+        throw (e);
+    }
 }
 
 export const uploadProfilePicture = async (uploadProfilePicture) => {
@@ -148,6 +148,19 @@ export const uploadProfilePicture = async (uploadProfilePicture) => {
             }
         });
         return response;
+    } catch (e) {
+        throw (e);
+    }
+}
+
+export const setStatus = async (status) => {
+    try {
+        // const response = await(axios.post('/api/status/', status, {
+        // 	headers: {
+        //         "Content-Type": "multipart/form-data"
+        //     }
+        // }));
+        // return response;
     } catch (e) {
         throw (e);
     }

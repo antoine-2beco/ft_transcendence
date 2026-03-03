@@ -1,10 +1,13 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { watchEffect, ref } from 'vue'
+import { useI18n } from 'vue-i18n';
+import { useStatus } from './composables/useStatus';
 import ThemeSwitch from './components/ThemeSwitch.vue'
 import LangSwitch from './components/LangSwitch.vue'
 import Footer from './components/Footer.vue'
-import { useI18n } from 'vue-i18n';
+
+useStatus();
 
 const { t } = useI18n();
 const router = useRouter();
@@ -18,7 +21,6 @@ watchEffect(async () => {
   else
     title.value = t(`${page.value}.title`);
 })
-
 </script>
 
 <template>

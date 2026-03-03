@@ -13,9 +13,10 @@ app.use(createPinia());
 app.use(router);
 app.use(i18n);
 app.use(Vue3Toastify, { 
-	autoclose: 3000,
-  	position: "bottom-left",
-	theme: "colored",
-	delay: 200
+  autoC0lose: 3000,
+    position: "bottom-left",
+  theme: "colored",
+  delay: 200
  });
+
 app.mount('#app');
