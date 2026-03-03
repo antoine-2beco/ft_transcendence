@@ -66,29 +66,50 @@ const achievements = computed(() => {
 
   return list;
 });
+
+const userLevel = computed(() => {
+  const u = userStore.user;
+  if (!u)
+    return { level: 1, currentXp: 0 };
+
+  const totalXp = (u.wins * 10) + (u.ties * 5);
+  const level = Math.floor(totalXp / 30) + 1;
+  const currentXp = totalXp % 30;
+
+  return { level, currentXp };
+});
 </script>
 
 <template>
   <div class="container">
     <article v-if="userStore.user">
 
-      <header v-if="!isEditing" style="display: flex; align-items: center;">
-        <div style="flex: 1;"></div>
-        <div class="flex-center" style="display: flex; align-items: center; gap: 1rem;">
-          <img :src="userStore.user.profile_picture_url" class="avatar">
-          <div>
-            <h2 style="margin-bottom: 0;">{{ userStore.user.username }}</h2>
-            <small>{{ $t("profile.elo") }}: {{ userStore.user.elo }}</small>
+      <header v-if="!isEditing" style="display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; width: 100%;">
+          <div style="flex: 1;"></div>
+          <div class="flex-center" style="display: flex; align-items: center; gap: 1rem;">
+            <img :src="userStore.user.profile_picture_url" class="avatar">
+            <div>
+              <h2 style="margin-bottom: 0;">{{ userStore.user.username }}</h2>
+              <small>{{ $t("profile.elo") }}: {{ userStore.user.elo }}</small>
+            </div>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <button
+              class="outline secondary"
+              style="width: auto; padding: 0.2rem 0.6rem; font-size: 0.8rem; margin: 0;"
+              @click="startEdit"
+            >
+              {{ $t("profile.edit") }}
+            </button>
           </div>
         </div>
-        <div style="flex: 1; text-align: right;">
-          <button
-            class="outline secondary"
-            style="width: auto; padding: 0.2rem 0.6rem; font-size: 0.8rem; margin: 0;"
-            @click="startEdit"
-          >
-            {{ $t("profile.edit") }}
-          </button>
+        <div style="width: 100%; margin-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+            <small><strong>{{$t("profile.level")}} {{ userLevel.level }}</strong></small>
+            <small>{{ userLevel.currentXp }} / 30 XP</small>
+          </div>
+          <progress :value="userLevel.currentXp" max="30" style="margin-bottom: 0; height: 10px;"></progress>
         </div>
       </header>
 

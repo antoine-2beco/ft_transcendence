@@ -106,7 +106,8 @@
 		"loading": "Loading...",
 		"draw": "DRAW",
 		"win": "WIN",
-		"loss": "LOSS"
+		"loss": "LOSS",
+    "level": "Level"
 	},
 	"articles": {
 		"title": "Tic Tac Toe",
@@ -135,7 +136,7 @@
 		"already_exists": "This already exists",
 		"bad_entries": "Invalid credentials",
 		"forbidden": "Access forbidden",
-		"not_found": "Resource not found", 
+		"not_found": "Resource not found",
 		"validation": "Validation failed",
 		"network": "Connection lost",
 		"timeout": "Request timeout",

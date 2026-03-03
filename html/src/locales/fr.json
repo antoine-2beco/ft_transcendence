@@ -106,7 +106,8 @@
 		"loading": "Chargement...",
 		"draw": "NUL",
 		"win": "GAGNÉ",
-		"loss": "PERDU"
+		"loss": "PERDU",
+    "level": "Niveau"
 	},
 	"articles": {
 		"title": "Tic Tac Toe",
