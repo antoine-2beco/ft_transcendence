@@ -40,6 +40,7 @@ COPY --from=deps /app/js/routes/addFriendRoute.js ./routes/addFriendRoute.js
 COPY --from=deps /app/js/routes/profilePicUploadRoute.js ./routes/profilePicUploadRoute.js
 COPY --from=deps /app/js/routes/editUsernameRoute.js ./routes/editUsernameRoute.js
 COPY --from=deps /app/js/routes/removeFriendRoute.js ./routes/removeFriendRoute.js
+COPY --from=deps /app/js/routes/onlineDetectorRoute.js ./routes/onlineDetectorRoute.js
 
 RUN mkdir -p /app/uploads && chown -R node:node /app/uploads
 RUN mkdir -p /app/certs && chown -R node:node /app

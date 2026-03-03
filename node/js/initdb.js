@@ -43,6 +43,8 @@ export async function initdb()
             t.integer("ties").notNullable().defaultTo(0);
 
             t.specificType("friends", "integer[]").notNullable().defaultTo(db.raw("'{}'::integer[]"));
+            t.timestamp("last_seen_at").nullable();
+            t.boolean("online").notNullable().defaultTo(false);
         });
         await db.raw(`
             ALTER TABLE users

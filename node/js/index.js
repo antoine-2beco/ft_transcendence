@@ -21,7 +21,9 @@ import { addFriendRoute } from "./routes/addFriendRoute.js";
 import { profilePicUploadRoute} from "./routes/profilePicUploadRoute.js";
 import { editUsernameRoute } from "./routes/editUsernameRoute.js";
 import { removeFriendRoute } from "./routes/removeFriendRoute.js";
+import { onlineDetectorRoute } from "./routes/onlineDetectorRoute.js";
 import "./db.js";
+import { db } from "./db.js";
 
 const fastify = Fastify({
     logger: true,
@@ -61,11 +63,19 @@ await fastify.register(addFriendRoute);
 await fastify.register(profilePicUploadRoute);
 await fastify.register(editUsernameRoute);
 await fastify.register(removeFriendRoute);
+await fastify.register(onlineDetectorRoute);
 
 async function start() 
 {
     await initdb();
     await fastify.listen({ port: 8787, host: "0.0.0.0" });
+    setInterval(() => {
+        db("users")
+          .where("online", true)
+          .andWhere("last_seen_at", "<", db.raw("now() - interval '60 seconds'"))
+          .update({ online: false })
+          .catch(() => {});
+    }, 60_000);
 }
 
 start().catch((err) => {
