@@ -7,7 +7,6 @@ export async function leaderboardRoute(fastify)
             .select("id", "username", "profile_picture_url", "elo", "wins", "losses", "ties")
             .select(User.raw("ROW_NUMBER() OVER (ORDER BY elo DESC) as rank"))
             .orderBy("elo", "desc")
-            // .limit(50);
     
         return { ok: true, users };
     });

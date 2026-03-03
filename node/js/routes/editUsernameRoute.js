@@ -6,26 +6,6 @@ export async function editUsernameRoute(fastify)
 {
   fastify.patch("/editUsername", { preHandler: requireAuth }, async (req, reply) => {
         const userId = Number(req.user.sub);
-    
-        const user = await User.query()
-            .findById(userId)
-            .select(
-                "id",
-                "username",
-                "profile_picture_url",
-                "language",
-                "elo",
-                "wins",
-                "losses",
-                "ties",
-                "friends",
-            );
-    
-        if (!user) 
-        {
-            reply.code(404);
-            return { error: "user not found" };
-        }
 
         const { username } = req.body || {};
 
@@ -38,7 +18,7 @@ export async function editUsernameRoute(fastify)
         try 
         {
             const updated = await db("users")
-            .where({ id: userId, profile_picture_url: profile_picture_url })
+            .where({ id: userId })
             .update({ username: newUsername })
             .returning(["id", "username"]);
 
@@ -56,7 +36,27 @@ export async function editUsernameRoute(fastify)
                 path: "/",
             });
 
-            return { ok: true, user };
+            const userData = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+            );
+    
+            if (!userData)
+            {
+                reply.code(404);
+                return { error: "user not found" };
+            }
+
+            return { ok: true, user: userData };
         } 
         catch (e) 
         {

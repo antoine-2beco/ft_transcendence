@@ -3,8 +3,6 @@ import * as userApi from '../api/user'
 import { useToastStore } from '@/stores/toast'
 import router from '@/router'
 
-const DEFAULT_AVATAR = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
-
 export const useUserStore = defineStore('user', {
 
   state: () => ({
@@ -27,17 +25,17 @@ export const useUserStore = defineStore('user', {
     isOnline: (state) => state.user.status,
   },
 
-  actions: {
-    async login (username, password) {
-      try {
-    const response = await userApi.login(username, password);
-        this.user.username = response.data.user;
-        await router.push('/');
-        useToastStore().notifySuccess('login');
-      } catch (e) {
-        useToastStore().notifyApiError(e);
-      }
-    },
+	actions: {
+		async login (username, password) {
+			try {
+        		const response = await userApi.login(username, password);
+				this.user.username = response.data.user;
+				await router.push('/');
+				useToastStore().notifySuccess('login');
+			} catch (e) {
+				useToastStore().notifyApiError(e);
+			}
+		},
 
     async register (username, email, password) {
       try {
@@ -70,18 +68,16 @@ export const useUserStore = defineStore('user', {
       router.push('/');
     },
 
-    async getProfile () {
-      try {
-        const response = await userApi.getProfile();
-        this.user = response.data.user;
-        if (!this.user.profile_picture_url)
-            this.user.profile_picture_url = DEFAULT_AVATAR;
-        return response.data.user;
-      }
-      catch (e) {
-        useToastStore().notifyApiError(e);
-      }
-    },
+		async getProfile () {
+			try {
+				const response = await userApi.getProfile();
+				this.user = response.data.user;
+				return response.data.user;
+			}
+			catch (e) {
+				useToastStore().notifyApiError(e);
+			}
+		},
 
     async getGames (id) {
       try {
@@ -92,18 +88,14 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async getLeaderboard () {
-      try {
-        const users = await userApi.getLeaderboard();
-        users.forEach(u => {
-        if (!u.profile_picture_url)
-          u.profile_picture_url = DEFAULT_AVATAR;
-        });
-        return users;
-      } catch (e) {
-        useToastStore().notifyApiError(e);
-      }
-    },
+		async getLeaderboard () {
+			try {
+				const users = await userApi.getLeaderboard();
+				return users;
+			} catch (e) {
+				useToastStore().notifyApiError(e);
+			}
+		},
 
     async addFriend (id) {
       try {

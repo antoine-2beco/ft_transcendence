@@ -46,7 +46,27 @@ export async function removeFriendRoute(fastify)
             .update({
                 friends: db.raw("array_remove(friends, ?)", [friendId]),
         });
+
+        const userData = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+        );
     
-        return { ok: true, user };
+        if (!userData) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+    
+        return { ok: true, user: userData };
     });
 }

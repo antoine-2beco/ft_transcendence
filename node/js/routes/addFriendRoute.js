@@ -55,6 +55,26 @@ export async function addFriendRoute(fastify)
                 friends: db.raw("array_append(friends, ?)", [friendId]),
         });
 
-        return { ok: true, user };
+        const userData = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+        );
+    
+        if (!userData) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+
+        return { ok: true, user: userData };
     });
 }
