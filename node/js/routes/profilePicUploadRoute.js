@@ -1,5 +1,6 @@
 import { requireAuth } from "../authPreHandler.js";
 import { db } from "../db.js";
+import { User } from "../models/User.js";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -19,6 +20,27 @@ export async function profilePicUploadRoute(fastify)
 {
     fastify.post( "/profilePicUpload", { preHandler: requireAuth }, async (req, reply) => {
         await fs.promises.mkdir(UPLOAD_DIR, { recursive: true });
+        const userId = Number(req.user.sub);
+    
+        const user = await User.query()
+            .findById(userId)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+            );
+    
+        if (!user) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
     
         const file = await req.file();
         if (!file) 
@@ -34,7 +56,6 @@ export async function profilePicUploadRoute(fastify)
             return { error: "only jpeg/png/webp allowed" };
         }
     
-        const userId = Number(req.user.sub);
         const name = crypto.randomBytes(16).toString("hex") + ext;
         const fullPath = path.join(UPLOAD_DIR, name);
     
@@ -46,6 +67,6 @@ export async function profilePicUploadRoute(fastify)
             .where({ id: userId })
             .update({ profile_picture_url: urlPath });
 
-        return { ok: true, profile_picture_url: urlPath };
+        return { ok: true, profile_picture_url: urlPath, user };
     });
 }
