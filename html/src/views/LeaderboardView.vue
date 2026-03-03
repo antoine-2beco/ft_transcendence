@@ -57,8 +57,8 @@ const toggleFriend = async (player) => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(p, i) in filteredLeaderboard" :key="p.id" :class="{ 'highlight': userStore.user?.id === p.id }">
-            <td>{{ i + 1 }}</td>
+          <tr v-for="p in filteredLeaderboard" :key="p.id" :class="{ 'highlight': userStore.user?.id === p.id }">
+            <td>{{ leaderboard.indexOf(p) + 1 }}</td>
 
             <td style="display: flex; align-items: center; gap: 10px;">
               <img :src="p.profile_picture_url" class="avatar">
