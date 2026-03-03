@@ -38,7 +38,7 @@ export async function editUsernameRoute(fastify)
         try 
         {
             const updated = await db("users")
-            .where({ id: userId })
+            .where({ id: userId, profile_picture_url: profile_picture_url })
             .update({ username: newUsername })
             .returning(["id", "username"]);
 
@@ -56,7 +56,7 @@ export async function editUsernameRoute(fastify)
                 path: "/",
             });
 
-            return { ok: true, username: user.username, user };
+            return { ok: true, user };
         } 
         catch (e) 
         {

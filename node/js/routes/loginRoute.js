@@ -26,13 +26,31 @@ export async function loginRoute(fastify)
         }
         
         const token = fastify.jwt.sign({ sub: user.id, username }, {expiresIn: '24h'} );
-
         reply.setCookie("token", token, {
             httpOnly: true,
             secure: true,
             sameSite: "lax",
             path: "/",
         });
-        return { ok: true, username };
+        
+        const userData = await User.query()
+            .findById(user.id)
+            .select(
+                "id",
+                "username",
+                "profile_picture_url",
+                "language",
+                "elo",
+                "wins",
+                "losses",
+                "ties",
+                "friends",
+            );
+        if (!userData) 
+        {
+            reply.code(404);
+            return { error: "user not found" };
+        }
+        return { ok: true, user: userData };
     });
 }

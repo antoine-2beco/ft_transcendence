@@ -28,8 +28,8 @@ export const useUserStore = defineStore('user', {
 	actions: {
 		async login (username, password) {
 			try {
-        		const response = await userApi.login(username, password);
-				this.user = response.data.user;
+        const response = await userApi.login(username, password);
+				this.user.username = response.data.user;
 				await router.push('/');
 				useToastStore().notifySuccess('login');
 			} catch (e) {
@@ -39,8 +39,7 @@ export const useUserStore = defineStore('user', {
 
 		async register (username, email, password) {
 			try {
-				const response = await userApi.register(username, email, password);
-				this.user = response.data.user;
+		    await userApi.register(username, email, password);
 				await router.push('/login');
 				useToastStore().notifySuccess('register');
 			} catch (e) {
@@ -71,11 +70,11 @@ export const useUserStore = defineStore('user', {
 
 		async getProfile () {
 			try {
-				const user = await userApi.getProfile();
-        if (!user.profile_picture_url)
-          user.profile_picture_url = DEFAULT_AVATAR;
-				this.user = user;
-				return user;
+				const response = await userApi.getProfile();
+				this.user = response.data.user;
+        		if (!this.user.profile_picture_url)
+          			this.user.profile_picture_url = DEFAULT_AVATAR;
+				return response.data.user;
 			}
 			catch (e) {
 				useToastStore().notifyApiError(e);
@@ -94,10 +93,10 @@ export const useUserStore = defineStore('user', {
 		async getLeaderboard () {
 			try {
 				const users = await userApi.getLeaderboard();
-        users.forEach(u => {
-          if (!u.profile_picture_url)
-            u.profile_picture_url = DEFAULT_AVATAR;
-        });
+				users.forEach(u => {
+				if (!u.profile_picture_url)
+					u.profile_picture_url = DEFAULT_AVATAR;
+				});
 				return users;
 			} catch (e) {
 				useToastStore().notifyApiError(e);

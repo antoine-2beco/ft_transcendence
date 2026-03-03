@@ -9,7 +9,7 @@ export const login = async (username, password) => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response.data.username;
+		return response;
     } catch (e) {
       throw (e);
     }
@@ -24,7 +24,7 @@ export const register = async (username, email, password) => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response.data.username;
+		return response;
     } catch (e) {
 		throw (e);
     }
@@ -60,7 +60,7 @@ export const getProfile = async () => {
 				"Content-Type": "application/json"
 			}
 		});
-		return response.data.user;
+		return response;
 	} catch (e) {
 		throw (e);
 	}
@@ -97,12 +97,13 @@ export const getLeaderboard = async () => {
 
 export const addFriend = async (id) => {
 	try {
-		await axios.post(`/api/addFriend/${id}`,
+		const response = await axios.post(`/api/addFriend/${id}`,
 			{
 			headers: {
 				"Content-Type": "application/json"
 			}
 		});
+		return response;
 	} catch (e) {
 		throw (e);
 	}
@@ -110,12 +111,13 @@ export const addFriend = async (id) => {
 
 export const removeFriend = async (id) => {
 	try {
-		await axios.delete(`/api/removeFriend/${id}`,
+		const response = await axios.delete(`/api/removeFriend/${id}`,
 			{
 			headers: {
 				"Content-Type": "application/json"
 			}
 		});
+		return response;
 	} catch (e) {
 		throw (e);
 	}
@@ -123,13 +125,14 @@ export const removeFriend = async (id) => {
 
 export const editUsername = async (username) => {
 	try {
-		await axios.patch(`/api/editUsername`,
+		const response = await axios.patch(`/api/editUsername`,
 			{ username },
 			{
 			headers: {
 				"Content-Type": "application/json"
 			}
 		});
+		return response;
 	} catch (e) {
 		throw (e);
 	}
@@ -144,7 +147,7 @@ export const uploadProfilePicture = async (uploadProfilePicture) => {
                 "Content-Type": "multipart/form-data"
             }
         });
-        return response.data;
+        return response;
     } catch (e) {
         throw (e);
     }

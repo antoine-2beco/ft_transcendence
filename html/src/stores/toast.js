@@ -15,7 +15,9 @@ export const useToastStore = defineStore('toast', {
       const { t } = i18n.global;
       const { showError, showWarning } = Toast();
 
-      console.error("DEV LOG : " + err.message); // DEV
+      console.error("DEV LOG 1 : " + err.message); // DEV
+
+      const status = err?.response?.status ?? err?.status ?? null;
 
       const statusHandlers = {
         400: { type: 'warning', key: 'error.bad_request' },
@@ -32,7 +34,7 @@ export const useToastStore = defineStore('toast', {
         500: { type: 'error', key: 'error.server' }
       };
       
-      const handler = statusHandlers[err?.status] || { type: 'error', key: 'error.unknow_error' };
+      const handler = statusHandlers[status] || { type: 'error', key: 'error.unknow_error' };
       let message = `${t(handler.key)}`;
       
       if (handler.type === 'warning') {
