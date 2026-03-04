@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, watch } from 'vue';
 import { useUserStore } from '@/stores/user';
 
 export function useStatus() {
@@ -12,6 +12,17 @@ export function useStatus() {
   function handleBeforeUnload() {
     userStore.setStatus(false);
   };
+
+  const unwatch = watch(
+    () => userStore.isAuthenticated,
+    (isAuth) => {
+      if (isAuth) {
+        userStore.setStatus(true);
+        unwatch();
+      }
+    },
+    { immediate: true }
+  );
 
   onMounted(() => {
     userStore.setStatus(true);

@@ -26,9 +26,10 @@ export const useUserStore = defineStore('user', {
 	actions: {
 		async login (username, password) {
 			try {
-        		const response = await userApi.login(username, password);
+        const response = await userApi.login(username, password);
 				this.user.username = response.data.user;
 				await router.push('/');
+        this.setStatus(true);
 				useToastStore().notifySuccess('login');
 			} catch (e) {
 				useToastStore().notifyApiError(e);
@@ -62,6 +63,7 @@ export const useUserStore = defineStore('user', {
 
     async logout () {
       try {
+        this.setStatus(false);
         await userApi.logout();
         useToastStore().notifySuccess('logout');
       } catch (e) {
