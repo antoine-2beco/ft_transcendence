@@ -1,169 +1,57 @@
 import axios from 'axios'
 
 export const login = async (username, password) => {
-    try {
-      const response = await axios.post('/api/login',
-        {username, password},
-        {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-      throw (e);
-    }
+    return await axios.post('/api/login', {username, password});
   }
 
 export const register = async (username, email, password) => {
-    try {
-      const response = await axios.post('/api/register',
-        {username, email, password},
-        {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    return await axios.post('/api/register', {username, email, password});
   }
 
 export const checkAuth = async () => {
-    try {
-      const response = await axios.get('/api/me',
-        {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-      void (e);
-    }
+    return await axios.get('/api/me')
 }
 
 export const logout = async () => {
-  try {
     await axios.post('/api/logout');
-  } catch (e) {
-    throw (e);
-  }
 }
 
 export const getProfile = async () => {
-    try {
-        const response = await axios.get('/api/profile',
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    return await axios.get('/api/profile');
 }
 
 export const getGames = async (id) => {
-    try {
-        const response = await axios.get('/api/match-history',
-            {id},
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response.data.games;
-    } catch (e) {
-        throw (e);
-    }
+    const response = await axios.get('/api/match-history', {id});
+    return response.data.games;
 }
 
 export const getLeaderboard = async () => {
-    try {
-        const response = await axios.get('/api/leaderboard',
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response.data.users;
-    } catch (e) {
-        throw (e);
-    }
+    const response = await axios.get('/api/leaderboard');
+    return response.data.users;
 }
 
 export const addFriend = async (id) => {
-    try {
-        const response = await axios.post(`/api/addFriend/${id}`,
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    return await axios.post(`/api/addFriend/${id}`);
 }
 
 export const removeFriend = async (id) => {
-    try {
-        const response = await axios.delete(`/api/removeFriend/${id}`,
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    return await axios.delete(`/api/removeFriend/${id}`);
 }
 
 export const editUsername = async (username) => {
-    try {
-        const response = await axios.patch(`/api/editUsername`,
-            { username },
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    return await axios.patch(`/api/editUsername`, {username},);
 }
 
 export const uploadProfilePicture = async (uploadProfilePicture) => {
-    try {
-        const formData = new FormData();
-        formData.append('file', uploadProfilePicture);
-        const response = await axios.post(`/api/profilePicUpload`, formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        });
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    const formData = new FormData();
+    formData.append('file', uploadProfilePicture);
+    return await axios.post(`/api/profilePicUpload`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
 }
 
 export const setStatus = async (status) => {
-    try {
-        const response = await(axios.post('/api/statusUpdater',
-            { status },
-            {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }));
-        return response;
-    } catch (e) {
-        throw (e);
-    }
+    return await(axios.post('/api/statusUpdater', {status}));
 }

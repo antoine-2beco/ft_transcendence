@@ -1,4 +1,3 @@
-
 export const joinQueue = async (ws) => {
   if (!ws || ws.readyState !== WebSocket.OPEN) {
 	  throw( {status: 500} );
