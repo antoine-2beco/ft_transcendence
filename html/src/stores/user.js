@@ -15,14 +15,12 @@ export const useUserStore = defineStore('user', {
       wins: null,
       losses: null,
       ties: null,
-      friends: null,
-      status: null
+      friends: null
     }
   }),
 
   getters: {
     isAuthenticated: (state) => !!state?.user.username,
-    isOnline: (state) => state.user.status,
   },
 
 	actions: {
@@ -145,8 +143,7 @@ export const useUserStore = defineStore('user', {
     async setStatus (status) {
       try {
         if (!this.isAuthenticated) return
-        const response = await userApi.setStatus(status);
-        this.user.status = status;
+          await userApi.setStatus(status);
       } catch (e) {
         useToastStore().notifyApiError(e);
       }

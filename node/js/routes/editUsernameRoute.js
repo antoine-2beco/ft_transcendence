@@ -33,7 +33,7 @@ export async function editUsernameRoute(fastify)
                 httpOnly: true,
                 secure: true,
                 sameSite: "lax",
-                path: "/",
+                path: "/"
             });
 
             const userData = await User.query()

@@ -155,12 +155,14 @@ export const uploadProfilePicture = async (uploadProfilePicture) => {
 
 export const setStatus = async (status) => {
     try {
-        // const response = await(axios.post('/api/status/', status, {
-        // 	headers: {
-        //         "Content-Type": "multipart/form-data"
-        //     }
-        // }));
-        // return response;
+        const response = await(axios.post('/api/statusUpdater',
+            { status },
+            {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }));
+        return response;
     } catch (e) {
         throw (e);
     }

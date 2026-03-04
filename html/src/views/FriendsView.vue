@@ -22,11 +22,6 @@ const removeFriend = async (friendId) => {
     friends.value = friends.value.filter(f => f.id !== friendId);
 };
 
-const getStatusClass = (s) => ({
-  'online': 'text-primary',
-  'in-game': 'text-warning',
-  'offline': 'text-muted'
-}[s] || 'text-muted');
 </script>
 
 <template>
@@ -42,8 +37,8 @@ const getStatusClass = (s) => ({
       <article v-for="friend in friends" :key="friend.id">
         <header class="text-center">
           <img :src="friend.profile_picture_url" class="avatar">
-          <div :class="getStatusClass(friend.status)">
-            <small>● {{ $t(`friends.${friend.status}`) }}</small>
+          <div :class="friend.online ? 'text-primary' : 'text-muted'">
+            <small>● {{ friend.online ? $t(`friends.online`) : $t(`friends.offline`) }} </small>
           </div>
         </header>
         <div class="text-center">
