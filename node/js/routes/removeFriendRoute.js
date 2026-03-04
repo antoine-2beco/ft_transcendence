@@ -59,6 +59,7 @@ export async function removeFriendRoute(fastify)
                 "losses",
                 "ties",
                 "friends",
+                "online",
         );
     
         if (!userData) 

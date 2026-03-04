@@ -18,6 +18,7 @@ export async function profileRoute(fastify)
                 "losses",
                 "ties",
                 "friends",
+                "online",
             );
     
         if (!user) 

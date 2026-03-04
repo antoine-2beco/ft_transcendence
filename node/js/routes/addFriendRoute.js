@@ -19,6 +19,7 @@ export async function addFriendRoute(fastify)
                 "losses",
                 "ties",
                 "friends",
+                "online",
             );
     
         if (!user) 

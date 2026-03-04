@@ -379,3 +379,8 @@ leaveQueueBtn.addEventListener("click", () => {
     ws.send(JSON.stringify({ type: "queue:leave" }));
     log("Sent queue:leave");
 });
+
+setInterval(() => {
+    fetch("/api/onlineUpdater", { method: "POST", credentials: "include" })
+        .catch(() => {});
+}, 30_000);
