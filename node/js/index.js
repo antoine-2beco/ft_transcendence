@@ -42,13 +42,9 @@ await fastify.register(websocket);
 
 await fastify.register(multipart, {
     limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB
+        fileSize: 5 * 1024 * 1024, // 5 MB
     },
 });
-  
-// fastify.get("/test123", async () => {
-//     return { testobj: "test1231234124233213" };
-// });
 
 await fastify.register(registerRoute);
 await fastify.register(loginRoute);

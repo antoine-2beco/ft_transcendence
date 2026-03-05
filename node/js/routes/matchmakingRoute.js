@@ -86,9 +86,7 @@ export async function matchmakingRoute(fastify)
     let nextGameId = 1;
 
     fastify.get("/ws", { websocket: true }, (ws, req) => {
-        // fastify.log.info({ cookie: req.headers.cookie }, "WS cookie header");
         let gameId = null;
-        // let symbol = null;
         let user;
         try 
         {
