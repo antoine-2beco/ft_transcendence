@@ -120,14 +120,13 @@ make status  # Show running containers (docker ps)
 
 AI was used as a writing assistant to help produce clear, well-structured documentation. All AI-generated content was carefully reviewed and validated before being incorporated into the project.
 
-# Team information
-- Assigned role(s): PO, PM, Tech Lead, Developers, etc.
+# Team Information
 
-**Product Owner (PO)**: Defines the product vision, prioritizes features, and ensures the project meets user needs.  
-**Project Manager (PM) / Scrum Master**: Facilitates team coordination and
+**ssenas-y - Product Owner (PO)**: Defines the product vision, prioritizes features, and ensures the project meets user needs.  
+**ade-beco - Project Manager (PM) / Scrum Master**: Facilitates team coordination and
 removes obstacles.  
-**Technical Lead / Architect**: Oversees technical decisions and architecture.  
-**Developers**: Implement features and modules.  
+**ekina - Technical Lead / Architect**: Oversees technical decisions and architecture.  
+**akloster - Developer**: Implement features and modules.  
 
 # Project Management
 
