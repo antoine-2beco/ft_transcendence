@@ -297,7 +297,7 @@ Records completed matches between two players.
 - Frontend entry: [`html/src/main.js`](html/src/main.js), [`html/src/App.vue`](html/src/App.vue), [`html/src/router/index.js`](html/src/router/index.js)
 - Backend entry: [`node/js/index.js`](node/js/index.js)
 
-**Team member(s):** ade-beco, Esteban, ssenas-y
+**Team member(s):** ade-beco, ekina, ssenas-y
 
 ---
 
@@ -317,7 +317,7 @@ Records completed matches between two players.
 - [`html/src/stores/game.js`](html/src/stores/game.js), [`html/src/api/matchmaking.js`](html/src/api/matchmaking.js)
 - [`nginx/default.conf`](nginx/default.conf) (WebSocket proxy block)
 
-**Team member(s):** Esteban, akloster
+**Team member(s):** ekina, akloster
 
 ---
 
@@ -335,7 +335,7 @@ Records completed matches between two players.
 - [`node/js/models/User.js`](node/js/models/User.js)
 - [`node/js/initdb.js`](node/js/initdb.js)
 
-**Team member(s):** Esteban
+**Team member(s):** ekina
 
 ---
 
@@ -364,7 +364,7 @@ Records completed matches between two players.
 - [`html/src/stores/auth.js`](html/src/stores/auth.js), [`html/src/api/auth.js`](html/src/api/auth.js)
 - [`html/src/views/LoginView.vue`](html/src/views/LoginView.vue), [`html/src/views/RegisterView.vue`](html/src/views/RegisterView.vue), [`html/src/views/UserProfileView.vue`](html/src/views/UserProfileView.vue), [`html/src/views/FriendsView.vue`](html/src/views/FriendsView.vue)
 
-**Team member(s):** ade-beco, Esteban, ssenas-y
+**Team member(s):** ade-beco, ekina, ssenas-y
 
 ---
 
@@ -386,7 +386,7 @@ Records completed matches between two players.
 - [`html/src/views/LeaderboardView.vue`](html/src/views/LeaderboardView.vue)
 - [`html/src/views/UserProfileView.vue`](html/src/views/UserProfileView.vue)
 
-**Team member(s):** ade-beco, Esteban, ssenas-y
+**Team member(s):** ade-beco, ekina, ssenas-y
 
 ---
 
@@ -423,7 +423,7 @@ Records completed matches between two players.
 - [`html/src/stores/game.js`](html/src/stores/game.js)
 - [`node/js/routes/matchmakingRoute.js`](node/js/routes/matchmakingRoute.js) (server-side game logic)
 
-**Team member(s):** ade-beco, Esteban
+**Team member(s):** ade-beco, ekina
 
 ---
 
@@ -442,7 +442,7 @@ Records completed matches between two players.
 - [`nginx/default.conf`](nginx/default.conf) (WebSocket proxy configuration)
 - [`html/src/stores/game.js`](html/src/stores/game.js) (reconnection message handling)
 
-**Team member(s):** Esteban
+**Team member(s):** ekina
 
 ---
 
@@ -508,17 +508,67 @@ Implemented the **AI opponent game mode** on the backend, building the move stra
 
 ## ade-beco
 ### Contribution
-- Linking back and front
+
+Contributed to the **frontend application shell and state management**, setting up the Vue.js entry point ([`html/src/main.js`](html/src/main.js)) and root component ([`html/src/App.vue`](html/src/App.vue)), and building Pinia stores for game state ([`html/src/stores/game.js`](html/src/stores/game.js)), user data ([`html/src/stores/user.js`](html/src/stores/user.js)), and toast notifications ([`html/src/stores/toast.js`](html/src/stores/toast.js)). Co-developed the **game UI** in [`html/src/views/GameView.vue`](html/src/views/GameView.vue), contributing to board rendering and gameplay interactions. Built the **Footer** ([`html/src/components/Footer.vue`](html/src/components/Footer.vue)) and **language switcher** ([`html/src/components/LangSwitch.vue`](html/src/components/LangSwitch.vue)) components, integrating the Terms of Service and Privacy Policy links into the footer and making them available in all three supported languages (English, French, Dutch) via Vue I18n. Also contributed to the **user management and authentication** frontend views and the **game statistics and match history** features.
+
+### Key Files & Components
+
+| Area | Files |
+|------|-------|
+| App shell & entry | [`html/src/main.js`](html/src/main.js), [`html/src/App.vue`](html/src/App.vue) |
+| Pinia stores | [`html/src/stores/game.js`](html/src/stores/game.js), [`html/src/stores/user.js`](html/src/stores/user.js), [`html/src/stores/toast.js`](html/src/stores/toast.js) |
+| Game UI (co-author) | [`html/src/views/GameView.vue`](html/src/views/GameView.vue) |
+| Footer & language switch | [`html/src/components/Footer.vue`](html/src/components/Footer.vue), [`html/src/components/LangSwitch.vue`](html/src/components/LangSwitch.vue) |
+
 ### Challenges & Solutions
-## Esteban
+
+> **Synchronizing multiple Pinia stores with real-time WebSocket events:** Keeping the game, user, and toast stores consistent as WebSocket messages arrived required careful ordering of state mutations. This was resolved by centralizing WebSocket event handling in the game store and dispatching updates to the other stores from a single source of truth, preventing race conditions and stale UI.
+>
+> **Making Vue I18n work seamlessly across every component:** Ensuring that every user-facing string — including dynamic content like toast notifications and form validation messages — was translated for all three languages required a systematic pass through every template and composable. Building the language switcher (`LangSwitch.vue`) also meant persisting the user's choice and synchronizing it with the backend's `language` field on the profile.
+>
+> **Co-developing the game UI without merge conflicts:** Working on `GameView.vue` alongside a teammate demanded clear ownership of specific sections and frequent communication to avoid conflicting changes, which was managed through short-lived feature branches and regular rebasing.
+## ekina
 ### Contribution
-- Backend database management
-- back end game (node.js)
-- back end nginx revers proxy
+Built the **backend architecture and database layer**, setting up the Fastify server entry point ([`node/js/index.js`](node/js/index.js)) with its plugin-based route structure, and configuring the **PostgreSQL database** with Knex.js and Objection.js ([`node/js/db.js`](node/js/db.js), [`node/js/initdb.js`](node/js/initdb.js), [`node/js/models/User.js`](node/js/models/User.js)). Built the **real-time multiplayer matchmaking system** in [`node/js/routes/matchmakingRoute.js`](node/js/routes/matchmakingRoute.js), handling queue-based pairing, server-side move validation, win/draw detection, stat persistence, and a 30-second disconnect/reconnect forfeit mechanism enabling **remote play** across separate machines. Configured the **Nginx reverse proxy** ([`nginx/default.conf`](nginx/default.conf)) for TLS termination, API proxying, WebSocket upgrade forwarding, and SPA fallback routing. Also contributed to the **user management and authentication** backend routes and the **game statistics and match history** endpoints.
+
+### Key Files & Components
+
+| Area | Files |
+|------|-------|
+| Backend entry & config | [`node/js/index.js`](node/js/index.js) |
+| Database & ORM | [`node/js/db.js`](node/js/db.js), [`node/js/initdb.js`](node/js/initdb.js), [`node/js/models/User.js`](node/js/models/User.js) |
+| Matchmaking & remote play | [`node/js/routes/matchmakingRoute.js`](node/js/routes/matchmakingRoute.js) |
+| Nginx reverse proxy | [`nginx/default.conf`](nginx/default.conf) |
+| Auth & user routes | [`registerRoute.js`](node/js/routes/registerRoute.js), [`loginRoute.js`](node/js/routes/loginRoute.js), [`profileRoute.js`](node/js/routes/profileRoute.js), [`authPreHandler.js`](node/js/authPreHandler.js) |
+| Stats & history | [`matchHistoryRoute.js`](node/js/routes/matchHistoryRoute.js), [`leaderboardRoute.js`](node/js/routes/leaderboardRoute.js) |
+
 ### Challenges & Solutions
+
+> **Designing reliable WebSocket reconnection logic:** Handling player disconnections mid-game required careful state management — tracking which games are active, starting a forfeit timer on disconnect, and seamlessly restoring the game state when a player reconnects within the 30-second window. This was solved by keeping authoritative game state server-side and using typed WebSocket messages (`opponent:disconnected`, `reconnected`, `game:forfeit`) to keep both clients in sync.
+>
+> **Configuring Nginx to proxy WebSocket connections:** Getting the reverse proxy to correctly upgrade HTTP connections to WebSocket required specific `Upgrade` and `Connection` header forwarding, alongside proper cookie passthrough for JWT authentication. Debugging involved testing from separate machines and working through WSL2 networking quirks to ensure remote access worked end-to-end.
+>
+> **Bridging the ORM with raw PostgreSQL features:** While Objection.js and Knex simplified most queries, PostgreSQL-specific features like `integer[]` columns for the friends list and atomic stat updates via `.increment()` required mixing ORM methods with raw query fragments (`whereRaw`, `array_append`), demanding a solid understanding of both abstraction layers.
 ## ssenas-y
 ### Contribution
-- front end
-- set up front with mock data
-- linking back and front
+
+Built the majority of the **frontend views for user management and authentication**, implementing the login ([`LoginView.vue`](html/src/views/LoginView.vue)), registration ([`RegisterView.vue`](html/src/views/RegisterView.vue)), user profile ([`UserProfileView.vue`](html/src/views/UserProfileView.vue)), and friends list ([`FriendsView.vue`](html/src/views/FriendsView.vue)) pages. Developed the **game statistics and match history** frontend, creating the global leaderboard ([`LeaderboardView.vue`](html/src/views/LeaderboardView.vue)) with search and win-rate calculation, and the match history log ([`HistoryView.vue`](html/src/views/HistoryView.vue)). Co-contributed to the **game UI** in [`GameView.vue`](html/src/views/GameView.vue). Contributed to the **application shell** by working on the root component ([`App.vue`](html/src/App.vue)), which ties together routing, layout, and global UI elements. Implemented the **Light/Dark mode** feature via the [`ThemeSwitch.vue`](html/src/components/ThemeSwitch.vue) component, toggling PicoCSS's `data-theme` attribute with `localStorage` persistence and system-preference detection. Also co-contributed to **internationalization**, helping translate user-facing text across the supported languages.
+
+### Key Files & Components
+
+| Area | Files |
+|------|-------|
+| Auth views | [`html/src/views/LoginView.vue`](html/src/views/LoginView.vue), [`html/src/views/RegisterView.vue`](html/src/views/RegisterView.vue) |
+| Profile & friends | [`html/src/views/UserProfileView.vue`](html/src/views/UserProfileView.vue), [`html/src/views/FriendsView.vue`](html/src/views/FriendsView.vue) |
+| Stats & leaderboard | [`html/src/views/LeaderboardView.vue`](html/src/views/LeaderboardView.vue), [`html/src/views/HistoryView.vue`](html/src/views/HistoryView.vue) |
+| Game UI (co-author) | [`html/src/views/GameView.vue`](html/src/views/GameView.vue) |
+| App shell (co-author) | [`html/src/App.vue`](html/src/App.vue) |
+| Theme switching | [`html/src/components/ThemeSwitch.vue`](html/src/components/ThemeSwitch.vue) |
+
 ### Challenges & Solutions
+
+> **Implementing light/dark mode with consistent behavior:** Getting the `ThemeSwitch.vue` component to respect the user's saved preference in `localStorage`, fall back to the system's `prefers-color-scheme` media query, and avoid a flash of the wrong theme on page load required careful initialization logic in the component's setup phase, executing the theme detection before the first render.
+>
+> **Building a responsive leaderboard with live search and computed stats:** The `LeaderboardView.vue` needed to calculate win rates on the fly, handle edge cases (zero games played), and update the displayed rankings as the user types a search query. Combining Vue's reactive computed properties with filtered and sorted arrays solved this, but required attention to performance and correct reactivity tracking.
+>
+> **Wiring authenticated views to backend state:** Each view (profile, friends, history) depended on JWT-authenticated API calls through Axios. Handling token expiration, redirecting unauthenticated users via Vue Router navigation guards, and displaying meaningful error feedback through the toast store required coordinating multiple layers of the frontend architecture end-to-end.
