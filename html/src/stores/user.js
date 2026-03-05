@@ -38,7 +38,7 @@ export const useUserStore = defineStore('user', {
 
     async register (username, email, password) {
       try {
-      await userApi.register(username, email, password);
+        await userApi.register(username, email, password);
         await router.push('/login');
         useToastStore().notifySuccess('register');
       } catch (e) {

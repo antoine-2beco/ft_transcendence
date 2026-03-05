@@ -130,7 +130,7 @@
     },
     "error": {
         "bad_request": "Ongeldig verzoek - controleer je gegevens",
-        "already_exists": "Dit item bestaat al",
+        "already_exists": "Reeds gebruikte vermeldingen",
         "bad_entries": "Ongeldige inloggegevens",
         "forbidden": "Toegang verboden",
         "not_found": "Resource niet gevonden",

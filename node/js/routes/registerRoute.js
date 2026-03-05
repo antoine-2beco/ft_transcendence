@@ -29,7 +29,7 @@ export async function registerRoute(fastify)
         }
         catch (e) 
         {
-            if (e?.code === "23505") {
+            if (e.nativeError?.code === "23505") {
                 reply.code(409);
                 return { error: "username or email already exists" };
             }

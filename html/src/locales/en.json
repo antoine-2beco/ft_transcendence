@@ -130,7 +130,7 @@
 	},
 	"error": {
 		"bad_request": "Bad request - check your data",
-		"already_exists": "This already exists",
+		"already_exists": "Entries already used",
 		"bad_entries": "Invalid credentials",
 		"forbidden": "Access forbidden",
 		"not_found": "Resource not found",

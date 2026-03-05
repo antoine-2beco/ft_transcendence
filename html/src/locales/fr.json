@@ -130,7 +130,7 @@
 	},
 	"error": {
 		"bad_request": "Mauvaise requête - vérifiez vos données",
-		"already_exists": "Cet élément existe déjà",
+		"already_exists": "Entrées déjà utilisées",
 		"bad_entries": "Identifiants incorrects",
 		"forbidden": "Accès interdit",
 		"not_found": "Ressource non trouvée",
