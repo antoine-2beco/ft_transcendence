@@ -19,26 +19,27 @@ function checkWinner(b) {
 }
 
 function aiMove(board) {
-	const wins = [
-		[0,1,2],[3,4,5],[6,7,8],
-		[0,3,6],[1,4,7],[2,5,8],
-		[0,4,8],[2,4,6],
-	];
+	console.log("AI is thinking...");
+    const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6],
+    ];
 
-	for (const [a, b, c] of wins) {
-		if (board[a] === "O" && board[b] === "O" && !board[c]) return c;
-		if (board[a] === "O" && board[c] === "O" && !board[b]) return b;
-		if (board[b] === "O" && board[c] === "O" && !board[a]) return a;
-	}
+    for (const [a, b, c] of wins) {
+        if (board[a] === "O" && board[b] === "O" && !board[c]) return c;
+        if (board[a] === "O" && board[c] === "O" && !board[b]) return b;
+        if (board[b] === "O" && board[c] === "O" && !board[a]) return a;
+    }
 
-	for (const [a, b, c] of wins) {
-		if (board[a] === "X" && board[b] === "X" && !board[c]) return c;
-		if (board[a] === "X" && board[c] === "X" && !board[b]) return b;	
-		if (board[b] === "X" && board[c] === "X" && !board[a]) return a;
-	}
+    for (const [a, b, c] of wins) {
+        if (board[a] === "X" && board[b] === "X" && !board[c]) return c;
+        if (board[a] === "X" && board[c] === "X" && !board[b]) return b;
+        if (board[b] === "X" && board[c] === "O" && !board[a]) return a;
+    }
 
-	const empties = board.map((v, i) => v === null ? i : null).filter(i => i !== null);
-	return empties[Math.floor(Math.random() * empties.length)];
+    const empties = board.map((v, i) => v === null ? i : null).filter(i => i !== null);
+    return empties[Math.floor(Math.random() * empties.length)];
 }
 
 export async function aiRoute(fastify) {
@@ -61,35 +62,32 @@ export async function aiRoute(fastify) {
 
         ws.userId = user.sub;
         ws.username = user.username;
-        ws.send(JSON.stringify({ type: "ai", username: ws.username }));
+
+        gameId = nextGameId++;
+
+        const game = {
+            board: Array(9).fill(null),
+            turn: "X",
+            finished: false,
+            player: ws,
+        };
+
+        games.set(gameId, game);
+
+        ws.send(JSON.stringify({
+            type: "match:found",
+            gameId,
+            symbol: "X",
+            board: game.board,
+            turn: game.turn,
+        }));
 
         ws.on("message", (raw) => {
             const msg = JSON.parse(raw.toString());
 
-            if (msg.type === "queue:join") {
-                gameId = nextGameId++;
-
-                const game = {
-                    board: Array(9).fill(null),
-                    turn: "X",
-                    finished: false,
-                    player: ws,
-                };
-
-                games.set(gameId, game);
-
-                ws.send(JSON.stringify({
-                    type: "match:found",
-                    gameId,
-                    symbol: "X",
-                    board: game.board,
-                    turn: game.turn,
-                }));
-            }
-
             if (msg.type === "move") {
-                const { gameId, cell, symbol } = msg;
-                const game = games.get(gameId);
+                const { gameId: msgGameId, cell, symbol } = msg;
+                const game = games.get(Number(msgGameId));
                 if (!game || game.finished) return;
                 if (game.turn !== symbol) return;
                 if (game.board[cell] !== null) return;
@@ -102,7 +100,7 @@ export async function aiRoute(fastify) {
                     game.finished = true;
                     ws.send(JSON.stringify({
                         type: "state",
-                        gameId,
+                        gameId: Number(msgGameId),
                         board: game.board,
                         turn: game.turn,
                         winner,
@@ -120,19 +118,36 @@ export async function aiRoute(fastify) {
 
                 ws.send(JSON.stringify({
                     type: "state",
-                    gameId,
+                    gameId: Number(msgGameId),
                     board: game.board,
                     turn: game.turn,
                     winner,
                 }));
+            }
+
+            if (msg.type === "game:manualForfeit") {
+                const id = Number(msg.gameId);
+                const game = games.get(id);
+                if (!game || game.finished) return;
+
+                game.finished = true;
+
+                ws.send(JSON.stringify({
+                    type: "game:manualForfeit",
+                    gameId: id,
+                    by: "X",
+                    winner: "O",
+                }));
+
+                games.delete(id);
             }
         });
 
         ws.on("close", () => {
             clearInterval(pingInterval);
             if (gameId !== null) {
-				games.delete(gameId);
-			}
-			});
-	});
-}			
+                games.delete(gameId);
+            }
+        });
+    });
+}
