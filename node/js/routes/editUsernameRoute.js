@@ -2,6 +2,8 @@ import { requireAuth } from "../authPreHandler.js";
 import { User } from "../models/User.js";
 import { db } from "../db.js";
 
+const usernameRegex = /^[a-zA-Z0-9]{1,15}$/;
+
 export async function editUsernameRoute(fastify) 
 {
   fastify.patch("/editUsername", { preHandler: requireAuth }, async (req, reply) => {
@@ -14,6 +16,12 @@ export async function editUsernameRoute(fastify)
             reply.code(400);
             return { error: "username required" };
         }
+        if (!usernameRegex.test(username)) 
+        {
+            reply.code(400);
+            return { error: "invalid username" };
+        }
+
         const newUsername = username.trim();
         try 
         {
