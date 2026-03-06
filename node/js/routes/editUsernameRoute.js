@@ -69,7 +69,7 @@ export async function editUsernameRoute(fastify)
         } 
         catch (e) 
         {
-            if (e?.code === "23505") 
+            if (e.nativeError?.code === "23505") 
             {
                 reply.code(409);
                 return { error: "username already exists" };
