@@ -2,6 +2,7 @@ import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const usernameRegex = /^[a-zA-Z0-9]{1,15}$/;
 
 const DEFAULT_AVATAR = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
 
@@ -13,6 +14,12 @@ export async function registerRoute(fastify)
         if (!username || !email || !password) {
             reply.code(400);
             return { error: "username, email and password required" };
+        }
+
+        if (!usernameRegex.test(username)) 
+        {
+            reply.code(400);
+            return { error: "invalid username" };
         }
 
         if (!emailRegex.test(email)) 
