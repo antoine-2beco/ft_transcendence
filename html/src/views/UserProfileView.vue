@@ -157,7 +157,7 @@ const userLevel = computed(() => {
             <tr v-for="g in history" :key="g.id">
               <td>{{ g.player1_username === userStore.user.username ? g.player2_username : g.player1_username }}</td>
               <td>
-                <span :class="['badge', getResult(g).toLowerCase()]">
+                <span>
                   {{ getResult(g) }}
                 </span>
               </td>
@@ -182,14 +182,4 @@ const userLevel = computed(() => {
   border-radius: 50%;
   border: 2px solid var(--pico-primary);
 }
-.badge {
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: white;
-}
-.win { background-color: var(--pico-primary); }
-.loss { background-color: var(--pico-del-color); }
-.draw { background-color: var(--pico-muted-color); }
 </style>

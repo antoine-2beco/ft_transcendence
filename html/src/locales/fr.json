@@ -37,7 +37,8 @@
 		"bad_email": "Mauvais format d'email",
 		"submit_button": "S'inscrire",
 		"already_account": "Vous avez déjà un compte ?",
-		"login": "Se connecter"
+		"login": "Se connecter",
+		"empty_field": "Champ vide"
 	},
 	"game": {
 		"title": "Tic Tac Toe",

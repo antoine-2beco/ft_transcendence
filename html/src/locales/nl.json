@@ -37,7 +37,8 @@
         "bad_email": "Ongeldig e-mailformaat",
         "submit_button": "Registreren",
         "already_account": "Al een account?",
-        "login": "Inloggen"
+        "login": "Inloggen",
+		"empty_field": "Leeg veld"
     },
     "game": {
         "title": "Tic Tac Toe",

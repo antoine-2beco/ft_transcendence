@@ -37,7 +37,8 @@
 		"bad_email": "Bad email formating",
 		"submit_button": "Register",
 		"already_account": "Do you already have an account ?",
-		"login": "Login"
+		"login": "Login",
+		"empty_field": "Empty field"
 	},
 	"game": {
 		"title": "Tic Tac Toe",

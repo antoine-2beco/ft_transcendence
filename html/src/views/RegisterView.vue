@@ -13,6 +13,10 @@ const error = ref('');
 const handleSubmit = async () => {
   error.value = '';
 
+  if (!username.value || !password.value || !email.value){
+	error.value = t("register.empty_field");
+	return;
+  }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email.value)) {
     error.value = t("register.bad_email");
