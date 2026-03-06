@@ -1,9 +1,6 @@
 # SHELL := /bin/sh
 DC := docker compose -f docker-compose.yml
 
-# define BAR
-# 	@printf "[##########] %s\n" "$(1)"
-# endef
 
 .PHONY: all build up down clean start stop
 

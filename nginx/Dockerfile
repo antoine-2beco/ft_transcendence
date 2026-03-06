@@ -15,7 +15,6 @@ FROM nginx:alpine
 RUN apk add --no-cache openssl
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-# COPY ./htmltest /usr/share/nginx/html
 
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/entrypoint.sh /entrypoint.sh
