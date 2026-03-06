@@ -36,11 +36,6 @@ export const useGameStore = defineStore('game', {
           this.ws = new WebSocket(`wss://${location.host}/ws`);
         else
           return;
-        
-        this.ws.onopen = () => {
-          if (mode === 'ai')
-            this.joinQueue();
-        };
 
         this.ws.onerror = () => {
           useToastStore().notifyApiError( {status: 500} );

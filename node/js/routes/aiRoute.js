@@ -19,7 +19,6 @@ function checkWinner(b) {
 }
 
 function aiMove(board) {
-	console.log("AI is thinking...");
     const wins = [
         [0,1,2],[3,4,5],[6,7,8],
         [0,3,6],[1,4,7],[2,5,8],
@@ -35,7 +34,7 @@ function aiMove(board) {
     for (const [a, b, c] of wins) {
         if (board[a] === "X" && board[b] === "X" && !board[c]) return c;
         if (board[a] === "X" && board[c] === "X" && !board[b]) return b;
-        if (board[b] === "X" && board[c] === "O" && !board[a]) return a;
+        if (board[b] === "X" && board[c] === "X" && !board[a]) return a;
     }
 
     const empties = board.map((v, i) => v === null ? i : null).filter(i => i !== null);
